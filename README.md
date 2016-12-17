@@ -1,15 +1,14 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A platform for comic book creators that belong to minority groups and regions to display their content for readers to purchase and view
 
-Things you may want to cover:
+# Ruby version
+*  5.0
 
-* Ruby version
-
-* System dependencies
+# System dependencies
 
 * Configuration
+  run bundle install to install gems and their dependencies
 
 * Database creation
 
