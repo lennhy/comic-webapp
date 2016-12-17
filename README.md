@@ -1,11 +1,11 @@
 # README
 
-A platform for comic book creators that belong to minority groups and regions to display their content for readers to purchase and view
+## A Platform for digital comics created by artists and authors belonging to underrepresented groups
 
-# Ruby version
+### Ruby version
 *  5.0
 
-# System dependencies
+### System dependencies
 
 * Configuration
   run bundle install to install gems and their dependencies
