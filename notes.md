@@ -6,11 +6,12 @@ Components of the app
 
 2. Templates
   - Page for creators to upload content
-  - A home page that contains 25 books each
+  - A home page that contains 50 books each
   - A show page for reader / publisher's comics
+  - A show page with details about a selected comic
   - One login and signup page for both users
   - Cart?
-  
+
 3. Features / View models
   - users can paginate from left to right
   - A Filter search options for genre and country
@@ -57,7 +58,7 @@ Genre
     - Action,
     - Horror,
     - SciFi,
-    - Drama,
+    - Drama,  
     - Noir,
     - Fantasy,
     - Adventure,
