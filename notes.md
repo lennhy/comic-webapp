@@ -19,7 +19,7 @@ Components of the app
     - 1 - 5 stars -->
 
 4. Filter by Criteria
-    - Genre
+      - Genre
       - Action, Horror, SciFi, Drama, Noir, Fantasy, Adventure, Superhero, Graphic Novel
       - Region
       - Caribbean

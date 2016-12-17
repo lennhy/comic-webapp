@@ -6,7 +6,10 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '904b9658987930b66a6a40404d80e453e26b1872df02c81f3ed0e2140ca1ce6fde2df15a59cdf67a94679be491ddaaae976a4276e5e98448f0c2d4a9e331cc59'
+  config.secret_key = '904b9658987930b66a6a40404d80e453e26b1872df02c81f3ed0e2140ca1ce6fde2df15a59cdf67a94679be491ddaaae976a4276e5e98448f0c2d4a9e331cc59'
+
+  # Add the Omniauth configuration for facebook
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -220,7 +223,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
