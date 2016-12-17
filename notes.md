@@ -6,16 +6,16 @@ Components of the app
 
 2. Templates
   - Page for creators to upload content
-  - Page for readers
-  - option to choose to be a reader or creator
-3. Features / View models
-  - An upload page for creators
   - A home page that contains 25 books each
+  - A show page for reader / publisher's comics
+  - One login and signup page for both users
+  - Cart?
+  
+3. Features / View models
   - users can paginate from left to right
   - A Filter search options for genre and country
-  - ratings
-    - 1 - 5 stars
-  - Once login and signup page for both users
+  <!-- - ratings
+    - 1 - 5 stars -->
 
 4. Filter by Criteria
     - Genre
@@ -30,18 +30,29 @@ Components of the app
       - Africa
 
 5. Models
-  - user
+User
+  has_many: comics
+
+Comic
+  has_many: users
+  has_many: genres
+  has_many: regions
+
+Genre
+  has_many: comics
+
+  - User
       attr: name=0, email=1, password=2
     - publisher
     - writer
     - artist
     - reader
 
-  - comicbook
-    attr: title, content
+  - Comic
+    attr: title, content, graphic novel =>default=>false
 
     seed the database
-  - genre
+  - Genre
     attr: ttile
     - Action,
     - Horror,
@@ -54,7 +65,7 @@ Components of the app
     - Graphic Novel
 
     seed the database
-  - Region
+  - Region comic story is based
     attr: name
     - Caribbean
     - Latin and Central America
@@ -64,7 +75,4 @@ Components of the app
     - Middle East
     - Africa
 
-    seed the database
-    - Cultures
-    attr: name
-      same as countries
+  -
