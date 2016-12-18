@@ -21,6 +21,12 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <!-- if clicked user changes to author -->
+    <%= f.radio_button :role, 'publisher' %>
+    <%= f.label :role, 'Select if you are a publisher'%><br />
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
