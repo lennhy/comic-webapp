@@ -1,4 +1,5 @@
 class ComicsController < ApplicationController
+
   def index
     comics = Comic.find(params[:id])
     render json: comics
@@ -18,8 +19,13 @@ class ComicsController < ApplicationController
       end
   end
 
+  def show
+      comic = Comic.find(params[:id])
+      render json: comic
+  end
+
   def update
-    comic = Comic.find(params[:id])
+      comic = Comic.find(params[:id])
       if comic.update(comic_params)
         render json: comic
       else

@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   before_action :set_csrf_cookie
 
   respond_to :json
-  
+
   # Thie part of angular allows CSRF cookies to post delete and update to the database
   # Note: Angular uses the acronym XSRF, but this is synonymous with CSRF.
   def set_csrf_cookie
-    cookies['XSRF-TOKEN']=form_authenticity_token if protect_from_forgery?
+    cookies['XSRF-TOKEN']=form_authenticity_token if protect_against_forgery?
   end
 
   # Run all our angular assets
