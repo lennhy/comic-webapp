@@ -14,7 +14,7 @@ class ComicsController < ApplicationController
       if comic.save
         render json: comic
       else
-        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+        render json: {errors: comic.errors.full_messages}, status: 402
       end
   end
 
@@ -23,12 +23,12 @@ class ComicsController < ApplicationController
       if comic.update(comic_params)
         render json: comic
       else
-        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+        render json: {errors: comic.errors.full_messages}, status: 402
       end
   end
 
   private
     def comic_params
-      params.require(:comic).permit(:)
+      params.require(:comic).permit(:id, :title, :description, :issue, :volume, :page_count, :issue_date, :graphic_novel)
     end
 end

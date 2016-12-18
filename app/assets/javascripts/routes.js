@@ -4,7 +4,7 @@
       .config(function ($stateProvider, $urlRouterProvider) {
           $stateProvider
             .state('comics', {
-                url: '/',
+                url: '/comics',
                 templateUrl: 'views/comics.html',
                 controller: 'ComicsController as comics',
                 resolve: { // Use the resolve property to fetch data from the URLs above to receive data.
@@ -14,7 +14,7 @@
                 }
             })
             .state('comic', {
-                url: '/comic/:id',
+                url: '/comics/:id',
                 templateUrl: 'views/show.html',
                 controller: 'ComicController as comic',
                 resolve: { // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
