@@ -1,0 +1,2 @@
+class ComicUser < ApplicationRecord
+end

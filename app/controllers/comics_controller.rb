@@ -1,7 +1,7 @@
 class ComicsController < ApplicationController
 
   def index
-    comics = Comic.find(params[:id])
+    comics = Comic.all
     render json: comics
   end
 
