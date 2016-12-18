@@ -1,7 +1,34 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# World Regions
+# Based on United Nations Country Grouping
+regions = [
+            'Africa',
+            'Asia',
+            'Central America',
+            'Eastern Europe',
+            'European Union',
+            'Middle East',
+            'North America',
+            'Oceania',
+            'South America',
+            'The Caribbean'
+]
+
+genres = [
+          'Action',
+          'Horror',
+          'SciFi',
+          'Drama',
+          'Noir',
+          'Fantasy',
+          'Adventure',
+          'Superhero'
+]
+
+def create_obj(array, object)
+  array.each do |value|
+    object.create(name: value).save
+  end
+end
+
+create_obj(regions, Region)
+create_obj(genres, Genre)
