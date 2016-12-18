@@ -12,6 +12,11 @@ Components of the app
   - One login and signup page for both users
   - Cart?
 
+2.5 Forms
+  - upload comic book form
+  
+
+
 3. Features / View models
   - users can paginate from left to right
   - A Filter search options for genre and country
