@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_and_belongs_to_many :comics
+
   devise :database_authenticatable, :registerable, :validatable # to enable devise authentication
 
   after_initialize :set_default_user_role
