@@ -1,23 +1,23 @@
 function ComicService($http){
   var commonUrl ='';
 
-  this.getAllComics = function(){
+  this.httpGetAllComics = function(){
     return $http.get('.json');
   };
 
-  this.getComic = function(id){
+  this.httpGetComic = function(id){
     return $http.get(`${id}.json`);
   };
 
-  this.postComic = function(id){
+  this.httpCreateComic = function(id){
     return $http.post();
   };
 
-  this.updateComic = function(id){
+  this.httpUpdateComic = function(id){
     return $http.patch();
   };
 
-  this.deleteComic = function(id){
+  this.httpDeleteComic = function(id){
     return $http.delete();
   };
 
