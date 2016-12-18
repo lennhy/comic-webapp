@@ -1,13 +1,34 @@
 class ComicsController < ApplicationController
   def index
+    comics = Comic.find(params[:id])
+    render json: comics
   end
 
-  def show
-    @comic = Comic.find(params[:id])
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: @comic}
+  def new
+      comic = Comic.new
+      render json: comic
+  end
+
+  def create
+      comic = Comic.new(comic_params)
+      if comic.save
+        render json: comic
+      else
+        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
       end
   end
 
+  def update
+    comic = Comic.find(params[:id])
+      if comic.update(comic_params)
+        render json: comic
+      else
+        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+      end
+  end
+
+  private
+    def comic_params
+      params.require(:comic).permit(:)
+    end
 end
