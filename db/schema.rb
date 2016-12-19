@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161218211315) do
+ActiveRecord::Schema.define(version: 20161219170138) do
 
   create_table "comic_genres", force: :cascade do |t|
     t.integer  "comic_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20161218211315) do
     t.boolean  "graphic_novel", default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer  "region_id"
   end
 
   create_table "genres", force: :cascade do |t|
