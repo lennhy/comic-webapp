@@ -1,6 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
+  before_action  :configure_permitted_parameters, if: :devise_controller?
+
   before_action  :store_current_location, :unless => :devise_controller?
 
   before_action :authenticate_user!, only: [:new, :create]
@@ -20,10 +22,10 @@ class ApplicationController < ActionController::Base
 
   end
 
-  protected
-    def verified_request?
-      super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
-    end
+  # protected
+  #   def verified_request?
+  #     super || valid_authenticity_token?(session, request.headers['X-XSRF-TOKEN'])
+  #   end
 
     # -- devise
     # In case you want to permit additional parameters, you can do so using a simple before filter

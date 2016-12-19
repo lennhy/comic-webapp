@@ -1,36 +1,36 @@
-class RegistrationsController < Devise::RegistrationsController
-
-  def new
-  end
-
-  def create
-  end
-
-  def cancel
-  end
-
-  def show
-    user = User.find(params[:id])
-    render '/'
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-  def roles
-    current_user.update_user_role(params[:user][:role], current_user)
-    if current_user.role == "publisher"
-      respond_to :html, :json
-    else
-      respond_to :html, :json, {errors: comic.errors.full_messages}, status: 402
-    end
-  end
+# class RegistrationsController < Devise::RegistrationsController
+#
+#   def new
+#   end
+#
+#   def create
+#   end
+#
+#   def cancel
+#   end
+#
+#   def show
+#     user = User.find(params[:id])
+#     render '/'
+#   end
+#
+#   def edit
+#   end
+#
+#   def update
+#   end
+#
+#   def destroy
+#   end
+#
+#   def roles
+#     current_user.update_user_role(params[:user][:role], current_user)
+#     if current_user.role == "publisher"
+#       respond_to :html, :json
+#     else
+#       respond_to :html, :json, {errors: comic.errors.full_messages}, status: 402
+#     end
+#   end
 
 end
 # //                     root GET    /                         application#index
