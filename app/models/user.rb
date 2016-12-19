@@ -12,9 +12,10 @@ class User < ApplicationRecord
     user.save
 
   end
-  
+
   def set_default_user_role
     self.role  ||= 0  # --will set the default user to reader only if it's nil
   end
+
 
 end

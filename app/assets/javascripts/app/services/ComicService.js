@@ -1,5 +1,4 @@
 function ComicService($http){
-  var commonUrl ='';
 
   this.httpGetAllComics = function(){
     return $http.get('/comics.json');

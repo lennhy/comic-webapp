@@ -4,4 +4,4 @@ function ComicsController(comics) {
 }
 angular
     .module('app')
-    .controller('ComicsController',ComicsController)
+    .controller('ComicsController', ComicsController);

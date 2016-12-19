@@ -1,4 +1,3 @@
-(function (){
   angular
       .module('app', ['ui.router'])
       .config(function ($stateProvider, $urlRouterProvider) {
@@ -26,7 +25,7 @@
                         return ComicService.httpGetComic($stateParams.id);
                     }
                 }
-            })
+            });
             // page for all comics
             // .state('comics.new', {
             //     url: '/comics/new',
@@ -55,4 +54,3 @@
 
        $urlRouterProvider.otherwise('/');
     });
-});
