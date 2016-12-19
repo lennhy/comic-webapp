@@ -1,6 +1,8 @@
 function ComicsController(comics) {
+  console.log("comics");
+
   var vm = this;
-  vm.comics = comics;
+  vm.comics = this.comics;
 }
 angular
     .module('app')

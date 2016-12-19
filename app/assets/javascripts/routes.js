@@ -1,12 +1,12 @@
   angular
-      .module('app', ['ui.router'])
+      .module('app')
       .config(function ($stateProvider, $urlRouterProvider) {
           $stateProvider
 
             // page for all comic
             .state('comics', {
                 url: '/comics',
-                templateUrl: 'views/comics.html',
+                templateUrl: 'templates/index.html',
                 controller: 'ComicsController as comics',
                 // Use the resolve property to fetch data from the URLs above to receive data.and to ultimately display in the DOM
                 resolve: {
@@ -19,7 +19,7 @@
             // page for individual comic
             .state('comics.id', {
                 url: '/comics/:id',
-                templateUrl: 'views/show.html',
+                templateUrl: 'templates/comics/show.html',
                 controller: 'ComicController as comic',
                 // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
                 resolve: {
@@ -31,13 +31,13 @@
 
             .state('comics.new', {
                 url: '/comics/new',
-                templateUrl: 'views/new.html',
+                templateUrl: 'templates/new.html',
                 controller: 'ComicsController as comics',
             })
 
             .state('comics.user.id', {
                 url: '/comics/user/:id',
-                templateUrl: 'views/show.html',
+                templateUrl: 'templates/show.html',
                 controller: 'UserController as user'
             });
 
