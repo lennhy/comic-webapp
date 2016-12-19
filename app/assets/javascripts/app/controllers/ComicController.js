@@ -3,7 +3,7 @@ function ComicController(comic) {
 
   console.log(comic);
 
-  vm.create = function () {
+    vm.whatever = function () {
     ComicService.creatComic();
   }
 
