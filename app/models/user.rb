@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_and_belongs_to_many :comics
+  has_many :comics, through: :comic_user
+  has_many :comic_users
 
   devise :database_authenticatable, :registerable, :validatable # to enable devise authentication
 

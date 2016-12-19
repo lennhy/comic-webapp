@@ -1,4 +1,4 @@
 class Genre < ApplicationRecord
-  has_and_belongs_to_many :comics
-
+  has_many :comics, through: :comic_genre
+  has_many :comic_genres
 end
