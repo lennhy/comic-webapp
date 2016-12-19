@@ -2,13 +2,13 @@
       .module('app', ['ui.router'])
       .config(function ($stateProvider, $urlRouterProvider) {
           $stateProvider
-          
+
             // page for all comic
             .state('comics', {
                 url: '/comics',
                 templateUrl: 'views/comics.html',
                 controller: 'ComicsController as comics',
-                // Use the resolve property to fetch data from the URLs above to receive data.
+                // Use the resolve property to fetch data from the URLs above to receive data.and to ultimately display in the DOM
                 resolve: {
                     comics: function (ComicService) {
                       return ComicService.httpGetComics();
