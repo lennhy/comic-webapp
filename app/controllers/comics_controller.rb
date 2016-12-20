@@ -15,9 +15,10 @@ class ComicsController < ApplicationController
   end
 
   def create
+    # comic = current_user.comics.build(comic_params)
       comic = Comic.new(comic_params)
       if comic.save
-        render json: comic
+        render json: { status: 'ok'}
       else
         render json: {errors: comic.errors.full_messages}, status: 402
       end
@@ -33,7 +34,7 @@ class ComicsController < ApplicationController
       if comic.update(comic_params)
         render json: comic
       else
-        render json: {errors: comic.errors.full_messages}, status: 402
+        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
       end
   end
 
