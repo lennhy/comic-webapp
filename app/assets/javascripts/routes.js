@@ -13,25 +13,25 @@
                 //     }
                 // }
             })
-            .state('home.comic', {
-                url: 'comics/:id',
-                templateUrl: 'comic/comic.html',
-                controller: 'ComicController as vm',
-                // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
-                resolve: {
-                    comic: function ($stateParams, ComicService) {
-                        return ComicService.httpGetComic($stateParams.id);
-                    }
-                }
-            })
-            .state('comics.new', {
-                url: '/comics/new',
-                templateUrl: 'templates/comics/new.html',
-                controller: 'HomeController as vm',
-            })
-            .state('comics.user.id', {
-                url: '/comics/user/:id',
-                templateUrl: 'templates/user/show.html',
+            // .state('home.comic', {
+            //     url: 'comics/:id',
+            //     templateUrl: 'comic/comic.html',
+            //     controller: 'ComicController as vm',
+            //     // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
+            //     resolve: {
+            //         comic: function ($stateParams, ComicService) {
+            //             return ComicService.httpGetComic($stateParams.id);
+            //         }
+            //     }
+            // })
+            // .state('comics.new', {
+            //     url: '/comics/new',
+            //     templateUrl: 'templates/comics/new.html',
+            //     controller: 'HomeController as vm',
+            // })
+            .state('home.user', {
+                url: '/user',
+                templateUrl: 'user/user_profile.html',
                 controller: 'UserController as vm'
             });
 
