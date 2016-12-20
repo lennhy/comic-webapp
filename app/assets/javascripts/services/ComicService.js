@@ -1,7 +1,7 @@
 function ComicService($http){
 
   this.httpGetAllComics = function(){
-    return $http.get('/comics');
+    return $http.get('/comics.json');
   };
 
   this.httpGetComic = function(id){
