@@ -14,9 +14,9 @@
                 // }
             })
             .state('home.comic', {
-                url: '/comics/:id',
+                url: 'comics/:id',
                 templateUrl: 'comic/comic.html',
-                controller: 'ComicController as comic',
+                controller: 'ComicController as vm',
                 // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
                 resolve: {
                     comic: function ($stateParams, ComicService) {
@@ -27,12 +27,12 @@
             .state('comics.new', {
                 url: '/comics/new',
                 templateUrl: 'templates/comics/new.html',
-                controller: 'HomeController as comics',
+                controller: 'HomeController as vm',
             })
             .state('comics.user.id', {
                 url: '/comics/user/:id',
                 templateUrl: 'templates/user/show.html',
-                controller: 'UserController as user'
+                controller: 'UserController as vm'
             });
 
 

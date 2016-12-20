@@ -16,8 +16,8 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body ng-app="app" ng-controller="ComicsController as vm">Hello {{ vm.name }}
-
+  <body ng-app="app">
+    <!-- <div ng-repeat="comic in vm.comics" >    Hello {{ comic  }} </div> -->
     <%= yield %>
   </body>
 </html>
