@@ -2,7 +2,11 @@ class ComicsController < ApplicationController
 
   def index
     comics = Comic.all
-    render json: comics
+    respond_to do |format|
+    format.html { render :index }
+    format.json { render json: comics}
+
+  end
   end
 
   def new

@@ -1,8 +1,7 @@
-function ComicsController(comics) {
-  console.log("comics");
+function ComicsController($scope) {
 
-  var vm = this;
-  vm.comics = this.comics;
+  $scope.name = "ash";
+  // vm.comics = this.comics;
 }
 angular
     .module('app')
