@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'bower-rails'
 
+gem 'bootstrap-sass', '~> 3.3.7'
+
 # Allows us to wrtie html code within our js assets folder and compile into our asset pipeline
 gem 'angular-rails-templates'
 

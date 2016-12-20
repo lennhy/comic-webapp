@@ -17,10 +17,11 @@ class ApplicationController < ActionController::Base
     cookies['XSRF-TOKEN']=form_authenticity_token if protect_against_forgery?
   end
 
-  # Run all our angular assets
-  def index
+  protected
+    # Run all our angular assets
+    def index
 
-  end
+    end
 
   # protected
   #   def verified_request?

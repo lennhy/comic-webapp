@@ -4,5 +4,5 @@ function ComicsController(comics) {
   ctrl.comics = comics;
 }
 angular
-    .module('app')
-    .controller('ComicsController', ComicsController);
+        .module('app')
+        .controller('ComicsController', ComicsController);
