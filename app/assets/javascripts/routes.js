@@ -8,16 +8,16 @@
                 controller: 'HomeController as vm'
             })
 
+            .state('home.books', {
+                url: 'books',
+                templateUrl: 'books/books.html',
+                controller: 'BooksController as vm'
+            })
+
             .state('home.book', {
                 url: 'books/:id',
                 templateUrl: 'books/book.html',
                 controller: 'BooksController as vm',
-                // Use the resolve property to fetch data from the URLs above to receive data and to ultimately display in the DOM
-                resolve: {
-                    book: function ($stateParams, BookService) {
-                      return BookService.httpGetBook($stateParams.id);
-                    }
-                }
             })
 
             .state('home.mybooks', {

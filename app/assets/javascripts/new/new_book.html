@@ -1,22 +1,23 @@
 <br>
 <h2>Upload a Book</h2>
 <br>
+
 <form ng-submit="vm.creatBook()">
 
   <label for="title"> Title: </label>
-  <input ng-model="vm.title" type="text" name="" value=""><br><br>
+  <input ng-model="vm.title" type="text" ><br><br>
 
   <label for="description"> Description: </label>
-  <input ng-model="vm.description" type="text" name="" value=""><br><br>
+  <input ng-model="vm.description" type="text" ><br><br>
 
   <label for="issue"> issue: </label>
-  <input  ng-model="vm.issue" type="text" name="" value=""><br><br>
+  <input  ng-model="vm.issue" type="text" ><br><br>
 
   <label for="volume"> volume: </label>
-  <input  ng-model="vm.volume" type="text" name="" value=""><br><br>
+  <input  ng-model="vm.volume" type="text" ><br><br>
 
   <label for="Page Count"> Page Count: </label>
-  <input  ng-model="vm.page_count" type="text" name="" value=""><br><br>
+  <input  ng-model="vm.page_count" type="text" ><br><br>
 
   <label for="Issue Date"> Issue Date: </label>
   <input ng-model="vm.issue_date" type="date"><br><br>
@@ -28,12 +29,12 @@
 
   <label for="Graphic Novel"> Yes: </label>
 
-  <input  ng-model="vm.graphic_novel" type="radio" name="" value="true">
+  <input  ng-model="vm.graphic_novel" type="radio" value="true">
 
 
   <label for="Graphic Novel"> No: </label>
 
-  <input  ng-model="vm.graphic_novel" type="radio" name="" value="false">
+  <input  ng-model="vm.graphic_novel" type="radio" value="false">
 
   <input type="submit" value="create">
 

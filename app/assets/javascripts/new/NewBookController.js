@@ -17,7 +17,10 @@ function NewBookController(BookService) {
           .then(function (data) {
               alert(data.status);
               return vm.books = data;
-          });
+          }),function(error){
+             //handle what happens if there is an error with the http post call
+             console.log("Error occurred: " + error);
+          }
   }
 }
 
