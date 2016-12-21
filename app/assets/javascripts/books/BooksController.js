@@ -1,7 +1,8 @@
-function BooksController() {
-  var vm = this
-  vm.be = "ball"
-
+function BooksController(books) {
+  var vm = this;
+  vm.books = books.data;
+  vm.genres = books.data[0].genres;
+  vm.regions = books.data[0].region;
   // console.log(book.data[0].description);
   // getBooks: getBooks
   // // createBook: createBook;

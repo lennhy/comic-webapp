@@ -1,26 +1,9 @@
 <a href="#" ui-sref="home">Home</a>
 <a href="#" ui-sref="home.profile">Profile</a>
 <a href="#" ui-sref="home.mybooks">My Books</a>
-<a href="#" ui-sref="home.book">Books</a>
+<a href="#" ui-sref="home.books">Books</a>
 
 <a href="#" ui-sref="home.publishers">Publishers</a>
 <a href="#" ui-sref="home.new">Upload</a>
-
-<ul ng-repeat="book in vm.books">
-  <h2>Book <span ng-bind="book.id"></span></h2>
-  <li>Title: <span ng-bind="book.title"></span></li>
-  <li>Description: <span  ng-bind="book.description"></span></li>
-  <li>Issue: <span ng-bind="book.issue"></span></li>
-  <li>Volume: <span ng-bind="book.volume"></span></li>
-  <li>Page_count: <span ng-bind="book.page_count"></span></li>
-  <li>Issue_date: <span g-bind="book.issue_date"></span></li>
-  <li>Type of Book:<span ng-bind="book.graphic_novel"></span></li>
-
-</ul>
-
-<ul ng-repeat="genre in vm.genres">
-  <li>{{ genre.name }}</li>
-</ul>
-
 
 <div ui-view></div>

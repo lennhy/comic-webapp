@@ -7,13 +7,22 @@
               templateUrl: 'home/home.html',
               controller: 'HomeController as vm',
               // Use the resolve property to fetch data from the URLs above to receive data and to ultimately display in the DOM
-              resolve: {
-                  books: function (BookService) {
-                    return BookService.httpGetAllBooks();
-                  }
-              }
+              // resolve: {
+              //     books: function (BookService) {
+              //       return BookService.httpGetAllBooks();
+              //     }
+              // }
           })
-
+          .state('home.books', {
+            url: 'books',
+            templateUrl: 'books/books.html',
+            controller: 'BooksController as vm',
+            resolve: {
+                books: function (BookService) {
+                  return BookService.httpGetAllBooks();
+                }
+            }
+          })
           .state('home.book', {
               url: 'books/:id',
               templateUrl: 'books/book.html',
