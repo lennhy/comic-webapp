@@ -1,14 +1,8 @@
-function HomeController( ComicService) {
-  // var ctrl = this;
-  // ctrl.name = "ash";
-  // ctrl.comics = comics;
+function HomeController() {
+
   var ctrl = this;
 
-    ComicService
-        .httpGetAllComics()
-        .then(function (res) {
-            console.log(res);
-        });
+
 
 }
 angular
