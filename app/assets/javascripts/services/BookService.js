@@ -8,8 +8,8 @@ function BookService($http){
     return $http.get(`/comics/${id}`);
   };
 
-  this.httpCreateBook = function(id){
-    return $http.post('/comics');
+  this.httpCreateBook = function(  title, description, issue, volume, page_count, issue_date, graphic_novel){
+    return $http.post('/comics', { img, title: title, description: description, issue: issue, volume: volume, page_count: page_count, issue_date: issue_date, graphic_novel: graphic_novel});
   };
 
   this.httpUpdateBook = function(id){

@@ -26,10 +26,10 @@
                 controller: 'MyBooksController as vm'
             })
 
-            .state('home.upload', {
+            .state('home.new', {
                 url: 'new',
-                templateUrl: 'uploads/upload.html',
-                controller: 'UploadsController as vm'
+                templateUrl: 'new/new_book.html',
+                controller: 'NewBookController as vm'
             })
 
             .state('home.profile', {
