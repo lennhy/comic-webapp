@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_csrf_cookie
 
-  respond_to :html, :json
+  respond_to :json
 
   # Thie part of angular allows CSRF cookies to post delete and update to the database
   # Note: Angular uses the acronym XSRF, but this is synonymous with CSRF.
@@ -43,8 +43,9 @@ class ApplicationController < ActionController::Base
     end
 
     # Overwriting the sign_out redirect path method
-    def after_sign_out_path_for(resource_or_scope)
-      new_user_session_path
+    def after_sign_out_path_for(resource)
+      request.referrer || new_user_sessions_path
     end
+
 
 end

@@ -10,11 +10,10 @@ Components of the app
   - A show page for reader / publisher's comics
   - A show page with details about a selected comic
   - One login and signup page for both users
-  - Cart?
 
 2.5 Forms
   - upload comic book form
-  
+
 
 
 3. Features / View models

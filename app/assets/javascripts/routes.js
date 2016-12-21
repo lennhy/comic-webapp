@@ -29,15 +29,20 @@
             //     templateUrl: 'templates/comics/new.html',
             //     controller: 'HomeController as vm',
             // })
+            .state('home.publishers', {
+                url: 'publishers',
+                templateUrl: 'users/publishers.html',
+                controller: 'UsersController as vm',
+            })
             .state('home.mybooks', {
                 url: 'mybooks',
                 templateUrl: 'mybooks/my_books.html',
                 controller: 'MyBooksController as vm',
             })
-            .state('home.user', {
-                url: 'user',
-                templateUrl: 'user/user_profile.html',
-                controller: 'UserController as vm'
+            .state('home.profile', {
+                url: 'profile',
+                templateUrl: 'users/user_profile.html',
+                controller: 'UsersController as vm'
             });
 
 
