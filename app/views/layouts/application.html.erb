@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="app">
   <head>
     <title>ComicWebapp</title>
     <%= csrf_meta_tags %>
@@ -8,7 +8,7 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body ng-app="app">
+  <body>
     <%= render 'layouts/log_user' %>
     <!-- <div ng-repeat="comic in vm.comics" >    Hello {{ comic  }} </div> -->
     <%= yield %>

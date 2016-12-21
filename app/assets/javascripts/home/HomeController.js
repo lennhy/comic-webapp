@@ -7,8 +7,7 @@ function HomeController( ComicService) {
     ComicService
         .httpGetAllComics()
         .then(function (res) {
-            ctrl.data = res.data.description; // our user object is populated from the backend
-            console.log(ctrl.data);
+            console.log(res);
         });
 
 }

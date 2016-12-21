@@ -1,22 +1,22 @@
-function ComicController(comic) {
+function UsersController() {
   var vm = this;
 
-  console.log(comic);
+  console.log();
 
-    vm.whatever = function () {
-    ComicService.creatComic();
-  }
-
-  vm.update = function () {
-    ComicService.updateComic();
-  }
-
-  vm.delete = function () {
-    ComicService.deleteComic();
-  }
+  //   vm.whatever = function () {
+  //   ComicService.creatComic();
+  // }
+  //
+  // vm.update = function () {
+  //   ComicService.updateComic();
+  // }
+  //
+  // vm.delete = function () {
+  //   ComicService.deleteComic();
+  // }
 }
 
 
 angular
     .module('app')
-    .controller('ComicController', ComicController);
+    .controller('UsersController', UsersController);

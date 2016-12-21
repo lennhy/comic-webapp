@@ -5,7 +5,7 @@ function ComicService($http){
   };
 
   this.httpGetComic = function(id){
-    return $http.get(`/comics/${id}.json`);
+    return $http.get(`/comics/${id}`);
   };
 
   this.httpCreateComic = function(id){

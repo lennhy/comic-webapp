@@ -4,6 +4,7 @@ class ComicsController < ApplicationController
     render json: Comic.all
   end
 
+
   def new
       comic = Comic.new
       render json: comic

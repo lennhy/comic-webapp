@@ -5,7 +5,7 @@
             .state('home', {
                 url: '/',
                 templateUrl: 'home/home.html',
-                controller: 'HomeController as vm',
+                controller: 'HomeController as vm'
                 // Use the resolve property to fetch data from the URLs above to receive data.and to ultimately display in the DOM
                 // resolve: {
                 //     comics: function (ComicService) {
@@ -13,17 +13,12 @@
                 //     }
                 // }
             })
-            // .state('home.comic', {
-            //     url: 'comics/:id',
-            //     templateUrl: 'comic/comic.html',
-            //     controller: 'ComicController as vm',
-            //     // Use the resolve instead of putting this in the controller so that the page doesnt have to replace the data in the controlelr causing the page to flicker
-            //     resolve: {
-            //         comic: function ($stateParams, ComicService) {
-            //             return ComicService.httpGetComic($stateParams.id);
-            //         }
-            //     }
-            // })
+            .state('home.comic', {
+                url: 'comics/:id',
+                templateUrl: 'comic/comic.html',
+                controller: 'ComicController as vm'
+
+            })
             // .state('comics.new', {
             //     url: '/comics/new',
             //     templateUrl: 'templates/comics/new.html',
@@ -32,12 +27,12 @@
             .state('home.publishers', {
                 url: 'publishers',
                 templateUrl: 'users/publishers.html',
-                controller: 'UsersController as vm',
+                controller: 'UsersController as vm'
             })
             .state('home.mybooks', {
                 url: 'mybooks',
                 templateUrl: 'mybooks/my_books.html',
-                controller: 'MyBooksController as vm',
+                controller: 'MyBooksController as vm'
             })
             .state('home.profile', {
                 url: 'profile',
