@@ -29,8 +29,13 @@
             //     templateUrl: 'templates/comics/new.html',
             //     controller: 'HomeController as vm',
             // })
+            .state('home.mybooks', {
+                url: 'mybooks',
+                templateUrl: 'mybooks/my_books.html',
+                controller: 'MyBooksController as vm',
+            })
             .state('home.user', {
-                url: '/user',
+                url: 'user',
                 templateUrl: 'user/user_profile.html',
                 controller: 'UserController as vm'
             });
