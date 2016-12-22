@@ -14,6 +14,7 @@ function NewBookController(BookService, regions) {
     region_id: null
   };
 
+  // Api call to post comics
   vm.createBook = function() {
       BookService
         //  before submit form
@@ -26,19 +27,6 @@ function NewBookController(BookService, regions) {
             console.log(error.messages);
           })
   }
-  // vm.getRegions = function() {
-  //     RegionService
-  //          //  before submit form
-  //          .httpGetRegions(vm.regions)
-  //            // after submit form
-  //            .then(function (data) {
-  //                alert(data.status);
-  //                return vm.regions = data;
-  //            },function(error){
-  //              console.log(error);
-  //            })
-  // }
-
 }
 
 angular

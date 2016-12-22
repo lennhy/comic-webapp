@@ -14,6 +14,7 @@ class ComicsController < ApplicationController
     # comic = current_user.comics.build(comic_params)
       comic = Comic.new(comic_params)
       # binding.pry
+      comic.user_id = current_user.id
       if comic.save
         render json: { status: 'ok'}
       else

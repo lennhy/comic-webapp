@@ -23,16 +23,12 @@
   <input ng-model="vm.book.issue_date" type="date"/><br><br>
 
   <label for="region"> Region: </label>
-  <!-- <input ng-model="vm.book.region_id" type="text" /><br><br> -->
 
-  <!-- <select ng-model="vm.book.region_id" ng-options="r.name for r in vm.regions track by r.id">
-  </select> -->
   <select ng-model="vm.book.region_id">
     <option ng-repeat="region in vm.regions " value="{{region.id}}">{{region.name}}</option>
   </select>
-<pre>---{{ vm.book.regions | json}}---</pre>
 
-<h1>You selected: {{vm.book.region_id}}</h1>
+  <h1>You selected: {{vm.book.region_id}}</h1>
 
   <label for="Graphic Novel"> Graphic Novel: </label>
 
