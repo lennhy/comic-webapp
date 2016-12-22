@@ -25,9 +25,9 @@
   <label for="region"> Region: </label>
   <!-- <input ng-model="vm.book.region_id" type="text" /><br><br> -->
 
-  <select ng-model="vm.regions" ng-options="x for x in regions">
+  <select ng-model="vm.book.region_id" ng-options="name as r.name for r in vm.book.regions track by r.id">
   </select>
-
+<pre>---{{ vm.book.regions | json}}---</pre>
 
 
   <label for="Graphic Novel"> Graphic Novel: </label>

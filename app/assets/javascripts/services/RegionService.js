@@ -1,8 +1,8 @@
 function RegionService($http){
 
   this.httpGetRegions = function(){
-    return $http.get('/region');
-  };
+    return $http.get('/regions')
+  }
 }
 angular
     .module('app')

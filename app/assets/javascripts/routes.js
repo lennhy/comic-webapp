@@ -39,7 +39,12 @@
           .state('home.new', {
               url: 'new',
               templateUrl: 'new/new_book.html',
-              controller: 'NewBookController as vm'
+              controller: 'NewBookController as vm',
+              resolve: {
+                  regions: function (RegionService) {
+                    return RegionService.httpGetRegions();
+                  }
+              }
           })
 
           .state('home.profile', {

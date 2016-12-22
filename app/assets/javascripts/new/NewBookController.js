@@ -1,4 +1,5 @@
-function NewBookController(BookService) {
+function NewBookController(BookService, regions) {
+  console.log(regions)
   var vm = this;
   vm.regions =[]
   vm.book = {
@@ -9,7 +10,7 @@ function NewBookController(BookService) {
     page_count:'',
     issue_date:'',
     graphic_novel:'',
-    region_id: ''
+    regions: regions.data
   };
 
   vm.createBook = function() {
@@ -25,18 +26,19 @@ function NewBookController(BookService) {
           },function(error){
             console.log(error);
           })
-     }
-         RegionService
-           //  before submit form
-           .httpGetRegions(vm.regions)
-             // after submit form
-             .then(function (data) {
-                 alert(data.status);
-                 return vm.regions = data;
-             },function(error){
-               console.log(error);
-             })
-
+  }
+  // vm.getRegions = function() {
+  //     RegionService
+  //          //  before submit form
+  //          .httpGetRegions(vm.regions)
+  //            // after submit form
+  //            .then(function (data) {
+  //                alert(data.status);
+  //                return vm.regions = data;
+  //            },function(error){
+  //              console.log(error);
+  //            })
+  // }
 
 }
 
