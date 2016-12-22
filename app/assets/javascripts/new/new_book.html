@@ -23,8 +23,10 @@
   <input ng-model="vm.book.issue_date" type="date"/><br><br>
 
   <label for="region"> Region: </label>
-  <input ng-model="vm.book.region_id" type="text" /><br><br>
+  <!-- <input ng-model="vm.book.region_id" type="text" /><br><br> -->
 
+  <select ng-model="vm.regions" ng-options="x for x in regions">
+  </select>
 
 
 

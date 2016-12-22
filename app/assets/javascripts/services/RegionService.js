@@ -1,7 +1,7 @@
 function RegionService($http){
 
-  this.httpGetRange = function(){
-    return $http.get('/range');
+  this.httpGetRegions = function(){
+    return $http.get('/region');
   };
 }
 angular
