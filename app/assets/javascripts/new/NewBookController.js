@@ -1,27 +1,31 @@
 function NewBookController(BookService) {
   var vm = this;
+  vm.book = {
+    title: '',
+    description: '',
+    issue:'',
+    volume:'',
+    page_count:'',
+    issue_date:'',
+    graphic_novel:'',
+    region_id: ''
+  };
 
-  vm.title = ''; // vm is bound to an input via `ng-model`
-  vm.description ='';
-  vm.issue ='';
-  vm.volume ='';
-  vm.page_count ='';
-  vm.issue_date ='';
-  vm.graphic_novel ='';
+  vm.createBook = function() {
+    console.log(vm.book)
 
-  vm.createBook = createBook;
-
-  function createBook() {
       BookService
-        .httpCreateBook(vm.title, vm.description, vm.issue, vm.volume, vm.page_count, vm.issue_date, vm.graphic_novel)
+        //  before submit form
+        .httpCreateBook(vm.book)
+          // after submit form
           .then(function (data) {
               alert(data.status);
-              return vm.books = data;
-          }),function(error){
-             //handle what happens if there is an error with the http post call
-             console.log("Error occurred: " + error);
-          }
-  }
+              return vm.book = data;
+          },function(error){
+            console.log(error);
+          })
+     }
+
 }
 
 angular

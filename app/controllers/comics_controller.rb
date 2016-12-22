@@ -13,6 +13,7 @@ class ComicsController < ApplicationController
   def create
     # comic = current_user.comics.build(comic_params)
       comic = Comic.new(comic_params)
+      # binding.pry
       if comic.save
         render json: { status: 'ok'}
       else
@@ -36,6 +37,6 @@ class ComicsController < ApplicationController
 
   private
     def comic_params
-      params.require(:comic).permit(:title, :description, :issue, :volume, :page_count, :issue_date, :graphic_novel)
+      params.require(:comic).permit(:title, :description, :issue, :volume, :page_count, :issue_date, :graphic_novel, :region_id)
     end
 end

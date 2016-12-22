@@ -8,9 +8,26 @@ function BookService($http){
     return $http.get(`/comics/${id}`);
   };
 
-  this.httpCreateBook = function(  title, description, issue, volume, page_count, issue_date, graphic_novel){
-    return $http.post('/comics', { title: title, description: description, issue: issue, volume: volume, page_count: page_count, issue_date: issue_date, graphic_novel: graphic_novel});
-  };
+  // this.httpCreateBook = function(data){
+  //   return $http.post('/comics', data);
+  // };
+
+  this.httpCreateBook = function(data) {
+    console.log(data,$http);
+    var req = {
+     method: 'POST',
+     url: '/comics',
+     data: data
+    }
+    return $http(req);
+  }
+  function successCallback(data){
+    console.log(data)
+  }
+
+  function errorCallback(error){
+    console.log(error)
+  }
 
   this.httpUpdateBook = function(id){
     return $http.patch(`/comics/${id}`);
