@@ -1,5 +1,6 @@
 function NewBookController(BookService) {
   var vm = this;
+  vm.regions =[]
   vm.book = {
     title: '',
     description: '',
@@ -25,6 +26,21 @@ function NewBookController(BookService) {
             console.log(error);
           })
      }
+
+     vm.createRegion = function() {
+       console.log(vm.regions)
+
+         RegionService
+           //  before submit form
+           .httpGetRegions(vm.regions)
+             // after submit form
+             .then(function (data) {
+                 alert(data.status);
+                 return (vm.regions) = data;
+             },function(error){
+               console.log(error);
+             })
+        }
 
 }
 
