@@ -3,7 +3,31 @@ function BooksController(books) {
   vm.books = books.data;
   vm.genres = books.data[0].genres;
   vm.regions = books.data[0].region;
-  vm.create = create;
+  vm.users = books.data[0].users;
+
+ // vm.userName  = function() {
+ //     $(document).ready(function(){
+ //        users.forEach(function(user){
+ //          vm.users.push(user);
+ //        });
+ //      });
+ //  }
+
+//   vm.userName = function() {
+//     BookService
+//       //  before submit form
+//       .httpCreateBook(vm.book)
+//         // after submit form
+//         .then(function (data) {
+//             alert(data.status);
+//             return vm.book = data;
+//         },function(error){
+//           console.log(error.messages);
+//         })
+//   }
+// }
+
+
   // console.log(book.data[0].description);
   // getBooks: getBooks
   // // createBook: createBook;

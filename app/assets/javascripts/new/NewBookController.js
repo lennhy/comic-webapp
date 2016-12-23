@@ -1,8 +1,7 @@
-function NewBookController(BookService, regions, genres, $scope) {
+function NewBookController(BookService, regions, genres) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
-  console.log($scope);
 
   vm.book = {
     title: '',
@@ -23,7 +22,7 @@ function NewBookController(BookService, regions, genres, $scope) {
       .httpCreateBook(vm.book)
         // after submit form
         .then(function (data) {
-            alert(data.status);
+            console.log(data.messages);
             return vm.book = data;
         },function(error){
           console.log(error.messages);

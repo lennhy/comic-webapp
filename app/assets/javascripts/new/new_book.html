@@ -70,9 +70,9 @@
 
     <label for="{{genre.id}}">{{genre.name}}</label>
 
-    <input ng-model="vm.book.genre_ids[$index]" type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value="null"  type="number" required="required"/>
+    <input ng-model="vm.book.genre_ids[$index]" type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value="null"  type="number"/>
 
-    <div ng-messages="newForm.genre.$error" ng-if="newForm.genre.$touched">
+    <div ng-messages="newForm.genre.$error" ng-if="newForm.genre.$untouched">
         <div ng-message="required">A genre is required!</div>
     </div>
 
