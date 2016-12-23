@@ -2,12 +2,22 @@ function BookService($http){
 
   this.httpGetAllBooks = function(){
     return $http.get('/comics.json');
+    // resolve returns the data so don't need the callback
+              // .then(handleResponse)
+              // .catch(handleError);
   };
+
+  // function handleResponse(response){
+  //   console.log(response);
+  // }
+  //
+  // function handleError(error){
+  //   console.log(error);
+  // }
 
   this.httpGetBook = function(id){
     return $http.get(`/comics/${id}`);
   };
-
 
   this.httpCreateBook = function(data) {
     console.log(data,$http);

@@ -3,9 +3,33 @@ function BooksController(books) {
   vm.books = books.data;
   vm.genres = books.data[0].genres;
   vm.regions = books.data[0].region;
-  vm.users = books.data[0].users;
+  // vm.userNames = userNames();
 
- // vm.userName  = function() {
+  // console.log(books.data.propertyOf);
+    var users = books.data.map(function(a) {
+      return a.users;
+    });
+// console.log(users);
+    var userNames = function (){
+      var arr =[];
+      // for(var prop in users){
+          // console.log(users[prop][i].name);
+          var j=0;
+      for(let i=0; i < users.length; i++){
+        // if(user[i].length > 0){
+          arr.push(users[i][j].name);
+        // }
+        // console.log(users[i].length)
+      }
+    // }
+      return (arr).join("");
+    }
+    userNames();
+ //  vm.genres.forEach(function(genre, index) {
+ //    let c = index + 1;
+ //    console.log(index + ". " + genre[c]);
+ //  });
+ // // vm.userName  = function() {
  //     $(document).ready(function(){
  //        users.forEach(function(user){
  //          vm.users.push(user);
