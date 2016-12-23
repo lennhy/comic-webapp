@@ -8,16 +8,8 @@
 ### System dependencies
 
 * Configuration
-  run bundle install to install gems and their dependencies
+  run bundle install and install all gems in the gem file and their dependencies
 
-* Database creation
+* Run migrations with rake db:migrate
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Run the server with rails s command
