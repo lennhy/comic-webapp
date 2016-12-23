@@ -1,7 +1,8 @@
-function NewBookController(BookService, regions) {
+function NewBookController(BookService, regions, genres) {
   var vm = this;
   vm.regions = regions.data;
-  console.log(vm.regions)
+  vm.genres = genres.data;
+  console.log(vm.genres)
 
   vm.book = {
     title: '',
@@ -11,7 +12,8 @@ function NewBookController(BookService, regions) {
     page_count:'',
     issue_date:'',
     graphic_novel:'',
-    region_id: null
+    region_id: null,
+    genre_ids: []
   };
 
   // Api call to post comics
@@ -27,6 +29,9 @@ function NewBookController(BookService, regions) {
             console.log(error.messages);
           })
   }
+    // function go(){
+    //   vm.book.genre_ids.push($('checboxes').input);
+    // }
 }
 
 angular

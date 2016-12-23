@@ -8,6 +8,7 @@ function BookService($http){
     return $http.get(`/comics/${id}`);
   };
 
+
   this.httpCreateBook = function(data) {
     console.log(data,$http);
     var req = {
@@ -20,10 +21,10 @@ function BookService($http){
   function successCallback(data){
     console.log(data)
   }
-
   function errorCallback(error){
     console.log(error)
   }
+
 
   this.httpUpdateBook = function(id){
     return $http.patch(`/comics/${id}`);

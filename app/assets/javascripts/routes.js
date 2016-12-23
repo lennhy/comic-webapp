@@ -6,12 +6,6 @@
               url: '/',
               templateUrl: 'home/home.html',
               controller: 'HomeController as vm',
-              // Use the resolve property to fetch data from the URLs above to receive data and to ultimately display in the DOM
-              // resolve: {
-              //     books: function (BookService) {
-              //       return BookService.httpGetAllBooks();
-              //     }
-              // }
           })
           .state('home.books', {
             url: 'books',
@@ -43,6 +37,9 @@
               resolve: {
                   regions: function (RegionService) {
                     return RegionService.httpGetRegions();
+                  },
+                  genres: function (GenreService) {
+                      return GenreService.httpGetGenres();
                   }
               }
           })
