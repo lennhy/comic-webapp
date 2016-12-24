@@ -9,4 +9,27 @@
   <li>Issue_date: <span ng-bind="vm.book.issue_date"></span></li>
   <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>
   <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li>
+
+  <form name="newForm" ng-submit="vm.createRating()">
+
+    <label for="rating"> Rate: </label>
+    <label for="rating"> 1 star </label>
+    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
+    <label for="rating"> 2 star </label>
+    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
+    <label for="rating"> 3 star </label>
+    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
+    <label for="rating"> 4 star </label>
+    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
+    <label for="rating"> 5 star </label>
+    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse" />
+
+    <label>Rating</label>
+
+    <input type="submit" value="rate"/>
+
+  </form>
+
+  <li> Current Rating <span ng-bind="vm.book.rating.star"></span></li>
+
 </ul>
