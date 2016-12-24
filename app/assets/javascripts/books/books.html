@@ -1,4 +1,7 @@
-<ul ng-repeat="book in vm.books">
+
+<label> Search:</label> <input ng-model="vm.search" ng-change="vm.updateSearch()"/>
+
+<ul ng-repeat="book in vm.filteredBooks">
   <h2><span ng-bind="book.title"></span></h2>
   <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
