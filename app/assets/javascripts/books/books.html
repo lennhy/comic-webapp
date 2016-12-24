@@ -1,6 +1,6 @@
 <ul ng-repeat="book in vm.books">
   <h2><span ng-bind="book.title"></span></h2>
-  <li>Publishers: <span ng-repeat="user in book.users | filter: returnPublisher(book.users)">{{user.name}}</span></li>
+  <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
   <li>Issue: <span ng-bind="book.issue"></span></li>
   <li>Volume: <span ng-bind="book.volume"></span></li>
