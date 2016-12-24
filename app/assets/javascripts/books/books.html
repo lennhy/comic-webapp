@@ -1,12 +1,12 @@
 <ul ng-repeat="book in vm.books">
   <h2><span ng-bind="book.title"></span></h2>
+  <li>Publishers: <span ng-repeat="user in book.users | filter: returnPublisher(book.users)">{{user.name}}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
   <li>Issue: <span ng-bind="book.issue"></span></li>
   <li>Volume: <span ng-bind="book.volume"></span></li>
   <li>Page_count: <span ng-bind="book.page_count"></span></li>
   <li>Issue_date: <span g-bind="book.issue_date"></span></li>
   <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>
-  <li>Genres: <span ng-bind="book.genres"></span></li>
-
-  <!-- <li>Users: <span ng-bind="vm.userNames"></span></li> -->
+  <li>Genres: <span ng-repeat="genre in book.genres">{{genre.name}}</span></li>
 </ul>
+<!-- <li>Publishers: <span ng-bind="vm.userNames"></span></li> -->
