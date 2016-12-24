@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   devise_for :users
   post '/' => 'users#roles'
 
+  get '/ratings' => 'ratings#index'
+  post '/ratings' => 'ratings#create'
   # json serialzer apis
   get '/regions' => 'regions#index'
   get '/genres' => 'genres#index'

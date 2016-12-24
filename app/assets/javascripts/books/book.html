@@ -1,0 +1,12 @@
+
+<ul>
+  <h2><span ng-bind="vm.book.title"></span></h2>
+  <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>
+  <li>Description: <span  ng-bind="vm.book.description"></span></li>
+  <li>Issue: <span ng-bind="vm.book.issue"></span></li>
+  <li>Volume: <span ng-bind="vm.book.volume"></span></li>
+  <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>
+  <li>Issue_date: <span ng-bind="vm.book.issue_date"></span></li>
+  <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>
+  <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li>
+</ul>

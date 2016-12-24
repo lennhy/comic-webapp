@@ -7,6 +7,7 @@
               templateUrl: 'home/home.html',
               controller: 'HomeController as vm',
           })
+
           .state('home.books', {
             url: 'books',
             templateUrl: 'books/books.html',
@@ -17,11 +18,16 @@
                 }
             }
           })
+
           .state('home.book', {
               url: 'books/:id',
               templateUrl: 'books/book.html',
-              controller: 'BooksController as vm',
-
+              controller: 'BookController as vm',
+              resolve: {
+                  book: function (BookService, $stateParams) {
+                    return BookService.httpGetBook($stateParams.id);
+                  }
+              }
           })
 
           .state('home.mybooks', {

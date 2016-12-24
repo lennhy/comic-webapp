@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222204314) do
+ActiveRecord::Schema.define(version: 20161224043647) do
 
   create_table "comic_genres", force: :cascade do |t|
     t.integer  "comic_id"
@@ -45,6 +45,12 @@ ActiveRecord::Schema.define(version: 20161222204314) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "comic_id"
+    t.integer "stars",    default: 0
   end
 
   create_table "regions", force: :cascade do |t|

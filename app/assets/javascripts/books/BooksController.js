@@ -2,7 +2,7 @@ function BooksController(books, $filter) {
   var vm = this;
   vm.books = books.data;
   vm.search = '';
-
+  // vm.book = book.data
 
   // vm.updateSearch = function(){
   //   if(vm.search === ''){

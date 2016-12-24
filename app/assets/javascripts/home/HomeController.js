@@ -1,13 +1,13 @@
 function HomeController(Auth) {
   var vm = this;
 
-  Auth.currentUser(){
-    .then(function(user){
-        console.log(user)
-      }, function(error){
-        console.log(error)
-      }
-    })
+  // Auth.currentUser(){
+  //   .then(function(user){
+  //       console.log(user)
+  //     }, function(error){
+  //       console.log(error)
+  //     }
+  //   })
 
 }
 angular
