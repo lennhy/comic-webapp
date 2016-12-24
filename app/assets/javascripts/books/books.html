@@ -1,7 +1,8 @@
 
-<label> Search:</label> <input ng-model="vm.search" ng-change="vm.updateSearch()"/>
+<label> Search:</label>
+<input ng-model="searchComics"/>
 
-<ul ng-repeat="book in vm.filteredBooks">
+<ul ng-repeat="book in vm.books | filter: searchComics">
   <h2><span ng-bind="book.title"></span></h2>
   <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
@@ -12,4 +13,3 @@
   <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>
   <li>Genres: <span ng-repeat="genre in book.genres">{{genre.name}}</span></li>
 </ul>
-<!-- <li>Publishers: <span ng-bind="vm.userNames"></span></li> -->

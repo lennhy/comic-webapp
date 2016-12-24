@@ -3,12 +3,15 @@ function BooksController(books, $filter) {
   vm.books = books.data;
   vm.search = '';
 
-  if(vm.search == ''){
-    vm.filteredList = vm.books;
-  }
-  vm.updateSearch = function(){
-    vm.filteredBooks = $filter('filter')(vm.books, vm.search);
-  };
+
+  // vm.updateSearch = function(){
+  //   if(vm.search === ''){
+  //     vm.filteredList = vm.books;
+  //   }else{
+  //     vm.filteredBooks = vm.search;
+  //     vm.filteredBooks = $filter('filter')(vm.books, vm.search);
+  //   }
+  // };
 }
 
 angular
