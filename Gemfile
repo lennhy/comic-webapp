@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'bower-rails'
 
+source "https://rails-assets.org" do
+  gem "rails-assets-angular-devise"
+end
+
 gem 'bootstrap-sass', '~> 3.3.7'
 
 # Allows us to wrtie html code within our js assets folder and compile into our asset pipeline

@@ -1,5 +1,6 @@
 {
-    "name": "bower-rails generated vendor assets",
-    "dependencies": {
-    }
+  "name": "bower-rails generated vendor assets",
+  "dependencies": {
+    "angular-devise": "~1.3.0"
+  }
 }

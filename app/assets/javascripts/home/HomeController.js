@@ -1,13 +1,18 @@
-function HomeController() {
-  // var vm = this;
-  // vm.books = books.data;
-  // vm.genres = books.data[0].genres;
-  // vm.regions = books.data[0].region;
+function HomeController(Auth) {
+  var vm = this;
+
+  Auth.currentUser(){
+    .then(function(user){
+        console.log(user)
+      }, function(error){
+        console.log(error)
+      }
+    })
+
 }
 angular
         .module('app')
         .controller('HomeController', HomeController);
-
         //
         // [
         //   {
