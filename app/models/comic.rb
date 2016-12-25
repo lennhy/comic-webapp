@@ -4,6 +4,6 @@ class Comic < ApplicationRecord
   has_many :comic_users
   has_many :comic_genres
   belongs_to :region
-
+  has_many :ratings
 
 end

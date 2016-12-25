@@ -14,25 +14,25 @@
 
     <label>Rating</label>
 
-    <input ng-model="vm.rating_star" type="radio" value="1" />
+    <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />
     <label>1 star</label>
 
-    <input ng-model="vm.rating_star" type="radio" value="2" />
+    <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />
     <label>2 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" value="3" />
+    <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />
     <label>3 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" value="4" />
+    <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />
     <label>4 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" value="5" />
+    <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />
     <label>5 stars</label>
 
     <input type="submit" value="rate"/>
 
     Give this a {{ vm.rating_star}} rating.
-    
+
   </form>
 
   <li> Current Rating <span ng-bind="vm.book.rating.star"></span></li>

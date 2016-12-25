@@ -8,9 +8,9 @@ function RatingService($http){
   //   return $http.post('/ratings')
   // }
 
-  this.httpCreateRating = function(stars, comic_id) {
+  this.httpCreateRating = function(star, comic_id) {
     data = {
-      stars: stars,
+      stars: star,
       comic_id: comic_id
     }
     console.log(data,$http);

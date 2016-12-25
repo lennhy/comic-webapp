@@ -11,7 +11,7 @@ function BookController(book, RatingService) {
           .httpCreateRating(vm.rating_star, bookId)
           // after submit form
           .then(function (data) {
-              console.log(data.messages);
+              console.log(data);
               return vm.rating = data;
           },function(error){
             console.log(error.messages);
