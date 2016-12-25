@@ -29,12 +29,12 @@
     <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />
     <label>5 stars</label>
 
-    <input type="submit" value="rate"/>
+    <input type="submit" value="rate"/><br><br>
 
-    Give this a {{ vm.rating_star}} rating.
+    Give this a {{ vm.rating_star}} star rating.
 
   </form>
 
-  <li> Current Rating <span ng-bind="vm.book.rating.star"></span></li>
+  <li> Current Rating <span ng-bind="vm.rateTotal"></span></li>
 
 </ul>

@@ -1,4 +1,4 @@
-<label> Search:</label>
+<label> Search by Genre:</label>
 <input ng-model="searchComics.genres"/>
 
 <ul ng-repeat="book in vm.books | filter: searchComics.genres | orderBy: 'title'">

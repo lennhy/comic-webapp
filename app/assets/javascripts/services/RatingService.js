@@ -1,7 +1,7 @@
 function RatingService($http){
 
-  this.httpGetRatings = function(){
-    return $http.get('/ratings')
+  this.httpGetRatings = function(id){
+    return $http.get('/ratings/'+id)
   }
 
   // this.httpCreateRating = function(star, comic_id){
@@ -13,7 +13,6 @@ function RatingService($http){
       stars: star,
       comic_id: comic_id
     }
-    console.log(data,$http);
     var req = {
      method: 'POST',
      url: '/ratings',
@@ -22,10 +21,10 @@ function RatingService($http){
     return $http(req);
   }
   function successCallback(data){
-    console.log(data)
+    console.log(data);
   }
   function errorCallback(error){
-    console.log(error)
+    console.log(error);
   }
 
 }
