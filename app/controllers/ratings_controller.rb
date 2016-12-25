@@ -2,6 +2,7 @@ class RatingsController < ApplicationController
 
   def create
     @rating = rating.new(rating_params)
+    @rating.user_id = current_user.id
     if @rating.save
         render json: @rating, status: 201, notice:"You have successfully rated this comic!"
     else
@@ -14,8 +15,7 @@ class RatingsController < ApplicationController
     def rating_params
       params.require(:rating).permit(
       :stars,
-      :comic_id,
-      :user_id
+      :comic_id
       )
     end
 end

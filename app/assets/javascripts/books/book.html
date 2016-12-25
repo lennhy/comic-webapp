@@ -12,22 +12,27 @@
 
   <form name="newForm" ng-submit="vm.createRating()">
 
-    <label for="rating"> Rate: </label>
-    <label for="rating"> 1 star </label>
-    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
-    <label for="rating"> 2 star </label>
-    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
-    <label for="rating"> 3 star </label>
-    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
-    <label for="rating"> 4 star </label>
-    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse"/>
-    <label for="rating"> 5 star </label>
-    <input ng-model="vm.rating" type="radio" ng-checked="true" value="true" name="trueOrFalse" />
-
     <label>Rating</label>
+
+    <input ng-model="vm.rating_star" type="radio" value="1" />
+    <label>1 star</label>
+
+    <input ng-model="vm.rating_star" type="radio" value="2" />
+    <label>2 stars</label>
+
+    <input ng-model="vm.rating_star" type="radio" value="3" />
+    <label>3 stars</label>
+
+    <input ng-model="vm.rating_star" type="radio" value="4" />
+    <label>4 stars</label>
+
+    <input ng-model="vm.rating_star" type="radio" value="5" />
+    <label>5 stars</label>
 
     <input type="submit" value="rate"/>
 
+    Give this a {{ vm.rating_star}} rating.
+    
   </form>
 
   <li> Current Rating <span ng-bind="vm.book.rating.star"></span></li>
