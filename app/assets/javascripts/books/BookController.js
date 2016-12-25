@@ -13,6 +13,10 @@ function BookController(book, RatingService, $scope) {
         .httpCreateRating(vm.rating_star, bookId)
         // after submit form
         .then(function (data) {
+          console.log(data);
+          if(data.status === 201){
+            $('ul').append("<li>You have successfully rated this comic!</li>")
+          }
         },function(error){
           console.log(error.messages);
         })
@@ -30,6 +34,11 @@ function BookController(book, RatingService, $scope) {
          return avg.toFixed(2);
     }
 
+    // function changOp(){
+    //   $('form').submit(function(){
+    //     return vm.ratings.html("bb");
+    //   });
+    // }
 
 }
 

@@ -4,9 +4,9 @@ function RatingService($http){
     return $http.get('/ratings/'+id)
   }
 
-  // this.httpCreateRating = function(star, comic_id){
-  //   return $http.post('/ratings')
-  // }
+  this.httpGetRating = function(id){
+    return $http.get('/ratings/'+id)
+  }
 
   this.httpCreateRating = function(star, comic_id) {
     data = {

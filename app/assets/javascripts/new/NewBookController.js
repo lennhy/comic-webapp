@@ -22,12 +22,14 @@ function NewBookController(BookService, regions, genres) {
       .httpCreateBook(vm.book)
         // after submit form
         .then(function (data) {
-            console.log(data.messages);
+          if(data.status === 201){
+            $('ul').append("<li>You have successfully created a new comic!</li>")
             return vm.book = data;
-        },function(error){
+          }
+         },function(error){
           console.log(error.messages);
         })
-  }
+   }
 }
 
 angular
