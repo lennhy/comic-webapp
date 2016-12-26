@@ -1,15 +1,16 @@
-function HomeController(Auth) {
+function HomeController(Auth,$rootScope) {
   var vm = this;
 
-  // Auth.currentUser(){
-  //   .then(function(user){
-  //       console.log(user)
-  //     }, function(error){
-  //       console.log(error)
-  //     }
-  //   })
+  Auth.currentUser()
+    .then(function(user){
+      console.log(user)
+        $rootScope.currentUser = user
+      }, function(error){
+        console.log(error)
+    })
 
 }
+
 angular
         .module('app')
         .controller('HomeController', HomeController);

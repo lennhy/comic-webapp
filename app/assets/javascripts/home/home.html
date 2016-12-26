@@ -3,7 +3,10 @@
 <a href="#" ui-sref="home.books">Books</a>
 
 <a href="#" ui-sref="home.publishers">Publishers</a>
-<a href="#" ui-sref="home.new">Upload</a>
+
+<span ng-if="currentUser.role =='publisher'">
+  <a href="#" ui-sref="home.new">Upload</a>
+</span>
 
 <h1>ComicColorr</h1>
 

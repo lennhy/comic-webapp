@@ -1,4 +1,4 @@
-function BookController(book, RatingService, $scope) {
+function BookController(book, RatingService, $scope, $route) {
   var vm = this;
   vm.book = book.data;
   vm.ratings = vm.book.ratings;
@@ -7,15 +7,19 @@ function BookController(book, RatingService, $scope) {
 
   var bookId = book.data.id;
 
+  function reloadData(){
+    $route.reload();
+  }
+
   vm.createRating = function() {
     RatingService
       //  before submit form
         .httpCreateRating(vm.rating_star, bookId)
         // after submit form
         .then(function (data) {
-          console.log(data);
+          reloadData();
           if(data.status === 201){
-            $('ul').append("<li>You have successfully rated this comic!</li>")
+            $('ul').append("<li>You have successfully rated this comic!</li>");
           }
         },function(error){
           console.log(error.messages);
@@ -33,12 +37,6 @@ function BookController(book, RatingService, $scope) {
          var avg = (total / highestNumOfRatings) * 5;
          return avg.toFixed(2);
     }
-
-    // function changOp(){
-    //   $('form').submit(function(){
-    //     return vm.ratings.html("bb");
-    //   });
-    // }
 
 }
 
