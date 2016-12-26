@@ -15,8 +15,10 @@ function BookService($http){
   //   console.log(error);
   // }
 
+
   this.httpGetBook = function(id){
     return $http.get('/comics/'+ id);
+
   };
 
   this.httpCreateBook = function(data) {

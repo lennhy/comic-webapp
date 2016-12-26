@@ -1,11 +1,16 @@
-Rails.application.routes.draw do
+  Rails.application.routes.draw do
   root 'application#index'
+
   devise_for :users
+
+  # json serialzer apis
+  get '/users/:id', to: 'users#show'
+
   post '/' => 'users#roles'
 
   get '/ratings' => 'ratings#index'
   post '/ratings' => 'ratings#create'
-  # json serialzer apis
+
   get '/regions' => 'regions#index'
   get '/genres' => 'genres#index'
 

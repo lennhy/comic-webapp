@@ -1,10 +1,8 @@
 <h2>My books</h2>
-<label> Search by Genre:</label>
-<input ng-model="searchComics.genres"/>
 
-<ul ng-repeat="book in vm.books | filter: searchComics.genres | orderBy: 'title'">
+<ul ng-repeat="book in currentUser.comics  | orderBy: 'title'">
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
-  <li>Publishers: <span ng-if="user in book.users === currentUser" ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
+  <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
   <li>Issue: <span ng-bind="book.issue"></span></li>
   <li>Volume: <span ng-bind="book.volume"></span></li>

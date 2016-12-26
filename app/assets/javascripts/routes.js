@@ -31,9 +31,14 @@
           })
 
           .state('home.mybooks', {
-              url: 'mybooks',
-              templateUrl: 'books/my_books.html',
-              controller: 'BooksController as vm'
+              url: 'users/:id',
+              templateUrl: 'users/user_books.html',
+              controller: 'UserController as vm',
+              // resolve: {
+              //   User: function (UserService, $stateParams) {
+              //       return UserService.httpGetUser($stateParams.id);
+              //   }
+              // }
           })
 
           .state('home.new', {
@@ -53,13 +58,13 @@
           .state('home.profile', {
               url: 'profile',
               templateUrl: 'users/user_profile.html',
-              controller: 'UsersController as vm'
+              controller: 'UserController as vm'
           })
 
           .state('home.publishers', {
               url: 'publishers',
               templateUrl: 'users/publishers.html',
-              controller: 'UsersController as vm'
+              controller: 'UserController as vm'
           });
 
      $urlRouterProvider.otherwise('/');
