@@ -1,7 +1,7 @@
 function MyBooksController() {
-  var ctrl = this;
-  ctrl.name ="big John";
-
+  var vm = this;
+  vm.books = books.data;
+  
 
 }
 angular

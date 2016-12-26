@@ -32,8 +32,8 @@
 
           .state('home.mybooks', {
               url: 'mybooks',
-              templateUrl: 'mybooks/my_books.html',
-              controller: 'MyBooksController as vm'
+              templateUrl: 'books/my_books.html',
+              controller: 'BooksController as vm'
           })
 
           .state('home.new', {

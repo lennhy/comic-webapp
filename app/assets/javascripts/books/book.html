@@ -10,6 +10,8 @@
   <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>
   <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li>
 
+<span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
+
   <form name="newForm" ng-submit="vm.createRating()">
 
     <label>Rating</label>
@@ -34,6 +36,7 @@
     Give this a {{ vm.rating_star}} star rating.
 
   </form>
+</span>
 
   <li> Current Rating <span ng-bind="vm.rateTotal"></span></li>
 
