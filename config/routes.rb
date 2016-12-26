@@ -5,6 +5,7 @@
 
   # json serialzer apis
   get '/users/:id', to: 'users#show'
+  get '/users', to: 'users#index'
 
   post '/' => 'users#roles'
 
