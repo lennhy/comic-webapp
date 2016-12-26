@@ -1,4 +1,4 @@
-  angular
+angular
     .module('app')
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
@@ -7,6 +7,7 @@
               templateUrl: 'home/home.html',
               controller: 'HomeController as vm',
           })
+
           // Create a new book
           .state('home.new', {
               url: 'new',
@@ -21,6 +22,7 @@
                   }
               }
           })
+
           // Index page for all books
           .state('home.books', {
             url: 'books',
@@ -32,6 +34,7 @@
                 }
             }
           })
+
           // Show page for a selected book
           .state('home.book', {
               url: 'books/:id',
@@ -43,27 +46,29 @@
                   }
               }
           })
+
           // Current User books
           .state('home.mybooks', {
               url: 'users/:id',
               templateUrl: 'users/user_books.html',
-              controller: 'UserController as vm',
           })
+
           // Current User profile
           .state('home.profile', {
               url: 'profile',
-              templateUrl: 'users/user_profile.html',
-              controller: 'UserController as vm',
-              resolve: {
-                users: function (RegionService) {
-                  return RegionService.httpGetRegions();
-             }
+              templateUrl: 'users/user_profile.html'
           })
+
           // Publishers index page
           .state('home.publishers', {
               url: 'publishers',
               templateUrl: 'users/publishers.html',
-              controller: 'UserController as vm'
+              controller: 'UserController as vm',
+              resolve: {
+                allUsers: function (UserService) {
+                  return UserService.httpGetUsers();
+                }
+              }
           });
 
      $urlRouterProvider.otherwise('/');

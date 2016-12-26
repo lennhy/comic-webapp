@@ -1,1 +1,11 @@
 <h2>All Publishers</h2>
+
+
+  <ul ng-repeat="user in vm.users | orderBy: 'title'">
+
+    <span ng-if="user.role === 'publisher'">
+      <h3><span ng-bind="user.name"></h3></li>
+
+  </span>
+
+  </ul>

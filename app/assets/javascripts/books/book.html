@@ -10,33 +10,34 @@
   <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>
   <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li>
 
-<span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
+  <span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
 
-  <form name="newForm" ng-submit="vm.createRating()">
+    <form name="newForm" ng-submit="vm.createRating()">
 
-    <label>Rating</label>
+      <label>Rating</label>
 
-    <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />
-    <label>1 star</label>
+      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />
+      <label>1 star</label>
 
-    <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />
-    <label>2 stars</label>
+      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />
+      <label>2 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />
-    <label>3 stars</label>
+      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />
+      <label>3 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />
-    <label>4 stars</label>
+      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />
+      <label>4 stars</label>
 
-    <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />
-    <label>5 stars</label>
+      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />
+      <label>5 stars</label>
 
-    <input type="submit" value="rate"/><br><br>
+      <input type="submit" value="rate"/><br><br>
 
-    Give this a {{ vm.rating_star}} star rating.
+      Give this a {{ vm.rating_star}} star rating.
 
-  </form>
-</span>
+    </form>
+    
+  </span>
 
   <li> Current Rating <span ng-bind="vm.rateTotal"></span></li>
 
