@@ -11,8 +11,8 @@ function NewBookController(BookService, regions, genres) {
     page_count:'',
     issue_date:'',
     graphic_novel:'',
-    region: null,
-    genre_ids: []
+    region_id: null,
+    // genre_ids: []
   };
 
   // Api call to post comics
@@ -23,9 +23,12 @@ function NewBookController(BookService, regions, genres) {
           // after submit form
           .then(function (data) {
               console.log(data);
-              return vm.book = data;
+                $('ul').append("<li>You have successfully created a new comic!</li>");
+              // return vm.book = data;
           },function(error){
-            console.log(error.messages);
+            console.log(error)
+            $('ul').append("<li>"+error+"</li>");
+            // $('ul').append("<li>" + error + "</li>");
           })
     }
   }

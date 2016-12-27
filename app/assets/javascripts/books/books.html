@@ -1,14 +1,17 @@
-<label> Search by Genre:</label>
-<input ng-model="searchComics.genres"/>
+<label> Search by Region:</label>
+<input ng-model="searchComics.region"/>
 
-<ul ng-repeat="book in vm.books | filter: searchComics.genres | orderBy: 'title'">
+<ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: 'title'">
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
   <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
+  <li>Region: <span  ng-bind="book.region.name"></span></li>
   <li>Issue: <span ng-bind="book.issue"></span></li>
   <li>Volume: <span ng-bind="book.volume"></span></li>
   <li>Page_count: <span ng-bind="book.page_count"></span></li>
-  <li>Issue_date: <span g-bind="book.issue_date"></span></li>
+  <li>Issue_date: <span ng-bind="book.issue_date | date : 'fullDate'"></span></li>
   <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>
-  <li>Genres: <span ng-repeat="genre in book.genres">{{ genre.name }}</span></li>
+  <li>Posted On: <span ng-bind="book.created_at | date : 'fullDate'"></span></li>
+
+  <!-- <li>Genres: <span ng-repeat="genre in book.genres">{{ genre.name }}</span></li> -->
 </ul>

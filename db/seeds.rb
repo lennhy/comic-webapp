@@ -52,7 +52,6 @@ end
 
 def create_comic(title, description, issue, volume, count, date, bool)
         Comic.create(
-            id: 1,
             title: title,
             description: description,
             issue: issue,

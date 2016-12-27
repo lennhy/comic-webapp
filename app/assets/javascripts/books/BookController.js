@@ -7,22 +7,17 @@ function BookController(book, RatingService, $scope, $route) {
 
   var bookId = book.data.id;
 
-  function reloadData(){
-    $route.reload();
-  }
-
   vm.createRating = function() {
     RatingService
       //  before submit form
         .httpCreateRating(vm.rating_star, bookId)
         // after submit form
         .then(function (data) {
-          reloadData();
           if(data.status === 201){
             $('ul').append("<li>You have successfully rated this comic!</li>");
           }
         },function(error){
-          console.log(error.messages);
+          console.log(error);
         })
    }
 

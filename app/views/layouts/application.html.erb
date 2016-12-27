@@ -9,6 +9,11 @@
   </head>
 
   <body>
+    <i><%= content_tag(:div, flash[:error], :id => "flash_error") %></i>
+    <i><%= content_tag(:div, flash[:notice], :id => "flash_notice") %></i>
+    <i><%= content_tag(:div, flash[:alert], :id => "flash_alert") %></i>
+    <br>
+
     <%= render 'layouts/log_user' %>
     <!-- <div ng-repeat="comic in vm.comics" >    Hello {{ comic  }} </div> -->
     <%= yield %>

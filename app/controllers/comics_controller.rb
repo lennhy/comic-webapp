@@ -10,12 +10,13 @@ class ComicsController < ApplicationController
   end
 
   def create
+    # binding.pry
       comic = Comic.new(comic_params)
-      comic.user_id = current_user.id
+      comic.users << current_user
       if comic.save
-        render json: { status: 'ok'}
+        render json: { status: 'ok'}, notice: "You successfully created a new Comic!"
       else
-        render json: {errors: comic.errors.full_messages}, status: 402
+        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
       end
   end
 
@@ -35,6 +36,16 @@ class ComicsController < ApplicationController
 
   private
     def comic_params
-      params.require(:comic).permit(:title, :description, :issue, :volume, :page_count, :issue_date, :graphic_novel, :region_id, :genre_ids=>[])
+      params.require(:comic).permit(
+                :title,
+                :description,
+                :issue,
+                :volume,
+                :page_count,
+                :issue_date,
+                :graphic_novel,
+                :region_id,
+                # :genre_ids => []
+        )
     end
 end

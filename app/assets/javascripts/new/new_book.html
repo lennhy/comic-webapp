@@ -1,9 +1,12 @@
 <br>
-<h2>Upload a Book</h2>
-<br>
+<h3>Upload a Book</h3>
+
+<ul>
+</ul>
 
 <form name="newForm" ng-submit="vm.createBook()">
 
+  <!--title  -->
   <label for="title"> Title: </label><br>
   <input ng-model="vm.book.title" type="text" name="title" required="required"/><br></br>
 
@@ -11,6 +14,7 @@
     <div ng-message="required">A region is required!</div>
   </div>
 
+  <!--description  -->
   <label for="description"> Description: </label><br>
   <input ng-model="vm.book.description" type="text" minlength="10" name="description" required="required" /><br></br>
 
@@ -19,7 +23,7 @@
     <div ng-message="minlength">Must be more than 10 characters!</div>
   </div>
 
-
+  <!--issue  -->
   <label for="issue"> Issue number: </label><br>
   <input  ng-model="vm.book.issue" name="issue" type="number" required="required" /><br></br>
 
@@ -28,7 +32,7 @@
   </div>
 
 
-
+  <!-- volume  -->
   <label for="volume"> volume: </label><br>
   <input  ng-model="vm.book.volume" name="volume" type="number" required="required" /><br></br>
 
@@ -36,7 +40,7 @@
       <div ng-message="required">A volume number is required!</div>
   </div>
 
-
+  <!--page count  -->
   <label for="Page Count"> Page Count: </label><br>
   <input  ng-model="vm.book.page_count" type="number" name="pageCount"required="required" /><br></br>
 
@@ -44,6 +48,7 @@
       <div ng-message="required">An page count is required!</div>
   </div>
 
+  <!--issue date  -->
   <label for="Issue Date"> Issue Date: </label><br>
   <input ng-model="vm.book.issue_date" type="date" name="issueDate" required="required" /><br></br>
 
@@ -52,31 +57,31 @@
   </div>
 
 
-
+  <!-- options dropdown for regions -->
   <label for="region"> Region: </label><br>
-  <!-- options field for regions -->
+
   <select ng-model="vm.book.region_id" >
 
-    <option ng-repeat="region in vm.regions" value="{{region.id}}">{{region.name}}</option>
+    <option ng-repeat="region in vm.regions" required="required" value="{{region.id}}">{{region.name}}</option>
 
   </select><br></br>
 
 
 
-  <!-- options field for genres -->
-  <span ng-repeat=" genre in vm.genres">
+  <!-- options dropdown for genres -->
+  <!-- <span ng-repeat=" genre in vm.genres">
 
     <label for="{{genre.id}}">{{genre.name}}</label>
 
-    <input ng-model="vm.book.genre_ids[$index]"  type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value="null"/>
+    <input ng-model="vm.book.genre_ids[$index]"  type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value=""/>
 
  </span>
 
- <h1>You selected: {{vm.book.genre_ids}}</h1>
+ <h1>You selected: {{vm.book.genre_ids}}</h1> -->
 
 
 
-
+ <!-- radio button fields for graphic novel -->
   <label for="Graphic Novel"> Graphic Novel: </label>
 
   <label for="Graphic Novel"> Yes: </label>
@@ -88,7 +93,9 @@
 
   <input  ng-model="vm.book.graphic_novel" type="radio" value="false"/>
 
-
+  <div ng-messages="newForm.graphic_novel.$error" ng-if="newForm.graphic_novel.$touched">
+      <div ng-message="required">An issue date is required!</div>
+  </div>
 
 
   <input type="submit" value="create"/>
