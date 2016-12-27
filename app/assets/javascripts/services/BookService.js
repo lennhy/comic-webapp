@@ -22,7 +22,6 @@ function BookService($http){
   };
 
   this.httpCreateBook = function(data) {
-    console.log(data,$http);
     var req = {
      method: 'POST',
      url: '/comics',

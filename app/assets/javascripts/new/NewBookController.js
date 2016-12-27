@@ -11,26 +11,25 @@ function NewBookController(BookService, regions, genres) {
     page_count:'',
     issue_date:'',
     graphic_novel:'',
-    region_id: null,
+    region: null,
     genre_ids: []
   };
 
   // Api call to post comics
-  vm.createBook = function() {
-    BookService
-      //  before submit form
-      .httpCreateBook(vm.book)
-        // after submit form
-        .then(function (data) {
-          if(data.status === 201){
-            $('ul').append("<li>You have successfully created a new comic!</li>")
-            return vm.book = data;
-          }
-         },function(error){
-          console.log(error.messages);
-        })
-   }
-}
+    vm.createBook = function() {
+      BookService
+        //  before submit form
+        .httpCreateBook(vm.book)
+          // after submit form
+          .then(function (data) {
+              console.log(data);
+              return vm.book = data;
+          },function(error){
+            console.log(error.messages);
+          })
+    }
+  }
+
 
 angular
         .module('app')

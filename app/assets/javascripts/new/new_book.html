@@ -63,40 +63,34 @@
 
 
 
-  <label for"gernre">Genre:</label>
-
-  <!-- checkbox field for genres -->
-  <span ng-repeat=" genre in vm.genres" name="genre">
+  <!-- options field for genres -->
+  <span ng-repeat=" genre in vm.genres">
 
     <label for="{{genre.id}}">{{genre.name}}</label>
 
-    <input ng-model="vm.book.genre_ids[$index]" type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value="null"  type="number"/>
-
-    <div ng-messages="newForm.genre.$error" ng-if="newForm.genre.$untouched">
-        <div ng-message="required">A genre is required!</div>
-    </div>
+    <input ng-model="vm.book.genre_ids[$index]"  type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value="null"/>
 
  </span>
 
+ <h1>You selected: {{vm.book.genre_ids}}</h1>
 
-<br></br>
+
+
+
   <label for="Graphic Novel"> Graphic Novel: </label>
 
   <label for="Graphic Novel"> Yes: </label>
 
-  <input ng-model="vm.book.graphic_novel" type="radio" ng-checked="true" value="true" name="trueOrFalse" required="required"/>
+  <input  ng-model="vm.book.graphic_novel" type="radio" value="true"/>
 
 
   <label for="Graphic Novel"> No: </label>
 
-  <input  ng-model="vm.book.graphic_novel" type="radio" value="false" />
+  <input  ng-model="vm.book.graphic_novel" type="radio" value="false"/>
+
+
 
 
   <input type="submit" value="create"/>
-
-  <ul class="notication">
-    <li></li>
-  </ul>
-
 
 </form>
