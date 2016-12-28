@@ -93,8 +93,8 @@
 
   <input  ng-model="vm.book.graphic_novel" type="radio" value="false"/>
 
-  <div ng-messages="newForm.graphic_novel.$error" ng-if="newForm.graphic_novel.$touched">
-      <div ng-message="required">An issue date is required!</div>
+  <div ng-messages="newForm.graphic_novel.$errors">
+      <div ng-message="radiob">You need to state if the book is a graphic novel or not</div>
   </div>
 
 

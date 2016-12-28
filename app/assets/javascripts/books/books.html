@@ -2,6 +2,11 @@
 <input ng-model="searchComics.region"/>
 
 <ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: 'title'">
+
+  <button id="up" ng-click="vm.vote(book)">Upvote + </button>
+  <!-- <button id="down" ng-click="vm.vote(book)">Downvote -</button> -->
+  <div class ="number">{{ book.num }}</div>
+
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
   <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
