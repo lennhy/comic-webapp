@@ -5,9 +5,9 @@ class RatingsController < ApplicationController
     new_rating.user_id = current_user.id
     old_rating = Rating.find_by(comic_id: params[:comic_id], user_id: current_user.id)
 
-    if old_rating.update(rating_params)
+    if old_rating != nil
+      old_rating.update(rating_params)
         render json: old_rating, status: 204, notice:"You have successfully updated this comic!"
-
     else
         new_rating.save
         render json: new_rating, status: 201, notice:"You have successfully rated this comic!"
