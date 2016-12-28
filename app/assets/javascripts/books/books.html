@@ -3,8 +3,8 @@
 
 <ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: 'title'">
 
-  <button id="up" ng-click="vm.vote(book)">Upvote + </button>
-  <!-- <button id="down" ng-click="vm.vote(book)">Downvote -</button> -->
+  <button ng-click="vm.upVote(book)">Upvote + </button>
+  <button ng-click="vm.downVote(book)">Downvote -</button>
   <div class ="number">{{ book.num }}</div>
 
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>

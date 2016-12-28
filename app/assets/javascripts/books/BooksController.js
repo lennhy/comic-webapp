@@ -14,11 +14,25 @@ function BooksController( $filter, BookService) {
                     console.log(error)
          });
 
+        // users can only upvote once
+        vm.upVote = function(book){
+          if(book.num === 1){
+            book.num =1;
+          }else{
+            book.num +=1;
+          }
 
-  vm.vote = function(book){
-    book.num +=1
-  }
+        }
+        
+        // users can only downvote once
+        vm.downVote = function(book){
+          if(book.num === 0){
+            book.num +=0;
+          }else{
+            book.num -=1;
+          }
 
+        }
 
 }
 
