@@ -1,12 +1,18 @@
-function BooksController(books, $filter) {
+function BooksController( $filter, BookService) {
   var vm = this;
-  vm.books = books.data;
   vm.search = '';
 
-  // vm.bookVote = function(){
-  //
-  // }
-
+     BookService
+       .httpGetAllBooks()
+           .then(function (books){
+             var getBooks = books.data;
+                 for(var i=0; i < getBooks.length; i++){
+                     getBooks[i].num = 0;
+                 }
+              vm.books = getBooks;
+            },function(error){
+                    console.log(error)
+         });
 
 
   vm.vote = function(book){
