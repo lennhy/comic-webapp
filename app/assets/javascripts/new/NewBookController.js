@@ -32,7 +32,7 @@ function NewBookController(BookService, regions, genres) {
             // failure
           },function(error){
             console.log(error)
-            // $('ul').append("<li>"+error+"</li>");
+            $('ul').append("<li>Looks like You are are missing something!</li>");
             // $('ul').append("<li>" + error + "</li>");
             // success and error are special functions added to a promise by $http
 

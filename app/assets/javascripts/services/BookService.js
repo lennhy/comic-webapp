@@ -8,6 +8,7 @@ function BookService($http){
   // then takes two parameters - a callback function for success and a
   // callback function for failure.
   this.httpGetAllBooks = function(){
+    console.log("d");
     return $http.get('/comics.json')
         // returns a promise
         // What to do when the request succeeds

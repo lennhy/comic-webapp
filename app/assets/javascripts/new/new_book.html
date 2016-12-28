@@ -86,12 +86,12 @@
 
   <label for="Graphic Novel"> Yes: </label>
 
-  <input  ng-model="vm.book.graphic_novel" type="radio" value="true"/>
+  <input  ng-model="vm.book.graphic_novel" type="radio" name="graphic_novel" value="true"/>
 
 
   <label for="Graphic Novel"> No: </label>
 
-  <input  ng-model="vm.book.graphic_novel" type="radio" value="false"/>
+  <input  ng-model="vm.book.graphic_novel" type="radio" name = "graphic_novel" value="false"/>
 
   <div ng-messages="newForm.graphic_novel.$errors">
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
