@@ -4,4 +4,6 @@ class Rating < ApplicationRecord
 
   validates_uniqueness_of :comic, scope: :user_id
 
+
+
 end

@@ -13,8 +13,11 @@ function BookController(book, RatingService, $scope, $route) {
         .httpCreateRating(vm.rating_star, bookId)
         // after submit form
         .then(function (data) {
-          if(data.status === 201){
-            $('ul').append("<li>You have successfully rated this comic!</li>");
+          if(data.status === 201 || data.status === 200){
+            $('ul').prepend("<li>You have successfully rated this comic!</li>");
+          }
+          else if(data.status === 204 ){
+            $('ul').prepend("<li>You have successfully updated the rating for this comic!</li>");
           }
         },function(error){
           console.log(error);
@@ -31,11 +34,11 @@ function BookController(book, RatingService, $scope, $route) {
           total += rating.stars;
         })
          var avg = (total / highestNumOfRatings) * 5;
-         if(NaN){
-         return avg.toFixed(2);
-       } else{
-         return "There are currently no ratings for this book"
-       }
+         if(avg === NaN){
+           return "There are currently no ratings for this book"
+         } else{
+           return avg.toFixed(2);
+         }
     }
 
 }

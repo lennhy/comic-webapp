@@ -35,7 +35,7 @@ function BookService($http){
         // success and error are special functions added to a promise by $http
 
         // success or error will be called later - when this block is finished
-        // executing we don't have the name, we've just specified what to do
+        // executing we don't have the books data, we've just specified what to do
         // when we do eventually get it - or what to do if we fail to get it.
   };
 
