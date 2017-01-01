@@ -1,4 +1,4 @@
 class RatingSerializer < ActiveModel::Serializer
   attributes :id, :stars
-  has_many :comics, serializer: ComicSerializer
+  has_one :comic, serializer: ComicSerializer
 end

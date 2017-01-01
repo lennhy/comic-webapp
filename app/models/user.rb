@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  has_many :ratings
   has_many :comics, through: :comic_users
   has_many :comic_users
-  has_many :comics, through: :ratings, foreign_key: :comic_id
+  has_many :ratings
+  has_many :comics, through: :ratings
   # bingo
 
 

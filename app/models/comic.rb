@@ -10,7 +10,7 @@ class Comic < ApplicationRecord
 
   #
   # # accepts_nested_attributes_for :genres
-  
-  validates :users, :title, :description, :issue, :volume, :page_count, :issue_date, :region_id,  :genre_ids  presence: true
+
+  validates :users, :title, :description, :issue, :volume, :page_count, :issue_date, :region_id,  presence: true
   validates_inclusion_of :graphic_novel, :in => [true, false]
 end
