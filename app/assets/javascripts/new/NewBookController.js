@@ -2,19 +2,26 @@ function NewBookController(BookService, regions, genres) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
-
   vm.book = {
-    title: '',
-    description: '',
-    issue:'',
-    volume:'',
-    page_count:'',
-    issue_date:'',
-    graphic_novel:'',
-    region_id: null,
-    // genre_ids: []
-  };
+     title: '',
+     description: '',
+     issue:'',
+     volume:'',
+     page_count:'',
+     issue_date:'',
+     graphic_novel:'',
+     region_id: null,
+     genre_ids: []
+   };
+  //  vm.whenClick = function(){
+  //  angular.forEach(vm.book.genre_ids, function(key,value){
+  //    if(key)
+  //        vm.book.genre_ids.push(value)
+  //    });
+  //   }
 
+  //  vm.book.genre_ids.push($("input[type='checkbox']").val())
+  // console.log($("input[type='checkbox']").val();
   // Api call to post comics
     vm.createBook = function() {
       BookService
@@ -25,9 +32,10 @@ function NewBookController(BookService, regions, genres) {
           // What to do when the request succeeds
           // Success
           .then(function (data) {
+
+            return vm.book = data;
               console.log(data);
                 $('ul').append("<li>You have successfully created a new comic!</li>");
-            // return vm.book = data;
             // what to do when the request fails
             // failure
           },function(error){

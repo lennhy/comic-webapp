@@ -69,16 +69,19 @@
 
 
   <!-- options dropdown for genres -->
-  <!-- <span ng-repeat=" genre in vm.genres">
+  <label ng-repeat=" genre in vm.genres">
 
-    <label for="{{genre.id}}">{{genre.name}}</label>
+    <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="null">
+      {{genre.name}}
 
-    <input ng-model="vm.book.genre_ids[$index]"  type= "checkbox" ng-true-value="{{genre.id}}" ng-false-value=""/>
+ </label>
 
- </span>
+ <h1>You selected: {{vm.book.genre_ids}}</h1>
 
+ <!-- <label ng-repeat="genre in vm.genres">
+   <input type="checkbox" checklist-model="vm.book.genre_ids[$index]" checklist-value="genre.id"> {{genre.name}}
+ </label>
  <h1>You selected: {{vm.book.genre_ids}}</h1> -->
-
 
 
  <!-- radio button fields for graphic novel -->

@@ -51,7 +51,10 @@ function BookService($http){
     var req = {
      method: 'POST',
      url: '/comics',
-     data: data
+     data: data,
+     headers: {
+       'Content-Type': 'application/json'
+     }
     }
     return $http(req);
 
