@@ -16,7 +16,7 @@ function NewBookController(BookService, regions, genres) {
   //  vm.whenClick = function(){
   //  angular.forEach(vm.book.genre_ids, function(key,value){
   //    if(key)
-  //        vm.book.genre_ids.push(value)
+        //  vm.book.genre_ids.push(1)
   //    });
   //   }
 

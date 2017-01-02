@@ -12,7 +12,10 @@
   <li>Posted On: <span ng-bind="vm.book.created_at | date : 'fullDate'"></span></li>
 
   <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->
-
+  <span ng-if="currentUser.role !=='publisher'">
+    <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button>
+  </span>
+  
   <span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
 
     <form name="newForm" ng-submit="vm.createRating()">

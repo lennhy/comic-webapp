@@ -71,7 +71,7 @@
   <!-- options dropdown for genres -->
   <label ng-repeat=" genre in vm.genres">
 
-    <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="null">
+    <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">
       {{genre.name}}
 
  </label>

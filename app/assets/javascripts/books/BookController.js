@@ -1,4 +1,4 @@
-function BookController(book, RatingService, $scope, $route) {
+function BookController(book, RatingService, BookService, $scope, $route) {
   var vm = this;
   vm.book = book.data;
   vm.ratings = vm.book.ratings;
@@ -6,6 +6,23 @@ function BookController(book, RatingService, $scope, $route) {
   vm.rateTotal = rateTotal();
 
   var bookId = book.data.id;
+
+  vm.add = function(id){
+    console.log(id)
+
+    BookService
+      .httpAdd(bookId)
+        .then(function (data) {
+          console.log(status)
+          if(data.status === 'ok') {
+            $('ul').prepend("<li>You have successfully added a new comic to your account!</li>");
+          }else{
+            $('ul').prepend("<li>You already have this comic in your account!</li>");
+          }
+        },function(error){
+        console.log(error);
+      });
+    }
 
   vm.createRating = function() {
     RatingService

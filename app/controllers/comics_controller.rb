@@ -25,6 +25,16 @@ class ComicsController < ApplicationController
       render json: comic
   end
 
+  def add
+      comic = Comic.find(params[:id])
+      if comic.users.map { |e| e !=  current_user }
+        comic.users << current_user
+        render json: { status: 'ok'}, notice: "You successfully added a new Comic to your account yo!"
+    else
+      render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
   def update
       comic = Comic.find(params[:id])
       if comic.update(comic_params)

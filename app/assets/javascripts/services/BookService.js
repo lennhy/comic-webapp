@@ -10,29 +10,6 @@ function BookService($http){
   this.httpGetAllBooks = function(){
     console.log("d");
     return $http.get('/comics.json')
-        // returns a promise
-        // What to do when the request succeeds
-        // Success
-      //   .then(function (books){
-      //     var getBooks = books.data;
-      //         for(var i=0; i < getBooks.length; i++){
-      //             books[i].num = 0;
-      //         }
-      //      vm.books = getBooks;
-      //    },function(error){
-      //            console.log(error)
-      // });
-        // .then(function (data) {
-        //   console.log(data)
-        //     for(var i=0; i < data.length; i++){
-        //         data[i].num = 0;
-        //   }
-        // // what to do when the request fails
-        // // failure
-        // },function(error){
-        //   console.log(error)
-        //
-        // })
         // success and error are special functions added to a promise by $http
 
         // success or error will be called later - when this block is finished
@@ -47,7 +24,6 @@ function BookService($http){
   };
 
   this.httpCreateBook = function(data) {
-    console.log(data)
     var req = {
      method: 'POST',
      url: '/comics',
@@ -58,9 +34,9 @@ function BookService($http){
     }
     return $http(req);
 
-  // returns a promise
-  // What to do when the request succeeds
-  // Success
+    // returns a promise
+    // What to do when the request succeeds
+    // Success
     function successCallback(data){
       console.log(data)
     }
@@ -78,9 +54,20 @@ function BookService($http){
   // Promises are not actually complicated, they're objects that contain a
   // reference to functions to call when something fails or succeeds.
 
+  this.httpAdd = function(id){
+    var req = {
+     method: 'PATCH',
+     url: '/comics/'+id,
+     data: id
+    }
+    return $http(req);
+  };
+
   this.httpUpdateBook = function(id){
     return $http.patch(`/comics/${id}`);
   };
+
+
 
   this.httpDeleteBook = function(id){
     return $http.delete(`/comics/${id}`);
