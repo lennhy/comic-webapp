@@ -13,16 +13,7 @@ function NewBookController(BookService, regions, genres) {
      region_id: null,
      genre_ids: []
    };
-  //  vm.whenClick = function(){
-  //  angular.forEach(vm.book.genre_ids, function(key,value){
-  //    if(key)
-        //  vm.book.genre_ids.push(1)
-  //    });
-  //   }
 
-  //  vm.book.genre_ids.push($("input[type='checkbox']").val())
-  // console.log($("input[type='checkbox']").val();
-  // Api call to post comics
     vm.createBook = function() {
       BookService
         //  before submit form

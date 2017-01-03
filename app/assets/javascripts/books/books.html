@@ -8,7 +8,7 @@
   <div class ="number">{{ book.num }}</div>
 
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
-  <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>
+  <li>Publishers: <span ng-repeat="user in book.users" ng-bind="user | returnPublisher"></span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
   <li>Region: <span  ng-bind="book.region.name"></span></li>
   <li>Issue: <span ng-bind="book.issue"></span></li>
@@ -18,5 +18,5 @@
   <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>
   <li>Posted On: <span ng-bind="book.created_at | date : 'fullDate'"></span></li>
 
-  <!-- <li>Genres: <span ng-repeat="genre in book.genres">{{ genre.name }}</span></li> -->
+  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(' ')"></span></li>
 </ul>

@@ -27,12 +27,14 @@ function BookService($http){
     var req = {
      method: 'POST',
      url: '/comics',
-     data: data,
+     data: {comic:data},
      headers: {
        'Content-Type': 'application/json'
      }
     }
-    return $http(req);
+    return $http(req)
+    .then(successCallback)
+    .catch(errorCallback)
 
     // returns a promise
     // What to do when the request succeeds

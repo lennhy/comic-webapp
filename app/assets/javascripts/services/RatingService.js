@@ -18,10 +18,12 @@ function RatingService($http){
      url: '/ratings',
      data: data
     }
-    return $http(req);
+    return $http(req)
+    .then(successCallback)
+    .catch(errorCallback)
   }
   function successCallback(data){
-    console.log(data);
+    return data.notice;
   }
   function errorCallback(error){
     console.log(error);
