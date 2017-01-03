@@ -12,5 +12,5 @@
   <li>Issue_date: <span ng-bind="book.issue_date | date : 'fullDate'"></span></li>
   <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>
   <li>Posted On: <span ng-bind="book.created_at | date : 'fullDate'"></span></li>
-  <li>Genres: <span ng-repeat="genre in book.genres">{{ genre.name }}</span></li>
+  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(' ')"></span></li>
 </ul>

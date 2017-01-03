@@ -2,6 +2,7 @@ function NewBookController(BookService, regions, genres) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
+  vm.printBook;
   vm.book = {
      title: '',
      description: '',
@@ -18,20 +19,12 @@ function NewBookController(BookService, regions, genres) {
       BookService
         //  before submit form
         .httpCreateBook(vm.book)
-          // after submit form
-          // returns a promise
-          // What to do when the request succeeds
-          // Success
           .then(function (data) {
-
-            return vm.book = data;
-              console.log(data);
-                $('ul').append("<li>You have successfully created a new comic!</li>");
-            // what to do when the request fails
-            // failure
+                $('ul').prepend("<li>You have successfully created a new comic!</li>");
+                return vm.printBook = data;
           },function(error){
-            console.log(error)
-            $('ul').append("<li>Looks like You are are missing something!</li>");
+                console.log(error)
+                $('ul').append("<li>Looks like You are are missing something!</li>");
             // $('ul').append("<li>" + error + "</li>");
             // success and error are special functions added to a promise by $http
 
