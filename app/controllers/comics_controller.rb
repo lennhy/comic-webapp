@@ -11,6 +11,7 @@ class ComicsController < ApplicationController
   end
 
   def create
+    binding.pry
       comic = Comic.new(comic_params)
       comic.users << current_user
       if comic.save
@@ -55,6 +56,7 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
+                :images=> [],
                 :genre_ids => []
         )
     end

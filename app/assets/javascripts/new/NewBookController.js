@@ -3,6 +3,7 @@ function NewBookController(BookService, regions, genres) {
   vm.regions = regions.data;
   vm.genres = genres.data;
   vm.printBook;
+
   vm.book = {
      title: '',
      description: '',
@@ -12,9 +13,29 @@ function NewBookController(BookService, regions, genres) {
      issue_date:'',
      graphic_novel:'',
      region_id: null,
+     images: [],
      genre_ids: []
    };
 
+var inputElement = document.getElementById("upload");
+inputElement.addEventListener("change", handleFiles, false);
+  function handleFiles() {
+    var numFiles = this.files.length;
+    if(numFiles !== 0 || numFiles !== null){
+      for(let i=0; i < numFiles; i++){
+        // console.log(this.files[i]);
+        vm.book.images.push(this.files[i]);
+      }
+    }
+
+}
+console.log(vm.book.images);
+
+// vm.upImg = function(){
+//   var poo = $("input[type='file']");
+//     console.log(poo);
+// vm.book.images.push(poo.val());
+// };
     vm.createBook = function() {
       BookService
         //  before submit form
