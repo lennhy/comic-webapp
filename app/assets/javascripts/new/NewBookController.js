@@ -17,25 +17,37 @@ function NewBookController(BookService, regions, genres) {
      genre_ids: []
    };
 
-var inputElement = document.getElementById("upload");
-inputElement.addEventListener("change", handleFiles, false);
+  var inputElement = document.getElementById("upload");
+  inputElement.addEventListener("change", handleFiles, false);
+
   function handleFiles() {
+
+    var preview = document.getElementById('preview');
+
     var numFiles = this.files.length;
+
     if(numFiles !== 0 || numFiles !== null){
       for(let i=0; i < numFiles; i++){
-        // console.log(this.files[i]);
+        var file = this.files[i];
         vm.book.images.push(this.files[i]);
+      }
+      var img = document.createElement("img");
+      img.classList.add("obj");
+      img.file = file;
+      // console.log(img.file);
+      console.log(preview);
+      preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+
+      var reader = new FileReader();
+          reader.onload = (function(aImg) {
+            return function(e) { aImg.src = e.target.result;
+             };
+           })(img);
+          reader.readAsDataURL(file);
       }
     }
 
-}
-console.log(vm.book.images);
 
-// vm.upImg = function(){
-//   var poo = $("input[type='file']");
-//     console.log(poo);
-// vm.book.images.push(poo.val());
-// };
     vm.createBook = function() {
       BookService
         //  before submit form
