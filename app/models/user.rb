@@ -2,8 +2,8 @@ class User < ApplicationRecord
   has_many :comics, through: :comic_users
   has_many :comic_users
   has_many :ratings
-  # bingo
-
+  has_attached_file :publisher
+  validates_attachment_content_type :publisher, content_type: /\Aimage\/.*\z/
 
   devise :database_authenticatable, :registerable, :validatable # to enable devise authentication
 

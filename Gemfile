@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'paperclip'
+
 gem 'bower-rails'
 
 gem 'bootstrap-sass', '~> 3.3.7'

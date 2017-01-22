@@ -41,7 +41,8 @@ function NewBookController(BookService, regions, genres) {
       var reader = new FileReader();
       // event handle triggered after the reading of the file has been successfully commpleted
           reader.onload = (function(aImg) {
-            return function(e) { aImg.src = e.target.result;
+            return function(e) {
+              aImg.src = e.target.result;
              };
            })(img);
           reader.readAsDataURL(file);
