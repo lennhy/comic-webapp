@@ -2,6 +2,7 @@ function UserController(Auth, UserService) {
   var vm = this;
   vm.currentUser = Auth.currentUser();
   vm.id='';
+
   var inputElement = document.getElementById("uploadProfilePic");
   inputElement.addEventListener("change", handleFiles, false);
 
@@ -20,7 +21,7 @@ function UserController(Auth, UserService) {
       var img = document.createElement("img");
       img.classList.add("obj");
       img.file = file;
-      console.log(vm.currentUser.avatar);
+      // console.log(vm.currentUser.avatar);
       preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
       // console.log(vm.book.images);
 

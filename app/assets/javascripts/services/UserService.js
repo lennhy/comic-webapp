@@ -25,7 +25,7 @@ function UserService($http){
     .catch(errorCallback)
 
     function successCallback(data){
-      console.log(data)
+      return data;
     }
     // what to do when the request fails
     // failure

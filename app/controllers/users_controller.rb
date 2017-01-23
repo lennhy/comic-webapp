@@ -6,7 +6,16 @@ class UsersController < ApplicationController
   end
 
   def profile_pic
-    current_user.update(user_params)
+    user = current_user
+    if current_user.update(params[:avatar])
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: user}
+    else
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: user.errors}
+    end
   end
 
   def show
@@ -26,11 +35,5 @@ class UsersController < ApplicationController
       flash[:notice]= "You are now a #{current_user.role}"
     end
   end
-
-  private
-raise params
-    def user_params
-      params.require(:user).permit(:avatar);
-    end
 
 end
