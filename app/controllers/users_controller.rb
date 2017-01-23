@@ -6,7 +6,6 @@ class UsersController < ApplicationController
   end
 
   def profile_pic
-    binding.pry
     current_user.update(user_params)
   end
 
@@ -29,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   private
-
+raise params
     def user_params
       params.require(:user).permit(:avatar);
     end

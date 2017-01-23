@@ -58,26 +58,16 @@ angular
 
           // Current User profile
           .state('home.profile', {
-              url: 'profile',
+              url: 'users/:id',
               templateUrl: 'users/user_profile.html',
               controller: 'UserController as vm',
-              resolve: {
-                allUsers: function (UserService) {
-                  return UserService.httpGetUsers();
-                },
-
-                    user: function (UserService, $stateParams) {
-                      return UserService.httpGetUser($stateParams.id);
-                    }
-
-              }
           })
 
           // Publishers index page
           .state('home.publishers', {
               url: 'publishers',
               templateUrl: 'users/publishers.html',
-              controller: 'UserController as vm',
+              controller: 'UsersController as vm',
               resolve: {
                 allUsers: function (UserService) {
                   return UserService.httpGetUsers();

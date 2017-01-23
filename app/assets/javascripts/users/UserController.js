@@ -1,49 +1,46 @@
-function UserController(Auth, UserService, allUsers, user) {
-  console.log(user);
-  // console.log(allUsers);
+function UserController(Auth, UserService) {
   var vm = this;
-  vm.users = allUsers.data;
   vm.currentUser = Auth.currentUser();
-  vm.user = user;
-  // var inputElement = document.getElementById("uploadProfilePic");
-  // inputElement.addEventListener("change", handleFiles, false);
+  vm.id='';
+  var inputElement = document.getElementById("uploadProfilePic");
+  inputElement.addEventListener("change", handleFiles, false);
 
-//   function handleFiles() {
-//
-//     var preview = document.getElementById('previewProfilePic');
-//     // this is the file object being passed in from the file input value
-//     var numFiles = this.files.length;
-//     console.log(vm.currentUser);
-//
-//     if(numFiles !== 0 || numFiles !== null){
-//       for(let i=0; i < numFiles; i++){
-//           vm.currentUser.avatar = this.files[i];
-//           var file = this.files[i];
-//
-//       var img = document.createElement("img");
-//       img.classList.add("obj");
-//       img.file = file;
-//       // console.log(vm.currentUser.avatar);
-//       preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-//       // console.log(vm.book.images);
-//
-//       var reader = new FileReader();
-//       // event handle triggered after the reading of the file has been successfully commpleted
-//           reader.onload = (function(aImg) {
-//             return function(e) {
-//               aImg.src = e.target.result;
-//              };
-//            })(img);
-//           reader.readAsDataURL(file);
-//           // console.log(vm.currentUser.avatar);
-//
-//       }
-//     }
-// }
+  function handleFiles() {
+
+    var preview = document.getElementById('previewProfilePic');
+    // this is the file object being passed in from the file input value
+    var numFiles = this.files.length;
+    console.log(vm.currentUser);
+
+    if(numFiles !== 0 || numFiles !== null){
+      for(let i=0; i < numFiles; i++){
+          vm.currentUser.avatar = this.files[i];
+          var file = this.files[i];
+
+      var img = document.createElement("img");
+      img.classList.add("obj");
+      img.file = file;
+      console.log(vm.currentUser.avatar);
+      preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+      // console.log(vm.book.images);
+
+      var reader = new FileReader();
+      // event handle triggered after the reading of the file has been successfully commpleted
+          reader.onload = (function(aImg) {
+            return function(e) {
+              aImg.src = e.target.result;
+             };
+           })(img);
+          reader.readAsDataURL(file);
+          // console.log(vm.currentUser.avatar);
+
+      }
+    }
+}
 
 vm.createProfilePic = function(){
   UserService
-    .httpCreateProfilePic(vm.currentUser.avatar)
+    .httpCreateProfilePic(vm.currentUser.avatar, vm.id)
     .then(function (data) {
           return vm.currentUser.avatar;
     },function(error){

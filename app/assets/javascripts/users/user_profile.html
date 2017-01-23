@@ -3,6 +3,7 @@
   <form ng-submit="vm.createProfilePic()">
     <label for ="image"> Select profile image:</label><br>
     <input type="file" id="uploadProfilePic"  ng-model ="vm.currentUser.avatar" accept="image/*">
+    <input type="hidden" ng-model ="vm.id" value="currentUser.id">
     image uploaded:{{ currentUser.avatar}}<br>
     <input type="submit" value="create"/>
 

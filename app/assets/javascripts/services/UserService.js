@@ -2,11 +2,17 @@ function UserService($http){
 
   this.httpGetUser = function(id){
     return $http.get('/users/'+ id)
-  }
+    .then(function (response) {
+      return response;
+            // do something with the response
+            }, function (error) {
+              console.log(error);
+            });
+  };
 
   this.httpGetUsers = function(){
     return $http.get('/users')
-  }
+  };
 
   this.httpCreateProfilePic = function(avatar, userId){
     var req = {
