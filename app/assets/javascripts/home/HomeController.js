@@ -1,4 +1,4 @@
-function HomeController(Auth,$rootScope) {
+function HomeController(Auth, $rootScope) {
   var vm = this;
 
   Auth.currentUser()
@@ -13,4 +13,3 @@ function HomeController(Auth,$rootScope) {
 angular
         .module('app')
         .controller('HomeController', HomeController);
-      

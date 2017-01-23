@@ -3,6 +3,8 @@
 
   devise_for :users
 
+  post '/users/:id' => 'users#profile_pic'
+
   # json serialzer apis
   get '/users/:id', to: 'users#show'
   get '/users', to: 'users#index'

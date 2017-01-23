@@ -1,5 +1,15 @@
 <h2>My Profile</h2>
+
+  <form>
+    <label for ="image"> Select profile image:</label><br>
+    <input id="uploadProfilePic" ng-model="currentUser.avatar" name ="image" type="file" ng-submit="vm.createProfilePic()" >
+    image uploaded:{{ currentUser.avatar}}<br>
+  </form><br>
+
 <ul>
+
+
+  <div id="previewProfilePic"></div>
   <li>Name: <span ng-bind="currentUser.name"></li>
   <li>Email: <span ng-bind="currentUser.email"></li>
   <li>User Type: <span ng-bind="currentUser.role"></li>

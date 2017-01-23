@@ -53,13 +53,19 @@ angular
           // Current User books
           .state('home.mybooks', {
               url: 'users/:id',
-              templateUrl: 'users/user_books.html',
+              templateUrl: 'users/user_books.html'
           })
 
           // Current User profile
           .state('home.profile', {
               url: 'profile',
-              templateUrl: 'users/user_profile.html'
+              templateUrl: 'users/user_profile.html',
+              controller: 'UserController as vm',
+              resolve: {
+                allUsers: function (UserService) {
+                  return UserService.httpGetUsers();
+                }
+              }
           })
 
           // Publishers index page

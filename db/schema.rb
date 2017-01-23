@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122181306) do
+ActiveRecord::Schema.define(version: 20170122223006) do
 
   create_table "comic_genres", force: :cascade do |t|
     t.integer  "comic_id"
@@ -72,10 +72,10 @@ ActiveRecord::Schema.define(version: 20170122181306) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "publisher_file_name"
-    t.string   "publisher_content_type"
-    t.integer  "publisher_file_size"
-    t.datetime "publisher_updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

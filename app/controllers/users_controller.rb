@@ -5,6 +5,10 @@ class UsersController < ApplicationController
     render json: users
   end
 
+  def profile_pic
+    current_user.create(user_params)
+  end
+
   def show
     @user = User.find(params[:id])
      respond_to do |format|
@@ -22,5 +26,11 @@ class UsersController < ApplicationController
       flash[:notice]= "You are now a #{current_user.role}"
     end
   end
+
+  private
+
+    def user_params
+      params.require(:user).permit(:avatar)
+    end
 
 end
