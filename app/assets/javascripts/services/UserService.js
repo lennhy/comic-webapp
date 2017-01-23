@@ -8,10 +8,10 @@ function UserService($http){
     return $http.get('/users')
   }
 
-  this.httpCreateProfilePic = function(){
+  this.httpCreateProfilePic = function(avatar, userId){
     var req = {
       method: 'POST',
-      url: '/users/id',
+      url: '/users/'+ userId,
       data: {user: avatar}
     }
     return $http(req)

@@ -1,10 +1,10 @@
 <h2>My Profile</h2>
 
-  <form>
+  <form ng-submit="vm.createProfilePic()">
     <label for ="image"> Select profile image:</label><br>
-    <input id="uploadProfilePic" ng-model="currentUser.avatar" name ="image" type="file" ng-submit="vm.createProfilePic()" >
+    <input type="file" id="uploadProfilePic"  ng-model ="vm.currentUser.avatar" accept="image/*">
     image uploaded:{{ currentUser.avatar}}<br>
-  </form><br>
+    <input type="submit" value="create"/>
 
 <ul>
 
@@ -15,3 +15,27 @@
   <li>User Type: <span ng-bind="currentUser.role"></li>
 
 </ul>
+avatar promise data: {{vm.currentUser.avatar}}
+<!-- avatar_file_name: nil,
+avatar_content_type: nil,
+avatar_file_size: nil,
+avatar_updated_at: nil>  -->
+
+<!-- b.avatar
+=> #<Paperclip::Attachment:0x0055e8eff74eb8 @name=:avatar,
+@name_string="avatar",
+@instance=#<User id: 3, name: "Visceral Comics", role: "publisher",
+created_at: "2017-01-22 23:58:35", updated_at: "2017-01-22 23:58:35",
+email: "visceral@gmail.com", avatar_file_name: nil, avatar_content_type: nil,
+avatar_file_size: nil, avatar_updated_at: nil>, @options={:convert_options=>{},
+:default_style=>:original, :default_url=>"/:attachment/:style/missing.png",
+:escape_url=>true, :restricted_characters=>/[&$+,\/:;=?@<>\[\]\{\}\|\\\^~%# ]/,
+:filename_cleaner=>nil, :hash_data=>":class/:attachment/:id/:style/:updated_at",
+:hash_digest=>"SHA1", :interpolator=>Paperclip::Interpolations, :only_process=>[],
+:path=>":rails_root/public:url", :preserve_files=>false, :processors=>[:thumbnail],
+:source_file_options=>{}, :storage=>:filesystem, :styles=>{},
+:url=>"/system/:class/:attachment/:id_partition/:style/:filename",
+:url_generator=>Paperclip::UrlGenerator, :use_default_time_zone=>true,
+:use_timestamp=>true, :whiny=>true, :validate_media_type=>true,
+:check_validity_before_processing=>true}, @post_processing=true,
+@queued_for_delete=[], @queued_for_write={}, @errors={}, @dirty=false, @interpolator=Paperclip::Interpolations, @url_generator=#<Paperclip::UrlGenerator:0x0055e8eff74d00 @attachment=#<Paperclip::Attachment:0x0055e8eff74eb8 ...>>, @source_file_options={}, @whiny=true> -->

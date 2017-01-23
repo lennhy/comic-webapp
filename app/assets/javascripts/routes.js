@@ -64,7 +64,12 @@ angular
               resolve: {
                 allUsers: function (UserService) {
                   return UserService.httpGetUsers();
-                }
+                },
+
+                    user: function (UserService, $stateParams) {
+                      return UserService.httpGetUser($stateParams.id);
+                    }
+
               }
           })
 
