@@ -6,5 +6,6 @@
 //= require angular-messages
 //= require angular-route
 //= require angular-rails-templates
+//= require angular-base64-upload
 //= require moment
 //= require_tree .
