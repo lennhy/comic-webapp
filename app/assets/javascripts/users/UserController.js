@@ -37,15 +37,17 @@ function UserController(Auth, UserService, Upload, $scope, user) {
   // upload on file select or drop
   $scope.upload = function (file, id) {
       Upload.upload({
-          url: 'user/' + id,
+          url: 'users/' + id,
           method: 'PATCH',
-          headers: { 'Content-Type': false },
-          file: file,
+          headers: {'Content-Type': 'application/json'},
+          data: {user:
+            { avatar:file }
+          },
           fileFormDataName: 'user[avatar]'
       }).then(function (resp) {
           console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-      }, function (resp) {
-          console.log('Error status: ' + resp.status);
+      }, function (err) {
+          console.log('Error status: ' + err.status);
       });
   };
 }

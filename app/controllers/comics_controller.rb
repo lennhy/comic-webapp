@@ -15,7 +15,7 @@ class ComicsController < ApplicationController
       comic = Comic.new(comic_params)
       comic.users << current_user
       if comic.save
-        render json: { status: 'ok'}, notice: "You successfully created a new Comic!"
+        render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
       else
         render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
       end
