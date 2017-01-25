@@ -5,25 +5,9 @@ class UsersController < ApplicationController
     render json: users
   end
 
-  def profile_pic
-    user = current_user
-    if current_user.update(params[:avatar])
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: user}
-    else
-      respond_to do |format|
-        format.html { render :show }
-        format.json { render json: user.errors}
-    end
-  end
-
   def show
-    @user = User.find(params[:id])
-     respond_to do |format|
-       format.html { render :show }
-       format.json { render json: @user}
-     end
+    user = User.find(params[:id])
+    render json: user
   end
 
   def roles
@@ -36,4 +20,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    binding.pry
+    user = current_user
+    if user.update(user_params)
+      render json: user
+    end
+  end
+
+  private
+    def user_params
+      params.require(:user).permit(:avatar)
+    end
 end

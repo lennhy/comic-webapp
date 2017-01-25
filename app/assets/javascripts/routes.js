@@ -61,6 +61,11 @@ angular
               url: 'users/:id',
               templateUrl: 'users/user_profile.html',
               controller: 'UserController as vm',
+              resolve: {
+                  user: function (UserService, $stateParams) {
+                    return UserService.httpGetUser($stateParams.id);
+                  }
+              }
           })
 
           // Publishers index page

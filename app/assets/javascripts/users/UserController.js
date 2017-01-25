@@ -1,63 +1,53 @@
-function UserController(Auth, UserService) {
+function UserController(Auth, UserService, Upload, $scope, user) {
   var vm = this;
-  vm.currentUser = Auth.currentUser();
-  vm.id='';
+  var user = user.data;
+  console.log(user.id);
+  currentUser = Auth.currentUser();
+  vm.currentUser = currentUser;
 
-  var inputElement = document.getElementById("uploadProfilePic");
-  inputElement.addEventListener("change", handleFiles, false);
-
-  function handleFiles() {
-
-    var preview = document.getElementById('previewProfilePic');
-    // this is the file object being passed in from the file input value
-    var numFiles = this.files.length;
-    console.log(vm.currentUser);
-
-    if(numFiles !== 0 || numFiles !== null){
-      for(let i=0; i < numFiles; i++){
-          vm.currentUser.avatar = this.files[i];
-          var file = this.files[i];
-
-      var img = document.createElement("img");
-      img.classList.add("obj");
-      img.file = file;
-      // console.log(vm.currentUser.avatar);
-      preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-      // console.log(vm.book.images);
-
-      var reader = new FileReader();
-      // event handle triggered after the reading of the file has been successfully commpleted
-          reader.onload = (function(aImg) {
-            return function(e) {
-              aImg.src = e.target.result;
-             };
-           })(img);
-          reader.readAsDataURL(file);
-          // console.log(vm.currentUser.avatar);
-
-      }
+  $scope.submit = function() {
+    if ($scope.form.file.$valid && $scope.file) {
+      // console.log($scope.file);
+      $scope.upload($scope.file, user.id);
     }
-}
-
-vm.createProfilePic = function(){
-  UserService
-    .httpCreateProfilePic(vm.currentUser.avatar, vm.id)
-    .then(function (data) {
-          return vm.currentUser.avatar;
-    },function(error){
-          console.log(error)
-
-      // $('ul').append("<li>" + error + "</li>");
-      // success and error are special functions added to a promise by $http
-
-      // success or error will be called later - when this block is finished
-      // executing we don't have the name, we've just specified what to do
-      // when we do eventually get it - or what to do if we fail to get it.
-      // Promises are not actually complicated, they're objects that contain a
-      // reference to functions to call when something fails or succeeds.
-
-    })
-  }
+  };
+//   // Upload Picture on file select or drop
+//   // vm.upload = function (file) {
+//   //   Upload.upload({
+//   //     url: 'posts/' + post.id + '.json',
+//   //     method: 'PUT',
+//   //     headers: { 'Content-Type': false },
+//   //     fields: {
+//   //       'post[title]': post.title,
+//   //       'post[body]': post.body,
+//   //       'post[image]': file
+//   //     },
+//   //     file: file,
+//   //     sendFieldsAs: 'json'
+//   //   }).then(function (resp) {
+//   //     console.log('Success ' + resp.config.file.name + 'uploaded. Response: ' + resp.data);
+//   //   }, function (resp) {
+//   //     console.log('Error status: ' + resp.status);
+//   //   }, function (evt) {
+//   //     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+//   //     console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+//   //   });
+//   // };
+//
+  // upload on file select or drop
+  $scope.upload = function (file, id) {
+      Upload.upload({
+          url: 'user/' + id,
+          method: 'PATCH',
+          headers: { 'Content-Type': false },
+          file: file,
+          fileFormDataName: 'user[avatar]'
+      }).then(function (resp) {
+          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+      }, function (resp) {
+          console.log('Error status: ' + resp.status);
+      });
+  };
 }
 
 angular
