@@ -1,19 +1,12 @@
-<h2>My Provm.file</h2>
-<!--
-  <form ng-submit="vm.createProvm.filePic()">
-    <label for ="image"> Select provm.file image:</label><br>
-    <input type="vm.file" id="uploadProvm.filePic"  ng-model ="vm.currentUser.avatar" accept="image/*">
-    <input type="hidden" ng-model ="vm.id" value="currentUser.id">
-    image uploaded:{{ currentUser.avatar}}<br>
-    <input type="submit" value="create"/> -->
+<h2>My Profile</h2>
 
-Image thumbnail: <img ngf-thumbnail="file">
+Image thumbnail: <img ng-src="{{ vm.avatar }}"/>
 
 <form name="form" ng-submit="submit()">
 
   <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
   ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
-  ngf-resize="{width: 100, height: 100}">Select</div>
+  ngf-resize="{width: 400, height: auto}">Select</div>
 
   <input type="submit" value="create"/>
 
