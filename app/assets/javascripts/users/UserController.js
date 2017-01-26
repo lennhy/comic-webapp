@@ -4,6 +4,7 @@ function UserController(Auth, UserService, Upload, $scope, user) {
   currentUser = Auth.currentUser();
   vm.currentUser = currentUser;
   vm.avatar = user.avatar;
+  console.log($scope.file);
   $scope.submit = function() {
     if ($scope.form.file.$valid && $scope.file) {
       // console.log($scope.file);

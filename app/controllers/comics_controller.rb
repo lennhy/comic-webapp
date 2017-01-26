@@ -56,7 +56,8 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
-                :images=> [],
+                :cover,
+                :pages=> [],
                 :genre_ids => []
         )
     end

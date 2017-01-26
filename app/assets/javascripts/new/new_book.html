@@ -6,10 +6,6 @@
 <div id="preview"></div>
 <form name="newForm" ng-submit="vm.createBook()">
 
-  <label for ="images"> Select page images:</label><br>
-  <input id="upload" ng-model="vm.book.images" name ="images" type="file" multiple>
-  images uploaded:{{vm.book.images}}<br>
-
   <!--title  -->
   <label for="title"> Title: </label><br>
   <input ng-model="vm.book.title" type="text" name="title" required="required"/><br></br>
@@ -102,7 +98,21 @@
 
   <div ng-messages="newForm.graphic_novel.$errors">
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
-  </div>
+  </div><br>
+
+  <!-- single upload -->
+  <label>Upload a Cover Page</label>
+  <img ngf-thumbnail="cover"/>
+  <div class="button" ngf-select ng-model="cover" name="cover" ngf-pattern="'image/*'"
+  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div><br>
+
+  <!-- mulitple upload -->
+  <label>Upload Pages if book in chronological order</label>
+  <ul ng-repeat="page in pages | orderBy: 'created_at'">
+    <img ngf-thumbnail="page"/>
+  </ul>
+  <div class="button" ngf-select ng-model="pages" name="pages" ngf-pattern="'image/*'"
+  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div><br>
 
 
   <input type="submit" value="create"/>

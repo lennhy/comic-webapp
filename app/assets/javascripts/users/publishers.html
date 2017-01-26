@@ -4,7 +4,7 @@
   <ul ng-repeat="user in vm.users | orderBy: 'name'">
 
     <span ng-if="user.role === 'publisher'">
-
+      <img ng-src="{{ user.avatar }}"/>
       <h3><span ng-bind="user.name"></h3></li>
 
   </span>

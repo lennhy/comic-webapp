@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170124010424) do
+ActiveRecord::Schema.define(version: 20170126180948) do
 
   create_table "comic_genres", force: :cascade do |t|
     t.integer  "comic_id"
@@ -33,10 +33,18 @@ ActiveRecord::Schema.define(version: 20170124010424) do
     t.integer  "volume"
     t.integer  "page_count"
     t.date     "issue_date"
-    t.boolean  "graphic_novel", default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "graphic_novel",      default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "region_id"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
+    t.string   "pages_file_name"
+    t.string   "pages_content_type"
+    t.integer  "pages_file_size"
+    t.datetime "pages_updated_at"
   end
 
   create_table "genres", force: :cascade do |t|

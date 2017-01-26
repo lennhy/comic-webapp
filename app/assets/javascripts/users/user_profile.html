@@ -1,12 +1,11 @@
 <h2>My Profile</h2>
-
-Image thumbnail: <img ng-src="{{ vm.avatar }}"/>
-
+<img ngf-thumbnail="file">
+ <!-- <img ng-src="{{ vm.avatar }}" width="300" height="auto" alt="" /> -->
+<img ng-src="{{ vm.avatar }}"/>
 <form name="form" ng-submit="submit()">
 
   <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"
-  ngf-resize="{width: 400, height: auto}">Select</div>
+  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div>
 
   <input type="submit" value="create"/>
 
