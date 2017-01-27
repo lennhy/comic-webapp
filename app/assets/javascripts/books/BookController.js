@@ -9,7 +9,6 @@ function BookController(book, RatingService, BookService, $scope, $route) {
 
   vm.add = function(id){
     console.log(id)
-
     BookService
       .httpAdd(bookId)
         .then(function (data) {
@@ -21,8 +20,8 @@ function BookController(book, RatingService, BookService, $scope, $route) {
           }
         },function(error){
         console.log(error);
-      });
-    }
+    });
+  }
 
   vm.createRating = function() {
     RatingService
@@ -57,7 +56,6 @@ function BookController(book, RatingService, BookService, $scope, $route) {
            return avg.toFixed(2);
          }
     }
-
 }
 
 angular

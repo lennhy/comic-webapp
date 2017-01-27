@@ -37,10 +37,6 @@ ActiveRecord::Schema.define(version: 20170126180948) do
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "region_id"
-    t.string   "cover_file_name"
-    t.string   "cover_content_type"
-    t.integer  "cover_file_size"
-    t.datetime "cover_updated_at"
     t.string   "pages_file_name"
     t.string   "pages_content_type"
     t.integer  "pages_file_size"

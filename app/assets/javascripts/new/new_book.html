@@ -4,7 +4,7 @@
 <ul>
 </ul>
 <div id="preview"></div>
-<form name="newForm" ng-submit="vm.createBook()">
+<form name="newForm" ng-submit="submit()">
 
   <!--title  -->
   <label for="title"> Title: </label><br>
@@ -69,19 +69,13 @@
 
 
   <!-- options dropdown for genres -->
-  <label ng-repeat=" genre in vm.genres">
-
+  <label ng-repeat="genre in vm.genres">
     <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">
       {{genre.name}}
-
  </label>
 
  <h1>You selected: {{vm.book.genre_ids}}</h1>
 
- <!-- <label ng-repeat="genre in vm.genres">
-   <input type="checkbox" checklist-model="vm.book.genre_ids[$index]" checklist-value="genre.id"> {{genre.name}}
- </label>
- <h1>You selected: {{vm.book.genre_ids}}</h1> -->
 
 
  <!-- radio button fields for graphic novel -->
@@ -102,18 +96,17 @@
 
   <!-- single upload -->
   <label>Upload a Cover Page</label>
-  <img ngf-thumbnail="cover"/>
-  <div class="button" ngf-select ng-model="cover" name="cover" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div><br>
+  <img ngf-thumbnail="pages"/>
+  <div class="button" ngf-select ng-model="pages" name="pages" ngf-pattern="'image/*'"
+  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}" ng-change="vm.setPages()">Here</div><br>
 
   <!-- mulitple upload -->
-  <label>Upload Pages if book in chronological order</label>
+  <!-- <label>Upload Pages if book in chronological order</label>
   <ul ng-repeat="page in pages | orderBy: 'created_at'">
     <img ngf-thumbnail="page"/>
   </ul>
   <div class="button" ngf-select ng-model="pages" name="pages" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Select</div><br>
-
+  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}" ngf-multiple="true" ng-change="vm.setPages()">Here</div><br> -->
 
   <input type="submit" value="create"/>
 

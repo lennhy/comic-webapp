@@ -48,6 +48,7 @@ class ComicsController < ApplicationController
   private
     def comic_params
       params.require(:comic).permit(
+                :pages,
                 :title,
                 :description,
                 :issue,
@@ -56,8 +57,6 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
-                :cover,
-                :pages=> [],
                 :genre_ids => []
         )
     end

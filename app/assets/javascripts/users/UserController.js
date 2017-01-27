@@ -22,8 +22,7 @@ function UserController(Auth, UserService, Upload, $scope, user) {
             user: {
               avatar: file
              }
-          },
-          fileFormDataName: 'user[avatar]'
+          }
       }).then(function (resp) {
           console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
       }, function (err) {

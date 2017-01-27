@@ -1,9 +1,9 @@
-function NewBookController(BookService, regions, genres) {
+function NewBookController(BookService, regions, genres, $scope, Upload) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
   vm.printBook;
-
+  //
   vm.book = {
      title: '',
      description: '',
@@ -13,66 +13,108 @@ function NewBookController(BookService, regions, genres) {
      issue_date:'',
      graphic_novel:'',
      region_id: null,
-     images: [],
      genre_ids: []
    };
 
-//   var inputElement = document.getElementById("upload");
-//   inputElement.addEventListener("change", handleFiles, false);
-//
-//   function handleFiles() {
-//
-//     var preview = document.getElementById('preview');
-//     // this is the file object being passed in from the file input value
-//     var numFiles = this.files.length;
-//
-//     if(numFiles !== 0 || numFiles !== null){
-//       for(let i=0; i < numFiles; i++){
-//         var file = this.files[i];
-//         vm.book.images.push(this.files[i]);
-//
-//       var img = document.createElement("img");
-//       img.classList.add("obj");
-//       img.file = file;
-//       // console.log(img.file);
-//       preview.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-//       // console.log(vm.book.images);
-//
-//       var reader = new FileReader();
-//       // event handle triggered after the reading of the file has been successfully commpleted
-//           reader.onload = (function(aImg) {
-//             return function(e) {
-//               aImg.src = e.target.result;
-//              };
-//            })(img);
-//           reader.readAsDataURL(file);
-//       }
-//     }
-// }
+   vm.setPages = function(){
+     console.log($scope.pages);
+     console.log(vm.book.genre_ids);
 
-    vm.createBook = function() {
-      BookService
-        //  before submit form
-        .httpCreateBook(vm.book)
-          .then(function (data) {
-                $('ul').prepend("<li>You have successfully created a new comic!</li>");
-                return vm.printBook = data;
-          },function(error){
-                console.log(error)
-                $('ul').append("<li>Looks like You are are missing something!</li>");
-            // $('ul').append("<li>" + error + "</li>");
-            // success and error are special functions added to a promise by $http
+   }
 
-            // success or error will be called later - when this block is finished
-            // executing we don't have the name, we've just specified what to do
-            // when we do eventually get it - or what to do if we fail to get it.
-            // Promises are not actually complicated, they're objects that contain a
-            // reference to functions to call when something fails or succeeds.
-
-          })
+    $scope.submit = function() {
+      console.log(vm.book.genre_ids[0]);
+      if ($scope.pages) {
+        // console.log($scope.file);
+        $scope.upload(
+              $scope.pages,
+              vm.book.title,
+              vm.book.description,
+              vm.book.issue,
+              vm.book.volume,
+              vm.book.page_count,
+              vm.book.issue_date,
+              vm.book.graphic_novel,
+              vm.book.region_id,
+              vm.book.genre_ids
+            )
+      }
     }
-  }
 
+      // upload on file select or drop
+      $scope.upload = function (
+        pages,
+        title,
+        description,
+        issue,
+        volume,
+        page_count,
+        issue_date,
+        graphic_novel,
+        region_id,
+        genre_ids
+      ) {
+          Upload.upload({
+              url: '/comics',
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              data: {
+                comic: {
+                  pages,
+                  title,
+                  description,
+                  issue,
+                  volume,
+                  page_count,
+                  issue_date,
+                  graphic_novel,
+                  region_id,
+                  genre_ids: genre_ids
+              }
+            }
+          }).then(function (resp) {
+              console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+          }, function (err) {
+              console.log('Error status: ' + err.status);
+          });
+        }
+      };
+
+    // $scope.uploadFiles = function (pages) {
+    //   if (pages && pages.length) {
+    //     // or send them all together for HTML5 browsers:
+    //     Upload.upload({comic: {pages: pages}});
+    //   }
+    // }
+    //   }).then(function (resp) {
+    //       console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    //   }, function (resp) {
+    //       console.log('Error status: ' + resp.status);
+    //   }, function (evt) {
+    //       var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //       console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //   });
+  // };
+
+  //   // upload on file select or drop
+  //   $scope.upload = function (book) {
+  //     console.log("book" + book[0]);
+  //       Upload.upload({
+  //           url: '/comics',
+  //           method: 'POST',
+  //           headers: {'Content-Type': 'application/json'},
+  //           // data: {pages: pages, 'username': $scope.username}
+  //
+  //           data: {
+  //             comic: book
+  //           }
+  //       }).then(function (resp) {
+  //           console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+  //       }, function (err) {
+  //           console.log('Error status: ' + err.status);
+  //       });
+  // };
+// }
 
 angular
         .module('app')
