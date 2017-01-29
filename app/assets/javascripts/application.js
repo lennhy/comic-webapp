@@ -7,6 +7,7 @@
 //= require angular-route
 //= require angular-rails-templates
 //= require moment
-//= require ng-file-upload-shim 
+//= require ng-file-upload-shim
 //= require ng-file-upload
+//= require angular-base64-upload
 //= require_tree .

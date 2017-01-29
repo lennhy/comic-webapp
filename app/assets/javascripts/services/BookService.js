@@ -22,32 +22,32 @@ function BookService($http){
     return $http.get('/comics/'+ id);
 
   };
-// 
-//   this.httpCreateBook = function(data) {
-//     var req = {
-//      method: 'POST',
-//      url: '/comics',
-//      data: {comic:data},
-//      headers: {
-//        'Content-Type': 'application/json'
-//      }
-//     }
-//     return $http(req)
-//     .then(successCallback)
-//     .catch(errorCallback)
 //
-//     // returns a promise
-//     // What to do when the request succeeds
-//     // Success
-//     function successCallback(data){
-//       console.log(data)
-//     }
-//     // what to do when the request fails
-//     // failure
-//     function errorCallback(error){
-//       console.log(error)
-//     }
-// }
+  this.httpCreateBook = function(data) {
+    var req = {
+     method: 'POST',
+     url: '/comics',
+     data: {comic:data},
+     headers: {
+       'Content-Type': 'application/json'
+     }
+    }
+    return $http(req)
+    .then(successCallback)
+    .catch(errorCallback)
+
+    // returns a promise
+    // What to do when the request succeeds
+    // Success
+    function successCallback(data){
+      console.log(data)
+    }
+    // what to do when the request fails
+    // failure
+    function errorCallback(error){
+      console.log(error)
+    }
+}
   // success and error are special functions added to a promise by $http
 
   // success or error will be called later - when this block is finished

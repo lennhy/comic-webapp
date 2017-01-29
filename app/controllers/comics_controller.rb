@@ -1,5 +1,7 @@
 
 class ComicsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+  respond_to :json
 
   def index
     render json: Comic.all
@@ -11,14 +13,22 @@ class ComicsController < ApplicationController
   end
 
   def create
+    comic = Comic.new(comic_params)
+    comic.users << current_user
+    if comic.save
+      render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
+    else
+      render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+    end
+  end
+
+  # po = Base64.decode64(params[:comic][:pages][0][:base64])
+
+  def decode_base64
     binding.pry
-      comic = Comic.new(comic_params)
-      comic.users << current_user
-      if comic.save
-        render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
-      else
-        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
-      end
+   decoded_data = Base64.decode64(params[:comic][:pages][:base64])
+   data = StringIO.new(po)
+   data
   end
 
   def show
@@ -48,7 +58,6 @@ class ComicsController < ApplicationController
   private
     def comic_params
       params.require(:comic).permit(
-                :pages,
                 :title,
                 :description,
                 :issue,
@@ -57,7 +66,8 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
-                :genre_ids => []
+                :genre_ids => [],
+                :pages=> decode_base64
         )
     end
 end
