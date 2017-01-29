@@ -12,8 +12,18 @@ class ComicsController < ApplicationController
       render json: comic
   end
 
+
+
   def create
+# picture_params = params[:picture]
+# encoded_picture = picture_params[:data]
+# content_type = picture_params[:content_type]
+# image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_picture}")
+# image.original_filename = picture_params[:filename]
+# @picture.image = image
+    binding.pry
     comic = Comic.new(comic_params)
+    comic.pages = decode_base64
     comic.users << current_user
     if comic.save
       render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
@@ -21,14 +31,20 @@ class ComicsController < ApplicationController
       render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
     end
   end
+# Paperclip::AdapterRegistry::NoHandlerErrors
+  # def decode_base64
+  #  decoded_data = Base64.decode64(params[:comic][:pages][:base64])
+  #  data = StringIO.new(decoded_data)
+  #  data
+  # end
+  # Paperclip::AdapterRegistry::NoHandlerError (No handler found for [{}, {}, {}, {}]):
 
-  # po = Base64.decode64(params[:comic][:pages][0][:base64])
 
-  def decode_base64
-    binding.pry
-   decoded_data = Base64.decode64(params[:comic][:pages][:base64])
-   data = StringIO.new(po)
-   data
+   def decode_base64
+      binding.pry
+      decoded_data = params[:comic][:pages].map { |page| Base64.decode64(page[:base64]) }
+      data = decoded_data.map { |d|  StringIO.new(d) }
+      data
   end
 
   def show
@@ -67,7 +83,8 @@ class ComicsController < ApplicationController
                 :graphic_novel,
                 :region_id,
                 :genre_ids => [],
-                :pages=> decode_base64
+                # :pages_attributes=> [:filetype, :filename, :filesize, :base64],
+                :pages => []
         )
     end
 end

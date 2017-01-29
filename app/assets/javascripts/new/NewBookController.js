@@ -14,23 +14,32 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
        genre_ids: [],
        pages: {}
   };
+  //
+  // // def decode_base64
+  // //   binding.pry
+  //   decoded_data = params[:comic][:pages].map { |page| Base64.decode64(page[:base64]) }
+  //   data = decoded_data.map { |d|  StringIO.new(d) }
+  //   data
+  // end
 
-  vm.submit = function(){
-    $http.post("/comics", vm.boook)
-    .then(function(res) {
-      vm.upload = res.data.pages;
-    })
-    .catch(function(error){
-      console.log(error.data);
-    });
-  }
+  //
+  // vm.submit = function(){
+  //   $http.post("/comics", vm.boook)
+  //   .then(function(res) {
+  //     vm.upload = res.data.pages;
+  //   })
+  //   .catch(function(error){
+  //     console.log(error.data);
+  //   });
+  // }
 
   vm.createBook = function() {
      BookService
        //  before submit form
        .httpCreateBook(vm.book)
          .then(function (res) {
-              vm.upload = res.pages;
+              vm.upload = res;
+              console.log(res);
               $('ul').prepend("<li>You have successfully created a new comic!</li>");
          },function(error){
                console.log(error)

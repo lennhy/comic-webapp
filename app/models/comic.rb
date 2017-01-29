@@ -3,7 +3,7 @@ class Comic < ApplicationRecord
   has_many :genres, through: :comic_genres
   has_many :comic_users
   has_many :comic_genres
-
+  has_many :pages
   has_many :ratings
 
   belongs_to :region
