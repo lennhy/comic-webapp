@@ -33,12 +33,35 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
   //   });
   // }
 
+  // def decode_base64
+  //     Rails.logger.info 'decoding base64 file'
+  //     # decode base64 string
+  //     decoded_data = params[:comic][:pages].map { |page| Base64.decode64(page[:base64]) }
+  //
+  //     # create 'file' understandable by Paperclip
+  //     data = decoded_data.map { |d|  StringIO.new(d) }
+  //
+  //     match_data = data.map do |d|
+  //       match_data.class_eval do
+  //           attr_accessor :content_type, :original_filename
+  //       end
+  //     end
+  //
+  //     # set file properties
+  //     set_data = match_data.map do |md|
+  //        md.content_type = params[:comic][:pages][:filetype]
+  //        md.original_filename = params[:comic][:pages][:filename]
+  //     end
+  //     # return data to be used as the attachment file (paperclip)
+  //     set_data
+  // end
+
   vm.createBook = function() {
      BookService
        //  before submit form
        .httpCreateBook(vm.book)
          .then(function (res) {
-              vm.upload = res;
+              vm.upload = res.data.comic.pages;
               console.log(res);
               $('ul').prepend("<li>You have successfully created a new comic!</li>");
          },function(error){
