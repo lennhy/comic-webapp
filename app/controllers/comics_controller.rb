@@ -12,10 +12,11 @@ class ComicsController < ApplicationController
   end
 
 
-
+# Paperclip::AdapterRegistry::NoHandlerError (No handler found for ["maxresdefault.jpg", "lenn.jpg", "CHAPPELLE_02_0204_RICKJAMES_640x360.jpg", "maxresdefault.jpg", "lenn.jpg", "CHAPPELLE_02_0204_RICKJAMES_640x360.jpg", "maxresdefault.jpg", "lenn.jpg", "CHAPPELLE_02_0204_RICKJAMES_640x360.jpg"]):
   def create
     comic = Comic.new(comic_params)
-    comic.pages = decode_base64
+    comic.pages = decode_base64 # save resource and render response ...
+
     comic.users << current_user
     binding.pry
     if comic.save
@@ -30,50 +31,55 @@ class ComicsController < ApplicationController
 #    decoded_data = Base64.decode64(params[:comic][:pages][:base64])
 #    data = StringIO.new(decoded_data)
 #    data
-#   end
+  # end
   # Paperclip::AdapterRegistry::NoHandlerError (No handler found for [{}, {}, {}, {}]):
-
+  #
   # def decode_base64
   #     Rails.logger.info 'decoding base64 file'
   #     # decode base64 string
-  #     decoded_data = params[:comic][:pages].map { |page| Base64.decode64(page[:base64]) }
+  #     pages = params[:comic][:pages]
+  #     decoded_data = pages.map { |page| Base64.decode64(page[:base64]) }
   #
   #     # create 'file' understandable by Paperclip
-  #     data = decoded_data.map { |d|  StringIO.new(d) }
+  #     data = decoded_data.map { |d|  StringIO.new(d) } #[#<StringIO:0x007f9bf80ca670>, #<StringIO:0x007f9bf80ca5d0>, #<StringIO:0x007f9bf80ca558>]
   #
-  #     match_data = data.map do |d|
-  #       match_data.class_eval do
+  #     # data[0].content_type  = params[:comic][:pages][0][:filetype]
+  #     set_attributes = data.each do |d|
+  #       d.class_eval do
   #           attr_accessor :content_type, :original_filename
   #       end
   #     end
+  #     binding.pry
   #
   #     # set file properties
-  #     set_data = match_data.map do |md|
-  #       binding.pry
-  #        md.content_type = params[:comic][:pages][:filetype]
-  #        md.original_filename = params[:comic][:pages][:filename]
+  #     set_data = set_attributes.map do |md|
+  #        pages.map do |page|
+  #          md.content_type = page[:filetype]
+  #          md.original_filename = page[:filename]
+  #        end
   #     end
   #     # return data to be used as the attachment file (paperclip)
   #     set_data
   # end
 
   def decode_base64
-  # decode base64 string
-  Rails.logger.info 'decoding base64 file'
-  decoded_data = Base64.decode64( params[:comic][:pages][:base64])
-  # create 'file' understandable by Paperclip
-  data = StringIO.new(decoded_data)
-  data.class_eval do
-    attr_accessor :content_type, :original_filename
+    # decode base64 string
+    Rails.logger.info 'decoding base64 file'
+    decoded_data = Base64.decode64( params[:comic][:pages][:base64])
+    # create 'file' understandable by Paperclip
+    data = StringIO.new(decoded_data)
+    data.class_eval do
+      attr_accessor :content_type, :original_filename
+    end
+
+    # set file properties
+    data.content_type = params[:comic][:pages][:filetype] ##<StringIO:0x007f9be40a1d88>
+    data.original_filename = params[:comic][:pages][:filename]
+    binding.pry
+
+    # return data to be used as the attachment file (paperclip)
+    data ##<StringIO:0x007fc91718b590 @content_type="image/jpeg", @original_filename="lenn.jpg">
   end
-
-  # set file properties
-  data.content_type = params[:comic][:pages][:filetype]
-  data.original_filename = params[:comic][:pages][:filename]
-
-  # return data to be used as the attachment file (paperclip)
-  data
-end
 
   def show
       comic = Comic.find(params[:id])
