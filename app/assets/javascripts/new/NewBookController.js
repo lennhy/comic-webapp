@@ -12,7 +12,7 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
        graphic_novel:'',
        region_id: null,
        genre_ids: [],
-       pages: {}
+       pages: []
   };
 
   vm.createBook = function() {
@@ -37,6 +37,25 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
 angular
         .module('app')
         .controller('NewBookController', NewBookController);
+
+        // def decode_base64
+        //   # decode base64 string
+        //   Rails.logger.info 'decoding base64 file'
+        //   decoded_data = Base64.decode64( params[:comic][:pages][:base64])
+        //   # create 'file' understandable by Paperclip
+        //   data = StringIO.new(decoded_data)
+        //   data.class_eval do
+        //     attr_accessor :content_type, :original_filename
+        //   end
+        //
+        //   # set file properties
+        //   data.content_type = params[:comic][:pages][:filetype] ##<StringIO:0x007f9be40a1d88>
+        //   data.original_filename = params[:comic][:pages][:filename]
+        //   binding.pry
+        //
+        //   # return data to be used as the attachment file (paperclip)
+        //   data ##<StringIO:0x007fc91718b590 @content_type="image/jpeg", @original_filename="lenn.jpg">
+        // end
         // # save resource and render response ...
         // id: nil,
         //    title: "sdkjsndn",

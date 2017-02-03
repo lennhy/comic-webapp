@@ -14,19 +14,35 @@ class Comic < ApplicationRecord
   validates_inclusion_of :graphic_novel, :in => [true, false]
 
 
-  # --nested forms custom attribute writter
-  def pages_attributes=(pages_attributes)
-     pages_attributes.values.each do |pages_attribute|
-       if pages_attribute[:illustration].blank? || pages_attribute[:comic_id].blank?
+   def pages_attributes(pages_attributes)
+      pages_attributes.each do |page|
+        if page[:illustration].blank?
 
-       else
-         page = Page.find_or_create_by(pages_attribute)
-         self.pages << page
-       end
+        else
+          new_page = Page.reate(page)
+          new_page.illustration = decode_base64(page) # save resource and render response ...
+          self.pages << new_page
+        end
+      end
+    end
+
+   def decode_base64(page)
+     Rails.logger.info 'decoding base64 file'
+     # decode base64 string
+     decoded_data = Base64.decode64( page[:illustration][:base64])
+     # create 'file' understandable by Paperclip
+     data = StringIO.new(decoded_data)
+     data.class_eval do
+       attr_accessor :content_type, :original_filename
      end
+
+     # set file properties
+     data.content_type = page[:filetype] ##<StringIO:0x007f9be40a1d88>
+     data.original_filename = page[:filename]
+
+     # return data to be used as the attachment file (paperclip)
+     data ##<StringIO:0x007fc91718b590 @content_type="image/jpeg", @original_filename="lenn.jpg">
    end
-
-
 
 
 end
