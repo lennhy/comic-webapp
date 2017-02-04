@@ -96,7 +96,7 @@
   <!-- single upload -->
   <label>Upload Cover Page </label>
     <div id="preview"></div>
-  <input type="file" ng-model="vm.book.cover" id="cover" ng-click="vm.previewImg('#cover', '#preview')" naccept="image/*" base-sixty-four-input>
+  <input type="file" ng-model="vm.book.cover" id="cover" ng-click="vm.previewCover('#cover', '#preview')" accept="image/*" base-sixty-four-input>
 
   <!-- mulitple upload -->
   <label>Upload Pages all pages must be numbered in chronological order</label>
@@ -104,7 +104,7 @@
     <div id="preview_pages"></div>
     <img ng-src="{{image.url}}">
   </ul>
-  <input type="file" ng-model="vm.book.pages"  id="pages" ng-click="vm.previewImg('#pages', '#preview_page')" accept="image/*" multiple base-sixty-four-input>
+  <input type="file" ng-model="vm.book.pages"  id="pages"  accept="image/*" multiple base-sixty-four-input>
 
   <input type="submit" value="create"/>
 

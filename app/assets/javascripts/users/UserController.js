@@ -1,18 +1,14 @@
-function UserController(Auth, UserService, $scope, user) {
+function UserController(Auth, UserService, FileService, $scope, user) {
   var vm = this;
   var user = user.data;
   vm.user = {
     avatar:{}
   }
   currentUser = Auth.currentUser();
-
-  FileService
-    .previewImg(div, displayDiv)
-    .then(function (res){
-      console.log(res);
-     },function(error){
-         console.log(error)
-  });
+  vm.previewImg = function(div, displayDiv) {
+    FileService
+      .previewImg(div, displayDiv)
+}
 
   vm.updateUser = function() {
     UserService

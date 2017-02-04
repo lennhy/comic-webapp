@@ -1,7 +1,7 @@
 function BookService($http){
 
   this.httpGetAllBooks = function(){
-    console.log("d");
+    console.log("Jeeezee");
     return $http.get('/comics.json')
   };
 

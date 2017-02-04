@@ -1,4 +1,4 @@
-function NewBookController(BookService, regions, genres, $scope, $http) {
+function NewBookController(BookService, FileService, regions, genres, $scope, $http) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
@@ -15,14 +15,11 @@ function NewBookController(BookService, regions, genres, $scope, $http) {
        genre_ids: [],
        pages: []
   };
-  
-  FileService
-    .previewImg(div, displayDiv)
-    .then(function (res){
-      console.log(res);
-     },function(error){
-         console.log(error)
-  });
+
+  vm.previewCover = function(div, displayDiv) {
+    FileService
+      .previewImg(div, displayDiv)
+    }
 
   vm.createBook = function() {
      BookService

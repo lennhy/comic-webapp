@@ -25,7 +25,9 @@ angular
           // Index page for all books
           .state('home.books', {
             url: 'books',
-            templateUrl: 'books/books.html'
+            templateUrl: 'books/books.html',
+            controller: 'BooksController as vm',
+
           })
 
           // Show page for a selected book
