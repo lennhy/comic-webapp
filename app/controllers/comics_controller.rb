@@ -13,10 +13,10 @@ class ComicsController < ApplicationController
 
   def create
     comic = Comic.new(comic_params)
-    comic.pages_attributes(params[:comic][:pages]) # save resource and render response ...
+    # save resource and render response
+    comic.pages_attributes(params[:comic][:pages])
 
     comic.users << current_user
-    binding.pry
     if comic.save
       render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
     else
@@ -60,8 +60,8 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
-                :pages=>[],
-                :genre_ids => []
+                :genre_ids => [],
+                :pages=>[]
         )
     end
 end
