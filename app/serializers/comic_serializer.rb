@@ -3,5 +3,7 @@ class ComicSerializer < ActiveModel::Serializer
   has_many :users, serializer: UserSerializer
   has_many :genres, serializer: GenreSerializer
   has_many :ratings, serializer: RatingSerializer
+  has_many :pages, serializer: PageSerializer
+
   has_one :region
 end

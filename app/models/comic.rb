@@ -14,10 +14,7 @@ class Comic < ApplicationRecord
 
 
    def pages_attributes(pages_attributes)
-     pages =[]
-
       pages_attributes.each do |image|
-        binding.pry
         if image.blank?
 
         else

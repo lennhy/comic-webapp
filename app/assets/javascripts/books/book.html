@@ -15,7 +15,7 @@
   <span ng-if="currentUser.role !=='publisher'">
     <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button>
   </span>
-  
+
   <span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
 
     <form name="newForm" ng-submit="vm.createRating()">
@@ -48,3 +48,6 @@
   <li> Current Rating <span ng-bind="vm.rateTotal"></span></li>
 
 </ul>
+<div ng-repeat="page in vm.book.pages">
+  <span><img ng-src='{{page.image}}'/></span>
+</div>

@@ -1,0 +1,11 @@
+---
+:User:
+  :avatar:
+  - :large
+  - :medium
+  - :thumb
+:Page:
+  :image:
+  - :large
+  - :medium
+  - :thumb
