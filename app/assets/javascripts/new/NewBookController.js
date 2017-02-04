@@ -1,4 +1,4 @@
-function NewBookController(BookService, regions, genres, $scope, Upload, $http) {
+function NewBookController(BookService, regions, genres, $scope, $http) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
@@ -11,9 +11,27 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
        issue_date:'',
        graphic_novel:'',
        region_id: null,
+       cover: {},
        genre_ids: [],
        pages: []
   };
+  // preview image before upload
+  vm.previewImg = function(div,  displayDiv){
+  $(div).on('change', function(event) {
+     var files = event.target.files;
+     var image = files[0]
+     var reader = new FileReader();
+     reader.onload = function(file) {
+       var img = new Image();
+       console.log(file);
+       img.src = file.target.result;
+       img.height=200;
+      //  img.width = auto;
+       $(displayDiv).html(img);
+     }
+     reader.readAsDataURL(image);
+   });
+}
 
   vm.createBook = function() {
      BookService
@@ -22,7 +40,7 @@ function NewBookController(BookService, regions, genres, $scope, Upload, $http) 
          .then(function (res) {
            var arr=[];
               for(let i=0; i < res.data.comic.pages.length; i++){
-                arr.push(res.data.comic.pages[i].url);
+                arr.push(res.data.comic.pages[i].image);
               };
               vm.upload = arr;
               console.log(res);

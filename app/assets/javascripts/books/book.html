@@ -1,6 +1,8 @@
 
 <ul class="notification">
   <h2><span ng-bind="vm.book.title"></span></h2>
+  <span><img ng-src="{{vm.book.cover}}"></span>
+
   <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="vm.book.description"></span></li>
   <li>Region: <span  ng-bind="vm.book.region.name"></span></li>

@@ -52,7 +52,7 @@ angular
 
           // Current User books
           .state('home.mybooks', {
-              url: 'users/:id',
+              url: 'mybooks/:id',
               templateUrl: 'users/user_books.html'
           })
 

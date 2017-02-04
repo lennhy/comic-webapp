@@ -1,11 +1,13 @@
 <h2>My Profile</h2>
-<img ngf-thumbnail="file">
- <!-- <img ng-src="{{ vm.avatar }}" width="300" height="auto" alt="" /> -->
-<img ng-src="{{ vm.avatar }}"/>
-<form name="form" ng-submit="submit()">
 
-  <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"   ngf-resize="{width: 300, height: 300}">Here</div>
+<form name="form" ng-submit="vm.updateUser()">
+
+  <!-- single upload -->
+  <label>Upload Avatar Page </label>
+  <span><img ng-src="{{ currentUser.avatar}}"></span>
+  <div id="preview_avatar"></div>
+
+  <input type="file" ng-model="vm.user.avatar" id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" naccept="image/*" base-sixty-four-input>
 
   <input type="submit" value="create"/>
 
@@ -16,10 +18,3 @@
   <li>Email: <span ng-bind="currentUser.email"></li>
   <li>User Type: <span ng-bind="currentUser.role"></li>
 </ul>
-
-<!-- avatar promise data: {{vm.currentUser.avatar}} -->
-
-<!-- avatar_vm.file_name: nil,
-avatar_content_type: nil,
-avatar_vm.file_size: nil,
-avatar_updated_at: nil>  -->

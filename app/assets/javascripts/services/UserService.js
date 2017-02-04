@@ -14,10 +14,25 @@ function UserService($http){
     return $http.get('/users')
   };
 
-  this.httpUpdateBook = function(id){
-    return $http.patch(`/comics/${id}`);
-  };
+  this.httpUpdateUser = function(id, avatar){
+      var req = {
+        method: 'PATCH',
+        url: '/users/'+ id,
+        data: {user: avatar}
+      }
+      return $http(req)
+      .then(successCallback)
+      .catch(errorCallback)
 
+      function successCallback(data){
+        return data;
+      }
+      // what to do when the request fails
+      // failure
+      function errorCallback(error){
+        console.log(error)
+      }
+}
 
   // this.httpCreateProfilePic = function(avatar, userId){
   //   var req = {

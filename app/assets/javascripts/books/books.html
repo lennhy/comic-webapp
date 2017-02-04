@@ -8,6 +8,7 @@
   <div class ="number">{{ book.num }}</div>
 
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
+  <span><img ng-src="{{book.cover}}"></span>
   <li>Publishers: <span ng-repeat="user in book.users" ng-bind="user | returnPublisher"></span></li>
   <li>Description: <span  ng-bind="book.description"></span></li>
   <li>Region: <span  ng-bind="book.region.name"></span></li>

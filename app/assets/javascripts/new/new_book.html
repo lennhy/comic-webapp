@@ -3,7 +3,6 @@
 
 <ul>
 </ul>
-<div id="preview"></div>
 <form name="newForm" ng-submit="vm.createBook()">
 
   <!--title  -->
@@ -95,22 +94,17 @@
   </div><br>
 
   <!-- single upload -->
-  <!-- <label>Upload a Cover Page</label>
-  <img ngf-thumbnail="pages"/>
-  <div class="button" ngf-select ng-model="pages" name="pages" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  ngf-resize="{width: 300, height: 300}" ng-change="vm.setPages()">Here</div><br> -->
+  <label>Upload Cover Page </label>
+    <div id="preview"></div>
+  <input type="file" ng-model="vm.book.cover" id="cover" ng-click="vm.previewImg('#cover', '#preview')" naccept="image/*" base-sixty-four-input>
 
   <!-- mulitple upload -->
-  <label>Upload Pages if book in chronological order</label>
-  <ul ng-repeat="url in vm.upload">
-    <img ng src="{{url}}">
+  <label>Upload Pages all pages must be numbered in chronological order</label>
+  <ul ng-repeat="image in vm.upload">
+    <div id="preview_pages"></div>
+    <img ng-src="{{image.url}}">
   </ul>
-  <!-- <input type="file" ngf-select ng-model="pages" name="pages" ngf-pattern="'image/*'"
-  ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 300, height: 300}" ngf-multiple="true" ng-change="vm.setPages()"/>Here<br> -->
-  <input type="file" ng-model="vm.book.pages" accept="image/*" multiple base-sixty-four-input>
-<!--pages
-  <input type="file" ng-model="files" name="files" multiple accept="image/*, .zip" maxsize="5000" required base-sixty-four-input>
-  <span ng-show="form.files.$error.maxsize">Files must not exceed 5000 KB</span> -->
+  <input type="file" ng-model="vm.book.pages"  id="pages" ng-click="vm.previewImg('#pages', '#preview_page')" accept="image/*" multiple base-sixty-four-input>
 
   <input type="submit" value="create"/>
 

@@ -21,8 +21,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    binding.pry
     user = current_user
+    user.avatar = user.decode_base64(params[:user][:avatar])
+
+    binding.pry
     if user.update(user_params)
       render json: user
     end
