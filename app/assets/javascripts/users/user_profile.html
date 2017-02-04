@@ -7,7 +7,7 @@
   <span><img ng-src="{{ currentUser.avatar}}"></span>
   <div id="preview_avatar"></div>
 
-  <input type="file" ng-model="vm.user.avatar" id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" naccept="image/*" base-sixty-four-input>
+  <input type="file" ng-model="vm.user.avatar" id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" accept="image/*" base-sixty-four-input>
 
   <input type="submit" value="create"/>
 

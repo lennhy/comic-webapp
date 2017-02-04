@@ -1,24 +1,19 @@
 function BooksController( $filter, BookService) {
   var vm = this;
   vm.search = '';
-console.log('A')
-   BookService
-      //  when this block is finished
-      // executing we don't have the books data, we've just specified what to do
-      // when we do eventually get it - or what to do if we fail to get it.
-     .httpGetAllBooks()
-         .then(function (books){
-           console.log("b")
-           var getBooks = books.data;
-               for(var i=0; i < getBooks.length; i++){
-                   getBooks[i].num = 0;
-               }
-               vm.books = getBooks;
 
-          },function(error){
-              console.log(error)
+   BookService
+     .httpGetAllBooks()
+       .then(function (books){
+         var getBooks = books.data;
+           for(var i=0; i < getBooks.length; i++){
+               getBooks[i].num = 0;
+           }
+           vm.books = getBooks;
+
+        },function(error){
+            console.log(error)
        });
-console.log("c")
       // users can only upvote once
       vm.upVote = function(book){
         if(book.num === 1){
@@ -38,7 +33,6 @@ console.log("c")
         }
 
       }
-
 }
 
 angular

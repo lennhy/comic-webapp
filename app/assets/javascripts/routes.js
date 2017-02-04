@@ -8,10 +8,6 @@ angular
               controller: 'HomeController as vm',
           })
 
-          // Create a new book
-          // Instead, we can use the resolve property we spoke about earlier - this
-          // allows us to specify a bunch of promises that we want to be resolved before our
-          // view is rendered.
           .state('home.new', {
               url: 'new',
               templateUrl: 'new/new_book.html',
@@ -29,13 +25,7 @@ angular
           // Index page for all books
           .state('home.books', {
             url: 'books',
-            templateUrl: 'books/books.html',
-            controller: 'BooksController as vm',
-            // resolve: {
-            //     books: function (BookService) {
-            //       return BookService.httpGetAllBooks();
-            //     }
-            // }
+            templateUrl: 'books/books.html'
           })
 
           // Show page for a selected book

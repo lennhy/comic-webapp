@@ -17,6 +17,7 @@ function FileService($http){
      reader.readAsDataURL(image);
    });
   }
+}
 
 angular
     .module('app')
