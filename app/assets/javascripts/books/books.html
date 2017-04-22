@@ -1,11 +1,9 @@
 <label> Search by Region:</label>
-<input ng-model="searchComics.region"/>
+<input ng-model="searchComics.region" ng-model-options="{updateOn: 'default blur', debounce: {'default':1000, 'blur':0}}"/>
 
 <ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: 'title'">
 
-  <button ng-click="vm.upVote(book)">Upvote + </button>
-  <button ng-click="vm.downVote(book)">Downvote -</button>
-  <div class ="number">{{ book.num }}</div>
+
 
   <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>
   <span><img ng-src="{{book.cover}}"></span>
@@ -20,4 +18,7 @@
   <li>Posted On: <span ng-bind="book.created_at | date : 'fullDate'"></span></li>
 
   <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(' ')"></span></li>
+  <button ng-click="book.upVote(book)">Upvote + </button>
+  <button ng-click="book.downVote(book)">Downvote -</button>
+  <div class ="number">{{ book.num }}</div>
 </ul>
