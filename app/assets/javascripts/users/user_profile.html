@@ -1,15 +1,15 @@
 <h2>My Profile</h2>
 
-<form name="form" ng-submit="vm.updateUser()">
+<form name="form" ng-submit="vm.updateUser(file)">
 
   <!-- single upload -->
   <label>Upload Avatar Page </label>
-  <span><img ng-src="{{ currentUser.avatar}}"></span>
+  <!-- <span><img ng-src="{{ currentUser.avatar}}"></span> -->
   <div id="preview_avatar"></div>
 
-  <input type="file" ng-model="vm.user.avatar" id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" accept="image/*" base-sixty-four-input>
+  <input type="file" ng-model="vm.user.avatar"  id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" accept="image/*" >
 
-  <input type="submit" value="create"/>
+  <input type="submit" value="submit"/>
 
 </form>
 

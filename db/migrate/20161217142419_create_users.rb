@@ -3,8 +3,10 @@ class CreateUsers < ActiveRecord::Migration[5.0]
     create_table :users do |t|
       t.string :name
       t.integer :role
+      # t.integer :avatar_id
 
       t.timestamps
     end
   end
 end
+# 

@@ -22,16 +22,25 @@ class UsersController < ApplicationController
 
   def edit
     user = current_user
-    user.avatar = user.decode_base64(params[:user][:avatar])
-
     binding.pry
+    # user.avatar = params[:avatar]
+
     if user.update(user_params)
+      # u.avatar.url # => '/url/to/file.png'
+      # u.avatar.current_path # => 'path/to/file.png'
+      # u.avatar_identifier # => 'file.png'
       render json: user
     end
   end
 
   private
     def user_params
-      params.require(:user).permit(:avatar)
+      params.require(:user).permit(
+        :id,
+        :name,
+        :role,
+        :email,
+        :avatar=> {:thumb=>{}}
+      )
     end
 end

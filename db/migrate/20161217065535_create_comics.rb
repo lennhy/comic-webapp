@@ -6,9 +6,11 @@ class CreateComics < ActiveRecord::Migration[5.0]
       t.integer :issue
       t.integer :volume
       t.integer :page_count
+      t.integer :region_id
+      # t.integer :cover_id
       t.date :issue_date
       t.boolean :graphic_novel, :default=> false
-      
+
       t.timestamps
     end
   end

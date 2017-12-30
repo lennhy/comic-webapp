@@ -31,7 +31,7 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
                 arr.push(res.data.comic.pages[i].image);
               };
               vm.upload = arr;
-              console.log(res);
+              // console.log(res);
               $('ul').prepend("<li>You have successfully created a new comic!</li>");
          },function(error){
                console.log(error)

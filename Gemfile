@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'paperclip'
+gem 'carrierwave', '~> 1.0'
 
 gem 'bower-rails'
 
@@ -12,8 +12,8 @@ gem 'angular-rails-templates'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql as the database for Active Record
+gem 'pg'
 
 # Convert data objects in database into json format
 gem 'active_model_serializers'

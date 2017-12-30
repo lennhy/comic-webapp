@@ -14,8 +14,8 @@ class ComicsController < ApplicationController
   def create
     comic = Comic.new(comic_params)
     # save resource and render response
-    comic.cover = comic.decode_base64(params[:comic][:cover])
-    comic.pages_attributes(params[:comic][:pages])
+    # comic.cover = comic.decode_base64(params[:comic][:cover])
+    # comic.pages_attributes(params[:comic][:pages])
 
     comic.users << current_user
     if comic.save

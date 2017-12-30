@@ -8,7 +8,6 @@ function FileService($http){
      var reader = new FileReader();
      reader.onload = function(file) {
        var img = new Image();
-       console.log(file);
        img.src = file.target.result;
        img.height=200;
       //  img.width = auto;
