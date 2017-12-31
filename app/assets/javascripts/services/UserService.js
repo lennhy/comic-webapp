@@ -14,11 +14,11 @@ function UserService($http){
     return $http.get('/users')
   };
 
-  this.httpUpdateUser = function(id, data){
+  this.httpUpdateUser = function(id, user){
       var req = {
         method: 'PATCH',
-        url: '/users/'+ id,
-        data: {user: data},
+        url: '/users/' + id + '/edit',
+        data: { user},
         headers: {
           'Content-Type': 'application/json'
         }

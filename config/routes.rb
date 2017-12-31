@@ -4,7 +4,7 @@
 
   devise_for :users
 
-  patch '/users/:id' => 'users#edit'
+  patch '/users/:id/edit' => 'users#edit'
 
   # json serialzer apis
   get '/users/:id', to: 'users#show'

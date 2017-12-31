@@ -6,4 +6,6 @@
 //= require angular-messages
 //= require angular-route
 //= require angular-rails-templates
+//= require ng-file-upload-shim
+//= require ng-file-upload
 //= require_tree .

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action  :store_current_location, :unless => :devise_controller?
 
   #  permits custom fields to be accepted before persisting to the database
-  # before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   # ensure that every controller action requires a logged in user, except for the login and register actions:
   before_action :authenticate_user!, only: [:index, :show, :new, :create]
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     # In case you want to permit additional parameters, you can do so using a simple before filter
     def configure_permitted_parameters
        devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :role) }
-       devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:id, :name, :role, :email, :avatar=>{}) }
+       devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :avatar=>{}) }
 
     end
 

@@ -1,35 +1,37 @@
-function UserController(Auth, UserService, FileService, $scope, user) {
+function UserController(Auth, UserService, FileService, $scope, user, Upload) {
   var vm = this;
-  // vm.user = user.data;
-  vm.user = {
-       id: user.data.id,
-       name: user.data.name,
-       role: user.data.role,
-       email: user.data.email,
-       avatar: user.data.avatar
-  };
-  console.log(user.data.avatar)
+  vm.user = user.data;
+
   currentUser = Auth.currentUser();
 
-  vm.previewImg = function(div, displayDiv) {
-    FileService
-      .previewImg(div, displayDiv)
+  vm.submit = function() {
+    if (vm.user.avatar) {
+      console.log(vm.user.avatar)
+      vm.updateUser(vm.user.avatar, Upload);
+    }
   }
 
-  vm.updateUser = function() {
-    UserService.httpUpdateUser(vm.user.id, vm.user)
-       .then(function (res) {
-         // var arr=[];
-            // for(let i=0; i < res.data.user.avatar.length; i++){
-            //   arr.push(res.data.comic.pages[i].image);
-            // };
-            console.log(res.data);
-            vm.upload = res.data.avatar;
-            $('ul').prepend("<li>You have successfully uploaded a profile pic !</li>");
-       },function(error){
-             console.log(error)
-             $('ul').append("<li>Looks like You are are missing something!</li>");
-       })
+  vm.updateUser = function(avatar, Upload) {
+    // console.log(user.data.avatar)
+    // vm.upload = function (image) {
+    //   console.log(image)
+    //
+            Upload.upload({
+                method: 'PATCH',
+                url: '/users/' + vm.user.id + '/edit',
+                data: { avatar }
+      })
+    // }
+    //
+    // UserService.httpUpdateUser(vm.user.id, vm.user)
+    //    .then(function (res) {
+    //         // console.log(res.data);
+    //         // vm.upload = res.data.avatar;
+    //         $('ul').prepend("<li>You have successfully uploaded a profile pic !</li>");
+    //    },function(error){
+    //          console.log(error)
+    //          $('ul').append("<li>Looks like You are are missing something!</li>");
+    //    })
     };
 
 }

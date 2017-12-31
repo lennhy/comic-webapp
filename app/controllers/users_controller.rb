@@ -22,10 +22,11 @@ class UsersController < ApplicationController
 
   def edit
     user = current_user
-    binding.pry
     # user.avatar = params[:avatar]
-
+    user.avatar = params[:avatar]
+    binding.pry
     if user.update(user_params)
+
       # u.avatar.url # => '/url/to/file.png'
       # u.avatar.current_path # => 'path/to/file.png'
       # u.avatar_identifier # => 'file.png'
@@ -36,11 +37,9 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(
-        :id,
         :name,
-        :role,
         :email,
-        :avatar=> {:thumb=>{}}
+        :avatar=> {}
       )
     end
 end
