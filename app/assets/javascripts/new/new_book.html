@@ -5,7 +5,7 @@
 </ul>
 <form name="newForm" ng-submit="vm.createBook()">
 
-  <!--title  -->
+  <!--  TITLE  -->
   <label for="title"> Title: </label><br>
   <input ng-model="vm.book.title" type="text" name="title" required="required"/><br></br>
 
@@ -13,7 +13,7 @@
     <div ng-message="required">A region is required!</div>
   </div>
 
-  <!--description  -->
+  <!--  DESCRIPTION  -->
   <label for="description"> Description: </label><br>
   <input ng-model="vm.book.description" type="text" minlength="10" name="description" required="required" /><br></br>
 
@@ -22,7 +22,7 @@
     <div ng-message="minlength">Must be more than 10 characters!</div>
   </div>
 
-  <!--issue  -->
+  <!--  ISSUE  -->
   <label for="issue"> Issue number: </label><br>
   <input  ng-model="vm.book.issue" name="issue" type="number" required="required" /><br></br>
 
@@ -31,7 +31,7 @@
   </div>
 
 
-  <!-- volume  -->
+  <!-- VOLUME  -->
   <label for="volume"> volume: </label><br>
   <input  ng-model="vm.book.volume" name="volume" type="number" required="required" /><br></br>
 
@@ -39,7 +39,7 @@
       <div ng-message="required">A volume number is required!</div>
   </div>
 
-  <!--page count  -->
+  <!--  PAGE COUNT  -->
   <label for="Page Count"> Page Count: </label><br>
   <input  ng-model="vm.book.page_count" type="number" name="pageCount"required="required" /><br></br>
 
@@ -47,7 +47,7 @@
       <div ng-message="required">An page count is required!</div>
   </div>
 
-  <!--issue date  -->
+  <!--  ISSUE DATE  -->
   <label for="Issue Date"> Issue Date: </label><br>
   <input ng-model="vm.book.issue_date" type="date" name="issueDate" required="required" /><br></br>
 
@@ -56,7 +56,7 @@
   </div>
 
 
-  <!-- options dropdown for regions -->
+  <!-- OPTIONS DROPDOWN FOR REGIONS -->
   <label for="region"> Region: </label><br>
 
   <select ng-model="vm.book.region_id" >
@@ -67,7 +67,7 @@
 
 
 
-  <!-- options dropdown for genres -->
+  <!-- OPTIONS DROPDOWN FOR GENRES -->
   <label ng-repeat="genre in vm.genres">
     <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">
       {{genre.name}}
@@ -77,7 +77,7 @@
 
 
 
- <!-- radio button fields for graphic novel -->
+ <!-- RADIO BUTTON FIELDS FOR GRAPHIC NOVEL -->
   <label for="Graphic Novel"> Graphic Novel: </label>
 
   <label for="Graphic Novel"> Yes: </label>
@@ -93,17 +93,23 @@
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
   </div><br>
 
-  <!-- single upload -->
+  <!-- SINGLE UPLOAD COVER -->
   <label>Upload Cover Page </label>
     <div id="preview"></div>
-  <input type="file" ng-model="vm.book.cover" id="cover" ng-click="vm.previewCover('#cover', '#preview')" accept="image/*" >
+    <div class="form-group">
+       <label for="myFileField">Select a file: </label>
+       <input type="file" file-model="vm.book.cover"  id ="exampleInputFile">
+    </div>
+  <!-- <input type= "file" ngf-select="vm.book.cover" name="cover" id="cover" ng-click="vm.previewCover('#cover', '#preview')"  accept="image/*" /> -->
+  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->
 
-  <!-- mulitple upload -->
+  <!-- MULTIPLE UPLOAD PAGES-->
   <label>Upload Pages all pages must be numbered in chronological order</label>
   <ul ng-repeat="image in vm.upload">
     <div id="preview_pages"></div>
     <img ng-src="{{image.url}}">
   </ul>
+
   <!-- <%= form.file_field :avatars, multiple: true %> -->
   <input type="file" ng-model="vm.book.pages"  id="pages"  accept="image/*" multiple>
 

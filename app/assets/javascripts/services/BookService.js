@@ -12,6 +12,7 @@ function BookService($http){
   };
 
   this.httpCreateBook = function(data) {
+    console.log("Book Service "+JSON.stringify(data))
     var req = {
      method: 'POST',
      url: '/comics',
@@ -20,12 +21,13 @@ function BookService($http){
        'Content-Type': 'application/json'
      }
     }
-    return $http(req)
+    // return $http(req)
     .then(successCallback)
     .catch(errorCallback)
 
     function successCallback(data){
-      console.log(data)
+      // console.log(data)
+      return data;
     }
 
     function errorCallback(error){
@@ -49,7 +51,24 @@ function BookService($http){
   this.httpDeleteBook = function(id){
     return $http.delete(`/comics/${id}`);
   };
-
+  //
+  // myApp.service('fileUpload', ['$https:', function ($https:) {
+  //     this.uploadFileToUrl = function(file, uploadUrl){
+  //        var fd = new FormData();
+  //        fd.append('file', file);
+  //
+  //        $https:.post(uploadUrl, fd, {
+  //           transformRequest: angular.identity,
+  //           headers: {'Content-Type': undefined}
+  //        })
+  //
+  //        .success(function(){
+  //        })
+  //
+  //        .error(function(){
+  //        });
+  //     }
+  //  }]);
 }
 
 angular

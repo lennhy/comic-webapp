@@ -23,9 +23,9 @@ class UsersController < ApplicationController
   def edit
     user = current_user
     # user.avatar = params[:avatar]
-    user.avatar = params[:avatar]
     binding.pry
-    if user.update(user_params)
+    if user.update(avatar:params[:avatar])
+
 
       # u.avatar.url # => '/url/to/file.png'
       # u.avatar.current_path # => 'path/to/file.png'

@@ -12,6 +12,7 @@ class ComicsController < ApplicationController
   end
 
   def create
+    binding.pry
     comic = Comic.new(comic_params)
     # save resource and render response
     # comic.cover = comic.decode_base64(params[:comic][:cover])
@@ -61,7 +62,7 @@ class ComicsController < ApplicationController
                 :issue_date,
                 :graphic_novel,
                 :region_id,
-                :cover,
+                :cover=>{},
                 :genre_ids => [],
                 :pages=>[]
         )

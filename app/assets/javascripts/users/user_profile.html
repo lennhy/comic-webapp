@@ -7,14 +7,15 @@
 
   <!-- <input type="file" ng-model="vm.user.avatar" id="avatar" accept="image/*" /> -->
 
-  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select</div>
+  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar"
+  ngf-pattern="'image/*'" ngf-accept="'image/*'">Select</div>
 
   <input type="submit" value="Submit"/>
 
 </form>
 
 <div id="preview_avatar"></div>
-{{vm.user.avatar}}
+<img src="{{vm.user.avatar.thumb.url}}"/>
 <ul>
   <li>Name: <span ng-bind="currentUser.name"></li>
   <li>Email: <span ng-bind="currentUser.email"></li>
