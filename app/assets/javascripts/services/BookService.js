@@ -21,12 +21,12 @@ function BookService($http){
        'Content-Type': 'application/json'
      }
     }
-    // return $http(req)
+    return $http(req)
     .then(successCallback)
     .catch(errorCallback)
 
     function successCallback(data){
-      // console.log(data)
+      console.log(data)
       return data;
     }
 
@@ -34,6 +34,15 @@ function BookService($http){
       console.log(error)
     }
   }
+
+  this.updateBook = function(cover, pages, id, Upload) {
+    Upload.upload({
+        method: 'PATCH',
+        url: '/pages/' + id + '/edit',
+        data: { cover, pages }
+    })
+  };
+
 
   this.httpAdd = function(id){
     var req = {

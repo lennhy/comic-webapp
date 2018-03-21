@@ -4,9 +4,8 @@ function UserController(Auth, UserService, FileService, $scope, user, Upload) {
 
   currentUser = Auth.currentUser();
 
-  vm.submit = function() {
+  vm.uploadAvatar = function() {
     if (vm.user.avatar) {
-      console.log(vm.user.avatar)
       vm.updateUser(vm.user.avatar, Upload);
     }
   }
@@ -14,7 +13,7 @@ function UserController(Auth, UserService, FileService, $scope, user, Upload) {
   vm.updateUser = function(avatar, Upload) {
     Upload.upload({
         method: 'PATCH',
-        url: '/users/' + vm.user.id + '/edit',
+        url: '/avatar/' + vm.user.id + '/edit',
         data: { avatar }
     })
   };
@@ -22,5 +21,5 @@ function UserController(Auth, UserService, FileService, $scope, user, Upload) {
 }
 
 angular
-        .module('app')
-        .controller('UserController', UserController);
+      .module('app')
+      .controller('UserController', UserController);

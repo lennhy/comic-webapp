@@ -93,12 +93,26 @@
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
   </div><br>
 
+
+  <input type="submit" value="create"/>
+
+</form>
+
+
+
+
+<form name="form" ng-submit="vm.uploadPages()">
+
   <!-- SINGLE UPLOAD COVER -->
-  <label>Upload Cover Page </label>
+  <!-- <label>Upload Cover Page </label> -->
     <div id="preview"></div>
     <div class="form-group">
        <label for="myFileField">Select a file: </label>
-       <input type="file" file-model="vm.book.cover"  id ="exampleInputFile">
+
+       <div class="button" ngf-select ng-model="vm.book.cover" name="cover"
+       ngf-pattern="'image/*'" ngf-accept="'image/*'">Upload Cover here</div>
+
+       <!-- <input type="file" file-model="vm.book.cover"  id ="exampleInputFile"> -->
     </div>
   <!-- <input type= "file" ngf-select="vm.book.cover" name="cover" id="cover" ng-click="vm.previewCover('#cover', '#preview')"  accept="image/*" /> -->
   <!-- <uploader ng-model="vm.book.cover"><uploader/> -->
@@ -109,10 +123,12 @@
     <div id="preview_pages"></div>
     <img ng-src="{{image.url}}">
   </ul>
-
-  <!-- <%= form.file_field :avatars, multiple: true %> -->
   <input type="file" ng-model="vm.book.pages"  id="pages"  accept="image/*" multiple>
 
-  <input type="submit" value="create"/>
+  <!-- <%= form.file_field :avatars, multiple: true %> -->
+  <!-- <div class="button" ngf-select ng-model="vm.book.pages[]"  id="pages"  accept="image/*" multiple>Upload Pages here</div> -->
+
+
+  <input type="submit" value="Upload images"/>
 
 </form>

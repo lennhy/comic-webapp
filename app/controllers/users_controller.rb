@@ -24,6 +24,20 @@ class UsersController < ApplicationController
     user = current_user
     # user.avatar = params[:avatar]
     binding.pry
+    if user.update(user_params)
+
+
+      # u.avatar.url # => '/url/to/file.png'
+      # u.avatar.current_path # => 'path/to/file.png'
+      # u.avatar_identifier # => 'file.png'
+      render json: user
+    end
+  end
+
+  def upload
+    user = current_user
+    # user.avatar = params[:avatar]
+    binding.pry
     if user.update(avatar:params[:avatar])
 
 

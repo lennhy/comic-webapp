@@ -12,7 +12,7 @@ class ComicsController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     comic = Comic.new(comic_params)
     # save resource and render response
     # comic.cover = comic.decode_base64(params[:comic][:cover])
@@ -20,7 +20,8 @@ class ComicsController < ApplicationController
 
     comic.users << current_user
     if comic.save
-      render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!"
+      render json: comic
+      # render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!" and comic
     else
       render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
     end
@@ -48,6 +49,20 @@ class ComicsController < ApplicationController
       else
         render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
       end
+  end
+
+  def upload
+    comic = Comic.find(params[:id])
+    # user.avatar = params[:avatar]
+    binding.pry
+    if comic.update(cover: params[:cover], pages: params[:pages])
+
+
+      # u.avatar.url # => '/url/to/file.png'
+      # u.avatar.current_path # => 'path/to/file.png'
+      # u.avatar_identifier # => 'file.png'
+      render json: comic
+    end
   end
 
   private

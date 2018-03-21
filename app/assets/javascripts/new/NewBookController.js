@@ -1,4 +1,4 @@
-function NewBookController(BookService, FileService, multipartForm, regions, genres, $scope, $http) {
+function NewBookController(BookService, FileService, regions, genres, $scope, $http, Upload) {
   var vm = this;
   vm.regions = regions.data;
   vm.genres = genres.data;
@@ -16,35 +16,40 @@ function NewBookController(BookService, FileService, multipartForm, regions, gen
        pages: []
   };
 
+ var id;
   $("#myFileField").change(function(){
-         //submit the form here
-         console.log("Outside NewBook Controller " + fileModel)
- });
+    //submit the form here
+    console.log("Outside NewBook Controller " + fileModel)
+  });
 
   vm.previewCover = function(div, displayDiv) {
     FileService
       .previewImg(div, displayDiv)
   }
   vm.createBook = function() {
-    console.log("NewBook Controller inside vm.creatBook "+JSON.stringify(vm.book))
-    var uploadUrl = "/comics";
-    multipartForm.post(uploadUrl, vm.book)
+   BookService
+     //  before submit form
+     .httpCreateBook(vm.book)
+       .then(function (res) {
+         console.log(res.data.id)
+         id = res.data.id;
+         var arr=[];
+            for(let i=0; i < res.data.comic.pages.length; i++){
+              arr.push(res.data.comic.pages[i].image);
+            };
+            vm.upload = arr;
+            $('ul').prepend("<li>You have successfully created a new comic!</li>");
+       },function(error){
+            console.log(error)
+            $('ul').append("<li>Looks like You are are missing something!</li>");
+       })
+   }
 
-     // BookService
-     //   //  before submit form
-     //   .httpCreateBook(vm.book)
-     //     .then(function (res) {
-     //       console.log(res.files)
-     //       var arr=[];
-     //          for(let i=0; i < res.data.comic.pages.length; i++){
-     //            arr.push(res.data.comic.pages[i].image);
-     //          };
-     //          vm.upload = arr;
-     //          $('ul').prepend("<li>You have successfully created a new comic!</li>");
-     //     },function(error){
-     //          console.log(error)
-     //          $('ul').append("<li>Looks like You are are missing something!</li>");
-     //     })
+   vm.uploadPages = function() {
+     if (vm.book.cover && vm.book.pages) {
+       console.log(vm.book.cover, vm.book.pages)
+       BookService.updateBook(vm.book.cover, vm.book.pages, id, Upload);
+     }
    }
 }
 
