@@ -8,8 +8,7 @@ class ComicsController < ApplicationController
 
   def new
       comic = Comic.new
-      @page_attachments = comic.page_attachments.build
-
+      page_attachments = comic.page_attachments.build
       render json: comic
   end
 
@@ -36,9 +35,9 @@ class ComicsController < ApplicationController
       if comic.users.map { |e| e !=  current_user }
         comic.users << current_user
         render json: { status: 'ok'}, notice: "You successfully added a new Comic to your account yo!"
-    else
-      render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
-    end
+      else
+        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+      end
   end
 
   # def update
@@ -51,15 +50,27 @@ class ComicsController < ApplicationController
   # end
 
   def upload
-    comic = Comic.find(params[:id])
-    comic.update(cover: params[:cover])
-    params[:page_attachments_attributes].each_with_index do |value, i|
-      page_attachment = PageAttachment.new
-      page_attachment.page = params[:page_attachments_attributes][i.to_s]
-      page_attachment.comic_id = comic.id
-      page_attachment.save
+    if Comic.find(params[:id])
+        comic = Comic.find(params[:id])
+        if params[:cover].present? && params[:page_attachments_attributes].present?
+          if !comic.page_attachments.blank? && !comic.cover.blank?
+              comic.update(cover: params[:cover])
+              params[:page_attachments_attributes].each_with_index do |value, i|
+                page_attachment = PageAttachment.new
+                page_attachment.page = params[:page_attachments_attributes][i.to_s]
+                page_attachment.comic_id = comic.id
+                page_attachment.save
+              end
+          else
+            flash[:notice] = "These images are already saved to this book"
+          end
+       else
+         flash[:notice] = "There are no images"
+      end
+    else
+      flash[:error] = "Comic book was not saved"
+      render json: Comic.all
     end
-      render json: comic
   end
 
 

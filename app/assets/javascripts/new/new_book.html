@@ -1,8 +1,8 @@
 <br>
 <h3>Upload a Book</h3>
 
-<ul>
-</ul>
+<div id="message">
+</div>
 <form name="newForm" ng-submit="vm.createBook()">
 
   <!--  TITLE  -->
@@ -91,7 +91,7 @@
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
   </div><br>
 
-  <input type="submit" value="create"/>
+  <input type="submit" id="create-book" value="create"/>
 
 </form>
 
@@ -101,8 +101,8 @@
   <!-- SINGLE UPLOAD COVER -->
   <div id="preview"></div>
   <label for="myFileField">Select a file: </label>
-  <input type="file" file-model="vm.book.cover"  id ="cover">
-  <uploader ng-model="vm.book.cover"><uploader/>
+  <input type="file" file-model="vm.book.cover"  id ="cover" disabled=true>
+  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->
 
 
   <!-- MULTIPLE UPLOAD PAGES-->
@@ -111,7 +111,7 @@
     <div id="preview_pages"></div>
     <img ng-src="{{image.url}}">
   </ul>
-  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple>
-  <input type="submit" value="Upload images"/>
+  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple disabled=true>
+  <input type="submit" id="upload-images" disabled=true value="Upload images"/>
 
 </form>
