@@ -32,7 +32,7 @@ class ComicsController < ApplicationController
 
   def show
       comic = Comic.find(params[:id])
-      page_attachments = comic.post_attachments.all
+      # page_attachments = comic.page_attachments.all
 
       render json: comic
   end
@@ -57,10 +57,15 @@ class ComicsController < ApplicationController
   # end
 
   def upload
-    binding.pry
     comic = Comic.find(params[:id])
-    params[:page_attachments].each do |key, v|
-      page_attachment = comic.page_attachments.create!(:page => params[:page_attachments][key], :comic_id => page.id)
+    binding.pry
+    comic.update(cover: params[:cover])
+    params[:page_attachments_attributes].each_with_index do |value, i|
+      page_attachment = PageAttachment.new
+      page_attachment.page = params[:page_attachments_attributes][i.to_s]  
+      page_attachment.comic_id = comic.id
+      page_attachment.save
+      # page_attachment = comic.page_attachments.create!(:page => params[:page_attachments][key], :comic_id => page.id)
     end
     # if comic.update(cover: params[:cover], page: params[:page_attachments])
       # params[:pages].each do |a|

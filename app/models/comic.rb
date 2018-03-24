@@ -1,7 +1,7 @@
 class Comic < ApplicationRecord
   # mount_uploader :page, PageUploader
   mount_uploader :cover, CoverUploader
-  has_many :page_attachments
+  has_many :page_attachments, dependent: :delete_all
   accepts_nested_attributes_for :page_attachments
 
   has_many :users, through: :comic_users

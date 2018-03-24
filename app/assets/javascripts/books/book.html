@@ -1,8 +1,8 @@
 
 <ul class="notification">
   <h2><span ng-bind="vm.book.title"></span></h2>
-  <span><img ng-src="{{vm.book.cover.thumb.url}}"></span>
-  <li>Pages: <span ng-repeat="page in vm.book.pages">{{ vm.book.pages }}</span></li>
+  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>
+  <span>Pages:</span> <li ng-repeat="item in vm.book.page_attachments"><img ng-src="{{item.page.thumb.url}}"></li>
 
   <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="vm.book.description"></span></li>

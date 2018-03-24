@@ -8,7 +8,6 @@ function BookService($http){
 
   this.httpGetBook = function(id){
     return $http.get('/comics/'+ id);
-
   };
 
   this.httpCreateBook = function(data) {
