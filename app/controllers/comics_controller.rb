@@ -8,6 +8,8 @@ class ComicsController < ApplicationController
 
   def new
       comic = Comic.new
+      @page_attachments = comic.page_attachments.build
+
       render json: comic
   end
 
@@ -20,6 +22,7 @@ class ComicsController < ApplicationController
 
     comic.users << current_user
     if comic.save
+
       render json: comic
       # render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!" and comic
     else
@@ -29,6 +32,8 @@ class ComicsController < ApplicationController
 
   def show
       comic = Comic.find(params[:id])
+      page_attachments = comic.post_attachments.all
+
       render json: comic
   end
 
@@ -42,32 +47,33 @@ class ComicsController < ApplicationController
     end
   end
 
-  def update
-      comic = Comic.find(params[:id])
-      if comic.update(comic_params)
-        render json: comic
-      else
-        render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
-      end
-  end
+  # def update
+  #     comic = Comic.find(params[:id])
+  #     if comic.update(comic_params)
+  #       render json: comic
+  #     else
+  #       render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+  #     end
+  # end
 
   def upload
-    comic = Comic.find(params[:id])
-    # user.avatar = params[:avatar]
     binding.pry
-    if comic.update(cover: params[:cover], pages: params[:pages])
-
-
-      # u.avatar.url # => '/url/to/file.png'
-      # u.avatar.current_path # => 'path/to/file.png'
-      # u.avatar_identifier # => 'file.png'
-      render json: comic
+    comic = Comic.find(params[:id])
+    params[:page_attachments].each do |key, v|
+      page_attachment = comic.page_attachments.create!(:page => params[:page_attachments][key], :comic_id => page.id)
     end
+    # if comic.update(cover: params[:cover], page: params[:page_attachments])
+      # params[:pages].each do |a|
+      #   comic.pages << a
+      #   comic.save
+      # end
+      render json: comic
+    # end
   end
+
 
   private
     def comic_params
-      # raise params.inspect
       params.require(:comic).permit(
                 :title,
                 :description,
@@ -79,7 +85,7 @@ class ComicsController < ApplicationController
                 :region_id,
                 :cover=>{},
                 :genre_ids => [],
-                :pages=>[]
-        )
+                :page_attachments_attributes=> []
+       )
     end
 end

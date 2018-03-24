@@ -11,7 +11,7 @@ function FileService($http){
        img.src = file.target.result;
        img.height=200;
       //  img.width = auto;
-      console.log(image);
+      // console.log(image);
        $(displayDiv).html(img);
      }
      reader.readAsDataURL(image);

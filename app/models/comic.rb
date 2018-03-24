@@ -1,18 +1,22 @@
 class Comic < ApplicationRecord
-  # include Decoder::InstanceMethods
-
+  # mount_uploader :page, PageUploader
   mount_uploader :cover, CoverUploader
-  mount_uploaders :pages, PageUploader
-
+  has_many :page_attachments
+  accepts_nested_attributes_for :page_attachments
 
   has_many :users, through: :comic_users
   has_many :genres, through: :comic_genres
   has_many :comic_users
   has_many :comic_genres
   has_many :ratings
-  # has_many :pages
   belongs_to :region
 
+  def page_attachments_attributes(page)
+    page_attachments_attributes.values.each do |page|
+      page = PageAttachment.find_or_create_by(page)
+      self.page_attachments << page
+    end
+  end
   # has_attached_file :cover, :styles => {large: "1000x1000>", medium: "300x300>", thumb: "150x150#" },
   #                           :default_style => :thumb, :default_url=> "/images/:style/cover.png"
 

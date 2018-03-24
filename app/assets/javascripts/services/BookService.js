@@ -12,7 +12,7 @@ function BookService($http){
   };
 
   this.httpCreateBook = function(data) {
-    console.log("Book Service "+JSON.stringify(data))
+    // console.log("Book Service "+JSON.stringify(data))
     var req = {
      method: 'POST',
      url: '/comics',
@@ -26,7 +26,7 @@ function BookService($http){
     .catch(errorCallback)
 
     function successCallback(data){
-      console.log(data)
+      // console.log(data)
       return data;
     }
 
@@ -35,11 +35,15 @@ function BookService($http){
     }
   }
 
-  this.updateBook = function(cover, pages, id, Upload) {
+  this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
     Upload.upload({
         method: 'PATCH',
         url: '/pages/' + id + '/edit',
-        data: { cover, pages }
+        // transformRequest: angular.identity,
+        headers: {
+          'Content-Type': undefined
+        },
+        data: { cover, page_attachments_attributes }
     })
   };
 
