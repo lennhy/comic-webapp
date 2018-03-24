@@ -14,15 +14,9 @@ class ComicsController < ApplicationController
   end
 
   def create
-    # binding.pry
     comic = Comic.new(comic_params)
-    # save resource and render response
-    # comic.cover = comic.decode_base64(params[:comic][:cover])
-    # comic.pages_attributes(params[:comic][:pages])
-
     comic.users << current_user
     if comic.save
-
       render json: comic
       # render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!" and comic
     else
@@ -58,22 +52,14 @@ class ComicsController < ApplicationController
 
   def upload
     comic = Comic.find(params[:id])
-    binding.pry
     comic.update(cover: params[:cover])
     params[:page_attachments_attributes].each_with_index do |value, i|
       page_attachment = PageAttachment.new
-      page_attachment.page = params[:page_attachments_attributes][i.to_s]  
+      page_attachment.page = params[:page_attachments_attributes][i.to_s]
       page_attachment.comic_id = comic.id
       page_attachment.save
-      # page_attachment = comic.page_attachments.create!(:page => params[:page_attachments][key], :comic_id => page.id)
     end
-    # if comic.update(cover: params[:cover], page: params[:page_attachments])
-      # params[:pages].each do |a|
-      #   comic.pages << a
-      #   comic.save
-      # end
       render json: comic
-    # end
   end
 
 

@@ -66,7 +66,6 @@
   </select><br></br>
 
 
-
   <!-- OPTIONS DROPDOWN FOR GENRES -->
   <label ng-repeat="genre in vm.genres">
     <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">
@@ -74,7 +73,6 @@
  </label>
 
  <h1>You selected: {{vm.book.genre_ids}}</h1>
-
 
 
  <!-- RADIO BUTTON FIELDS FOR GRAPHIC NOVEL -->
@@ -93,24 +91,19 @@
       <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>
   </div><br>
 
-
-
   <input type="submit" value="create"/>
 
 </form>
 
 <form name="form" ng-submit="vm.uploadPages()">
 
+
   <!-- SINGLE UPLOAD COVER -->
-  <!-- <label>Upload Cover Page </label> -->
-    <div id="preview"></div>
-       <label for="myFileField">Select a file: </label>
-
-       <!-- <div class="button" input-type="file" ngf-select ng-file-model="vm.book.cover"  accept="image/*" id ="cover">upload cover</div> -->
-
-       <input type="file" file-model="vm.book.cover"  id ="cover">
-  <!-- <input type= "file" ngf-select="vm.book.cover" name="cover" id="cover" ng-click="vm.previewCover('#cover', '#preview')"  accept="image/*" /> -->
+  <div id="preview"></div>
+  <label for="myFileField">Select a file: </label>
+  <input type="file" file-model="vm.book.cover"  id ="cover">
   <uploader ng-model="vm.book.cover"><uploader/>
+
 
   <!-- MULTIPLE UPLOAD PAGES-->
   <label>Upload Pages all pages must be numbered in chronological order</label>
@@ -118,14 +111,7 @@
     <div id="preview_pages"></div>
     <img ng-src="{{image.url}}">
   </ul>
-  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple> 
-
-  <!-- <div class="button" ngf-select input-type="file"  ng-file-model="vm.book.page_attachments"  id="page_attachments"  accept="image/*" multiple>upload pages</div> -->
-
-  <!-- <%= form.file_field :avatars, multiple: true %> -->
-   <!-- <div class="button" ngf-select ng-model="vm.book.pages[]"  id="pages"  accept="image/*" multiple>Upload Pages here</div> -->
-
-
+  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple>
   <input type="submit" value="Upload images"/>
 
 </form>

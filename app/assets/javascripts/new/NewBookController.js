@@ -18,23 +18,11 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
        page_attachments_attributes:[]
   };
 
+  // SAVE MULTIPLE AND SINGLE FILE INPUTS TO VARIABLES
   $("#page_attachments_attributes").change(function(event){
-    console.log(event.target.files)
     vm.page_attachments_attribute = event.target.files
-    // console.log("files yea "+event.target.files[]);
     console.log("page attachments " + vm.book.page_attachments_attributes)
     console.log("page cover " + vm.book.cover)
-
-    // for(let i=0; i<event.target.files.length; i++){
-    //   // vm.book.page_attachments.push(event.target.files[i]);
-    //    // console.log(event.target.files[i])
-    //    arr.push(event.target.files[i])
-    //  }
-     // vm.book.page_attachments = arr;
-     // console.log(vm.book.page_attachments)
-
-    // submit the form here
-    console.log("Outside NewBook Controller " + vm.book.pages)
   });
 
   vm.previewCover = function(div, displayDiv) {
@@ -42,6 +30,7 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
       .previewImg(div, displayDiv)
   }
 
+  //  CREATE BOOK WITHOUT IMAGES VIA POST REQUEST
   vm.createBook = function() {
    BookService
      //  before submit form
@@ -61,17 +50,10 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
        })
    }
 
-   // vm.uploadPages = function() {
-   //   if (vm.book) {
-   //     // console.log(vm.book.cover, vm.book.pages)
-   //     // BookService.updateBook(vm.book.cover, vm.book.page_attachments, id, Upload);
-   //     BookService.createBook(vm.book);
-   //
-   //   }
-   // }
+   // UPLOAD AND SAVE IMAGES TO BOOK
    vm.uploadPages = function() {
     if (vm.book.cover && vm.page_attachments_attribute) {
-      console.log(vm.page_attachments_attribute)
+      console.log("This is the id "+id)
       BookService.updateBook(vm.book.cover, vm.page_attachments_attribute, id, Upload);
     }
   }
