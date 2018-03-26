@@ -1,9 +1,19 @@
-
-<ul class="notification">
+<div class="notification"></div>
   <h2><span ng-bind="vm.book.title"></span></h2>
   <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>
-  <span>Pages:</span> <li ng-repeat="item in vm.book.page_attachments"><img ng-src="{{item.page.thumb.url}}"></li>
+  <span>Pages:</span>
+  <div id="carousel">
+    <!-- <div id="carousel_content"> -->
+      <!-- <div id="horizontal"> -->
+        <div class="image_container" ng-repeat="item in vm.book.page_attachments">
+          <img ng-src="{{item.page.thumb.url}}">
+        </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
 
+  <div>
+    <ul>
   <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>
   <li>Description: <span  ng-bind="vm.book.description"></span></li>
   <li>Region: <span  ng-bind="vm.book.region.name"></span></li>
@@ -13,7 +23,10 @@
   <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>
   <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>
   <li>Posted On: <span ng-bind="vm.book.created_at | date : 'fullDate'"></span></li>
+</ul>
+</div>
 
+<div>
   <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->
   <span ng-if="currentUser.role !=='publisher'">
     <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button>
@@ -48,9 +61,9 @@
 
   </span>
 
-  <li> Current Rating <span ng-bind="vm.rateTotal"></span></li>
+</div>
+</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>
 
-</ul>
 <div ng-repeat="page in vm.book.pages">
   <span><img ng-src='{{page.image}}'/></span>
 </div>

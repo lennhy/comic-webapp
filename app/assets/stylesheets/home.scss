@@ -1,3 +1,48 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#carousel {
+    display: flex;
+    overflow-x: scroll;
+    width: 75%;
+    height: auto;
+    margin: 0 auto;
+}
+
+
+div.image_container{
+    background-color: #333;
+    display:inline-block;
+    width: 200px;
+    padding: 40px;
+}
+
+// .flex-container {
+//   display: flex;
+//   background-color: DodgerBlue;
+//   overflow-x: scroll;
+// }
+//
+// .flex-container > div {
+//   background-color: #f1f1f1;
+//   margin: 10px;
+//   padding: 20px;
+//   font-size: 30px;
+// }
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+// #carousel {
+//     width: 20%;
+// }
+//
+// #carousel_content {
+//     background-color: lightblue;
+//     width: 50%;
+//     overflow-x: scroll;
+// }
+//
+// div.horizontal{
+//     display:inline;
+//     width: 100%;
+// }
