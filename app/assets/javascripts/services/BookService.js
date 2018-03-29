@@ -9,6 +9,7 @@ function BookService($http){
     return $http.get('/comics/'+ id);
   };
 
+
   this.httpCreateBook = function(data) {
     var req = {
      method: 'POST',
@@ -30,6 +31,7 @@ function BookService($http){
       console.log(error)
     }
   }
+
 
   this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
     Upload.upload({
@@ -60,6 +62,61 @@ function BookService($http){
   this.httpDeleteBook = function(id){
     return $http.delete(`/comics/${id}`);
   };
+
+
+  // function Node(data){
+  //   this.data = data;
+  //   this.previous = previous;
+  //   this.next = next;
+  // }
+  //
+  // // this.PageContainer = function(book, number){
+  //   var node = new Node(book.page_attachments[0]);
+  //
+  //   this.doublyLinkedPages(node) {
+  //     this._length = 0;
+  //     this.head = null;
+  //     this.tail = null;
+  //
+  //     function nextPage(node){
+  //       node.data+=1
+  //       return node.data;
+  //     }
+  //
+  //     function prevPage(node){
+  //       node.data-=1
+  //       return node.data;
+  //     }
+  //
+  //   }
+
+    // const pages_carousel = new DoublyLinkedPages();
+
+    // function getFirstPage(){
+    //   return this.head;
+    // }
+
+    // function getLastPage(){
+    //   if (!this.head){
+    //     return "There are no pages";
+    //   }
+    //
+    //   let node = this.head;
+    //   while(node){
+    //     if(!node.next){
+    //       return node;
+    //     }
+    //     node = node.next; // update the node to the next one in our chain
+    //   }
+    // }
+    // function getPageAt(){
+    //
+    // }
+
+
+    // }
+
+  // }
 
 }
 

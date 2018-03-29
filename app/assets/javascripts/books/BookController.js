@@ -4,8 +4,31 @@ function BookController(book, RatingService, BookService, $scope, $route) {
   vm.ratings = vm.book.ratings;
   vm.rating_star = null;
   vm.rateTotal = rateTotal();
+  let currentImage = document.getElementById("image")
+  let currentPageId = document.getElementById("page")
+  let currentPage = parseInt(currentPageId.getAttribute("data-page-number"));
+  let bookId = book.data.id;
 
-  var bookId = book.data.id;
+
+  vm.goToPreviousPage = function (){
+    if(currentPage > 0){
+        currentPage -=1;
+        currentImage.src = vm.book.page_attachments[currentPage].page.url
+    }
+  }
+
+  vm.goToNextPage = function(){
+    if(currentPage < vm.book.page_attachments.length-1){
+        currentPage +=1;
+        currentImage.src = vm.book.page_attachments[currentPage].page.url
+    }
+  }
+
+  let prevButton = document.getElementById("#prev");
+  let nextButton = document.getElementById("#next");
+
+  // ================ END OF DOUBLE LINKED LIST (IMAGE CAROUSEL) ==================
+
 
   vm.add = function(id){
     console.log(id)

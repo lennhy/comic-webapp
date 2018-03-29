@@ -2,15 +2,19 @@
   <h2><span ng-bind="vm.book.title"></span></h2>
   <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>
   <span>Pages:</span>
-  <div id="carousel">
-    <!-- <div id="carousel_content"> -->
-      <!-- <div id="horizontal"> -->
-        <div class="image_container" ng-repeat="item in vm.book.page_attachments">
-          <img ng-src="{{item.page.thumb.url}}">
-        </div>
-      <!-- </div> -->
-    <!-- </div> -->
-  </div>
+  <div class="book_container">
+    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>
+    <button id="next" ng-click="vm.goToNextPage()">Next</button>
+
+    <div id="page" data-page-number=0>
+      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">
+    </div>
+    <div id="carousel">
+          <div class="image_container" ng-repeat="item in vm.book.page_attachments">
+            <img ng-src="{{item.page.thumb.url}}">
+          </div>
+    </div>
+</div>
 
   <div>
     <ul>
