@@ -10,23 +10,23 @@ class PageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # Use local storage if in development or test
-  CarrierWave.configure do |config|
+  # CarrierWave.configure do |config|
 
-    # Use local storage if in development or test
-    if Rails.env.development? || Rails.env.test?
-      CarrierWave.configure do |config|
-        config.storage = :file
-      end
-    end
+    # # Use local storage if in development or test
+    # if Rails.env.development? || Rails.env.test?
+    #   CarrierWave.configure do |config|
+    #     config.storage = :file
+    #   end
+    # end
 
     # Use AWS storage if in production
-    if Rails.env.production?
+    # if Rails.env.production?
       CarrierWave.configure do |config|
         config.storage = :fog
       end
-    end
+    # end
 
-  end
+  # end
   #
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
