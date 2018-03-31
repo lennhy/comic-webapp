@@ -51,23 +51,19 @@ class ComicsController < ApplicationController
 
   def upload
     if Comic.find(params[:id])
-        comic = Comic.find(params[:id])
-        if params[:cover].present? && params[:page_attachments_attributes].present?
-          if !comic.page_attachments.blank? && !comic.cover.blank?
-              comic.update(cover: params[:cover])
-              params[:page_attachments_attributes].each_with_index do |value, i|
-                page_attachment = PageAttachment.new
-                page_attachment.page = params[:page_attachments_attributes][i.to_s]
-                page_attachment.comic_id = comic.id
-                page_attachment.save
-              end
-              render json: comic
-          else
-            flash[:notice] = "These images are already saved to this book"
-          end
-         render json: comic
-       else
-         flash[:notice] = "There are no images"
+      comic = Comic.find(params[:id])
+      if params[:cover].present? && params[:page_attachments_attributes].present?
+        comic.update(cover: params[:cover])
+        params[:page_attachments_attributes].each_with_index do |value, i|
+          page_attachment = PageAttachment.new
+          page_attachment.page = params[:page_attachments_attributes][i.to_s]
+          page_attachment.comic_id = comic.id
+          page_attachment.save
+        end
+        flash[:notice] = "You created a comic"
+        render json: comic
+      else
+        flash[:notice] = "There are no images"
       end
     else
       flash[:error] = "Comic book was not saved"
@@ -75,6 +71,17 @@ class ComicsController < ApplicationController
     end
   end
 
+  def destroy
+    comic = Comic.find(params[:id])
+    comic.page_attachments.each do |page_attachment|
+      page_attachment.page.remove!
+      page_attachment.page.thumb.remove!
+
+    end
+    binding.pry
+    comic.delete
+    render json: comic
+  end
 
   private
     def comic_params

@@ -10,6 +10,11 @@ function BookController(book, RatingService, BookService, $scope, $route) {
   let bookId = book.data.id;
 
 
+  vm.deleteBook = function(){
+    BookService
+        .httpDeleteBook(bookId)
+  }
+
   vm.goToPreviousPage = function (){
     if(currentPage > 0){
         currentPage -=1;
