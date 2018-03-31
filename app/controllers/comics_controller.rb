@@ -61,15 +61,17 @@ class ComicsController < ApplicationController
                 page_attachment.comic_id = comic.id
                 page_attachment.save
               end
+              render json: comic
           else
             flash[:notice] = "These images are already saved to this book"
           end
+         render json: comic
        else
          flash[:notice] = "There are no images"
       end
     else
       flash[:error] = "Comic book was not saved"
-      render json: Comic.all
+      render json: comic
     end
   end
 

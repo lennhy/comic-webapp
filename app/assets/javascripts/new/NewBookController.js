@@ -61,6 +61,7 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
    vm.uploadPages = function() {
      document.getElementById("menu-bar").style.display = "block";
     if (vm.book.cover && vm.page_attachments_attribute) {
+      console.log(vm.page_attachments_attribute);
       console.log("This is the id "+id)
       BookService.updateBook(vm.book.cover, vm.page_attachments_attribute, id, Upload);
     }

@@ -34,6 +34,7 @@ function BookService($http){
 
 
   this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
+    console.log("What is happening in the BookService " + page_attachments_attributes)
     Upload.upload({
         method: 'PATCH',
         url: '/pages/' + id + '/edit',
