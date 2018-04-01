@@ -73,7 +73,8 @@
 <!-- <div ng-repeat="page in vm.book.pages">
   <span><img ng-src='{{page.image}}'/></span>
 </div> -->
-
+<!-- <div ng-if="currentUser.role === 'publisher' && book.users[0].id === currentUser.id"> -->
 <form name="deleteBookForm" ng-submit="vm.deleteBook()">
   <button type"submit" value="delete book">Delete Book</button>
 </form>
+<!-- </div> -->
