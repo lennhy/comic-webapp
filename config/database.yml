@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: comic_development
+  pool: 5
+  username: <%= ENV['LOCAL_USERNAME'] %>
+  password: <%= ENV['LOCAL_PASSWORD'] %>
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: comic_test
+  pool: 5
+  username: <%= ENV['LOCAL_USERNAME'] %>
+  password: <%= ENV['LOCAL_PASSWORD'] %>
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV['AWS_RDS_NAME'] %>
+  url: <%= ENV['AWS_RDS_URL'] %>
+  username: <%= ENV['AWS_RDS_USERNAME'] %>
+  password: <%= ENV['AWS_RDS_PASSWORD'] %>
