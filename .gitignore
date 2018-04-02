@@ -26,7 +26,8 @@
 /config/secrets.yml
 
 /public/uploads/*
-/initializers/*
+/config/initializers/carrierwave.rb
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
