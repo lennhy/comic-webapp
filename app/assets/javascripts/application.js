@@ -1,10 +1,10 @@
 //= require jquery
 //= require jquery_ujs
-//= require bower_components/angular
-//= require bower_components/angular-devise
-//= require bower_components/angular-ui-router
-//= require bower_components/angular-messages
-//= require bower_components/angular-route
+//= require bower_components/angular/angular.js
+//= require bower_components/angular-devise/angular-devise.js
+//= require bower_components/angular-ui-router/angular-ui-router.js
+//= require bower_components/angular-messages/angular-messages.js
+//= require bower_components/angular-route/angular-route.js
 //= require angular-rails-templates
 //= require ng-file-upload-shim
 //= require ng-file-upload
