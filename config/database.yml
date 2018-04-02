@@ -18,6 +18,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: <%= ENV['AWS_RDS_NAME'] %>
-  url: <%= ENV['AWS_RDS_URL'] %>
   username: <%= ENV['AWS_RDS_USERNAME'] %>
   password: <%= ENV['AWS_RDS_PASSWORD'] %>
+  host: <%= ENV['AWS_RDS_URL'] %>
+  port: <%= ENV['AWS_RDS_PORT'] %>
