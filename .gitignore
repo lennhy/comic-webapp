@@ -21,7 +21,6 @@
 .byebug_history
 # Ignore bower components
 
-/config/secrets.yml
 
 /public/uploads/*
 
