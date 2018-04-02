@@ -26,7 +26,7 @@
 /config/secrets.yml
 
 /public/uploads/*
-
+/initializers/*
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
