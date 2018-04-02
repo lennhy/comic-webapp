@@ -1,10 +1,9 @@
-require 'fog/aws'
-# if Rails.env.development? or Rails.env.test?
-  # CarrierWave.configure do |config|
-  #   config.storage = :file
-  #   config.enable_processing = false
-  # end
-# else
+if Rails.env.development? or Rails.env.test?
+  CarrierWave.configure do |config|
+    config.storage = :file
+    config.enable_processing = false
+  end
+else
   CarrierWave.configure do |config|
     config.fog_provider = 'fog/aws'                        # required
     config.fog_credentials = {
@@ -19,4 +18,4 @@ require 'fog/aws'
     config.fog_public     = false                                                 # optional, defaults to true
     config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } # optional, defaults to {}
   end
-# end
+end
