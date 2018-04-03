@@ -23,7 +23,7 @@
   patch '/comics/:id', to: 'comics#add'
   patch '/pages/:id/edit' => 'comics#upload'
 
-
+# 
   resources :comics, only: [:index, :show, :new, :create, :update, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
