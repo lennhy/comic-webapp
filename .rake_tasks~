@@ -4,6 +4,7 @@ app:update
 assets:clean[keep]
 assets:clobber
 assets:environment
+assets:precompile
 bower:cache:clean
 bower:clean
 bower:install[options]
