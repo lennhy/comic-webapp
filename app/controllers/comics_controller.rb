@@ -78,7 +78,6 @@ class ComicsController < ApplicationController
       page_attachment.page.thumb.remove!
 
     end
-    binding.pry
     comic.delete
     render json: comic
   end

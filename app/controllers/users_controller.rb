@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   def edit
     user = current_user
     # user.avatar = params[:avatar]
-    binding.pry
     if user.update(user_params)
 
 
@@ -37,7 +36,6 @@ class UsersController < ApplicationController
   def upload
     user = current_user
     # user.avatar = params[:avatar]
-    binding.pry
     if user.update(avatar:params[:avatar])
 
 
