@@ -33,9 +33,9 @@
 
 <div>
   <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->
-  <span ng-if="currentUser.role !=='publisher'">
-    <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button>
-  </span>
+  <!-- <span ng-if="currentUser.role !=='publisher'"> -->
+    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->
+  <!-- </span> -->
 
   <span ng-if="currentUser.role !== 'publisher' && book.user.name !== currentUser.name">
 
@@ -73,8 +73,3 @@
 <!-- <div ng-repeat="page in vm.book.pages">
   <span><img ng-src='{{page.image}}'/></span>
 </div> -->
-<!-- <div ng-if="currentUser.role === 'publisher' && book.users[0].id === currentUser.id"> -->
-<form name="deleteBookForm" ng-submit="vm.deleteBook()">
-  <button type"submit" value="delete book">Delete Book</button>
-</form>
-<!-- </div> -->

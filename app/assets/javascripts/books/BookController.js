@@ -1,4 +1,4 @@
-function BookController(Auth, book, RatingService, BookService, $scope, $route) {
+function BookController( book, RatingService, BookService, $scope, $route) {
   var vm = this;
   vm.book = book.data;
   vm.ratings = vm.book.ratings;
@@ -8,15 +8,7 @@ function BookController(Auth, book, RatingService, BookService, $scope, $route) 
   let currentPageId = document.getElementById("page")
   let currentPage = parseInt(currentPageId.getAttribute("data-page-number"));
   let bookId = book.data.id;
-  vm.current_user = Auth.currentUser();
 
-  vm.bookPublisher = function(book){
-    for(let i=0; book.data.users.length; i++){
-      if(book.data.users[i].id === currentUser.id){
-        return true;
-      }
-    }
-  }
 
   vm.deleteBook = function(){
     BookService

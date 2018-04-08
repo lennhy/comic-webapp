@@ -16,3 +16,9 @@
   <li>Posted On: <span ng-bind="book.created_at | date : 'fullDate'"></span></li>
   <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(' ')"></span></li>
 </ul>
+
+<div ng-if="currentUser.role === 'publisher'">
+<form name="deleteBookForm" ng-submit="vm.deleteBook()">
+  <button type"submit" value="delete book">Delete Book</button>
+</form>
+</div>

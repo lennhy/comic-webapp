@@ -41,7 +41,9 @@ angular
                   }
               }
           })
-
+          // book: function (BookService, $stateParams) {
+          //   return BookService.httpGetBook($stateParams.id);
+          // }
           // Current User books
           .state('home.mybooks', {
               url: 'mybooks/:id',
