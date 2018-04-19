@@ -77,10 +77,12 @@ class ComicsController < ApplicationController
 
   def destroy
     comic = Comic.find(params[:id])
-    comic.page_attachments.each do |page_attachment|
-      page_attachment.page.remove!
-      page_attachment.page.thumb.remove!
+    if comic.page_attachments != nil
+      comic.page_attachments.each do |page_attachment|
+        page_attachment.page.remove!
+        page_attachment.page.thumb.remove!
 
+      end
     end
     comic.delete
     render json: comic
