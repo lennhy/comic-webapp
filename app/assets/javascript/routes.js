@@ -25,7 +25,7 @@ angular
           // Index page for all books
           .state('home.books', {
             url: 'books',
-            templateUrl: 'books/books.html',
+            templateUrl: 'books/templates/books.html',
             controller: 'BooksController as vm',
 
           })
@@ -41,7 +41,7 @@ angular
                   }
               }
           })
-  
+
           .state('home.mybooks', {
               url: 'mybooks/:id',
               templateUrl: 'users/templates/user_books.html'
