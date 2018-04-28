@@ -60258,11 +60258,9 @@ function BookController( book, RatingService, BookService, $scope, $route) {
 
 
   vm.add = function(id){
-    console.log(id)
     BookService
       .httpAdd(bookId)
         .then(function (data) {
-          console.log(status)
           if(data.status === 'ok') {
             $('ul').prepend("<li>You have successfully added a new comic to your account!</li>");
           }else{
@@ -60323,7 +60321,6 @@ function BooksController( $filter, BookService) {
                getBooks[i].num = 0;
            }
            vm.books = getBooks;
-           // console.log(vm.books);
 
         },function(error){
             console.log(error)
@@ -60366,7 +60363,6 @@ function BookService($http){
 
 
   this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
-    console.log("What is happening in the BookService " + page_attachments_attributes)
     Upload.upload({
         method: 'PATCH',
         url: '/pages/' + id + '/edit',
@@ -60395,7 +60391,6 @@ function BookService($http){
   this.httpDeleteBook = function(id){
     return $http.delete(`/comics/${id}`);
   };
-
 
 }
 
@@ -60439,7 +60434,7 @@ function RatingService($http){
     return data.notice;
   }
   function errorCallback(error){
-    console.log(error);
+    // console.log(error);
   }
 
 }
@@ -60460,10 +60455,10 @@ function multipartForm($http){
     this.post = function(uploadUrl, data){
         var fd = new FormData();
         for(var key in data){
-            console.log(key, data[key])
+            // console.log(key, data[key])
 
             fd.append(key, data[key]);
-            console.log(comic)
+            // console.log(comic)
         }
         $http.post(uploadUrl, fd,{
             transformRequest: angular.identity,
@@ -60481,7 +60476,7 @@ angular
 // source: app/assets/javascript/books/templates/book.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("books/templates/book.html", '<div class="notification"></div>\n  <h2><span ng-bind="vm.book.title"></span></h2>\n  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>\n  <span>Pages:</span>\n\n  <div class="book_container">\n    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>\n    <button id="next" ng-click="vm.goToNextPage()">Next</button>\n\n    <div id="page" data-page-number=0>\n      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">\n    </div>\n\n  </div>\n  <div id="carousel">\n    <div class="image_container" ng-repeat="item in vm.book.page_attachments">\n      <img ng-src="{{item.page.thumb.url}}">\n    </div>\n  </div>\n  <div class="description">\n    <ul>\n    <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>\n    <li>Description: <span  ng-bind="vm.book.description"></span></li>\n    <li>Region: <span  ng-bind="vm.book.region.name"></span></li>\n\n    <li>Issue: <span ng-bind="vm.book.issue | date : \'fullDate\'"></span></li>\n    <li>Volume: <span ng-bind="vm.book.volume"></span></li>\n    <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>\n    <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>\n    <li>Posted On: <span ng-bind="vm.book.created_at | date : \'fullDate\'"></span></li>\n    </ul>\n  </div>\n\n<div>\n  <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->\n  <!-- <span ng-if="currentUser.role !==\'publisher\'"> -->\n    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->\n  <!-- </span> -->\n\n  <span ng-if="currentUser.role !== \'publisher\'">\n\n    <form name="newForm" ng-submit="vm.createRating()">\n\n      <label>Rating</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />\n      <label>1 star</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />\n      <label>2 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />\n      <label>3 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />\n      <label>4 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />\n      <label>5 stars</label>\n\n      <input type="submit" value="rate"/><br><br>\n\n      Give this a {{ vm.rating_star}} star rating.\n\n    </form>\n\n  </span>\n\n</div>\n\n</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>\n\n<!-- <div ng-repeat="page in vm.book.pages">\n  <span><img ng-src=\'{{page.image}}\'/></span>\n</div> -->\n  <form name="deleteBookForm" ng-submit="vm.deleteBook()">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form>')
+  $templateCache.put("books/templates/book.html", '<div class="notification"></div>\n  <h2><span ng-bind="vm.book.title"></span></h2>\n  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>\n  <span>Pages:</span>\n\n  <div class="book_container">\n    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>\n    <button id="next" ng-click="vm.goToNextPage()">Next</button>\n\n    <div id="page" data-page-number=0>\n      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">\n    </div>\n\n  </div>\n  <div id="carousel">\n    <div class="image_container" ng-repeat="item in vm.book.page_attachments">\n      <img ng-src="{{item.page.thumb.url}}">\n    </div>\n  </div>\n  <div class="description">\n    <ul>\n    <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>\n    <li>Description: <span  ng-bind="vm.book.description"></span></li>\n    <li>Region: <span  ng-bind="vm.book.region.name"></span></li>\n\n    <li>Issue: <span ng-bind="vm.book.issue | date : \'fullDate\'"></span></li>\n    <li>Volume: <span ng-bind="vm.book.volume"></span></li>\n    <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>\n    <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>\n    <li>Posted On: <span ng-bind="vm.book.created_at | date : \'fullDate\'"></span></li>\n    </ul>\n  </div>\n\n<div>\n  <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->\n  <!-- <span ng-if="currentUser.role !==\'publisher\'"> -->\n    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->\n  <!-- </span> -->\n\n  <span ng-if="currentUser.role !== \'publisher\'">\n\n    <form name="newForm" ng-submit="vm.createRating()">\n\n      <label>Rating</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />\n      <label>1 star</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />\n      <label>2 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />\n      <label>3 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />\n      <label>4 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />\n      <label>5 stars</label>\n\n      <input type="submit" value="rate"/><br><br>\n\n      Give this a {{ vm.rating_star}} star rating.\n\n    </form>\n\n  </span>\n\n</div>\n\n</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>\n\n<!-- <div ng-repeat="page in vm.book.pages">\n  <span><img ng-src=\'{{page.image}}\'/></span>\n</div> -->\n<div ng-if="currentUser.role === \'publisher\'">\n  <form name="deleteBookForm" ng-submit="vm.deleteBook()">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form>\n</div>')
 }]);
 
 // Angular Rails Template
@@ -61158,8 +61153,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
   // SAVE MULTIPLE AND SINGLE FILE INPUTS TO VARIABLES
   $("#page_attachments_attributes").change(function(event){
     vm.page_attachments_attribute = event.target.files
-    console.log("page attachments " + vm.page_attachments_attribute)
-    console.log("page cover " + vm.book.cover)
   });
 
   vm.previewCover = function(div, displayDiv) {
@@ -61181,7 +61174,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
      //  before submit form
      .httpCreateBook(vm.book)
        .then(function (res) {
-         // console.log(res.data.id)
          id = res.data.id;
          var arr=[];
             for(let i=0; i < res.data.comic.pages.length; i++){
@@ -61189,7 +61181,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
             };
         document.getElementById('#message').prepend("<li>You have successfully created a new comic!</li>");
        },function(error){
-            console.log(error + "lats")
             document.getElementById('#message').append("<li>Looks like You are are missing something!</li>");
        })
    }
@@ -61198,8 +61189,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
    vm.uploadPages = function() {
      document.getElementById("menu-bar").style.display = "block";
     if (vm.book.cover && vm.page_attachments_attribute) {
-      console.log(vm.page_attachments_attribute);
-      console.log("This is the id "+id)
       BookService.updateBook(vm.book.cover, vm.page_attachments_attribute, id, Upload);
     }
   }
@@ -61332,7 +61321,7 @@ angular
           // Index page for all books
           .state('home.books', {
             url: 'books',
-            templateUrl: 'books/books.html',
+            templateUrl: 'books/templates/books.html',
             controller: 'BooksController as vm',
 
           })
@@ -61348,7 +61337,7 @@ angular
                   }
               }
           })
-  
+
           .state('home.mybooks', {
               url: 'mybooks/:id',
               templateUrl: 'users/templates/user_books.html'
@@ -61423,10 +61412,8 @@ angular
       .module('app')
       .controller('UserController', UserController);
 function UsersController(allUsers) {
-  console.log(allUsers);
   var vm = this;
   vm.users = allUsers.data;
-
 }
 
 angular
@@ -61438,7 +61425,7 @@ function FileService($http){
   this.previewImg = function(div,  displayDiv){
 
   $(div).on('change', function(event) {
-     console.log(event)
+     // console.log(event)
      var files = event.target.files;
      var image = files[0]
      var reader = new FileReader();

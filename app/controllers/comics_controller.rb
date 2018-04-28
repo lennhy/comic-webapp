@@ -14,7 +14,6 @@ class ComicsController < ApplicationController
 
   def create
     # render json: { status: 'ok'}, notice: "This is not allowed. This site is under construction."
-
     comic = Comic.new(comic_params)
     comic.users << current_user
     if comic.save
@@ -28,7 +27,6 @@ class ComicsController < ApplicationController
   def show
       comic = Comic.find(params[:id])
       # page_attachments = comic.page_attachments.all
-
       render json: comic
   end
 
@@ -74,15 +72,19 @@ class ComicsController < ApplicationController
 
   def destroy
     comic = Comic.find(params[:id])
-    if comic.page_attachments != nil
-      comic.page_attachments.each do |page_attachment|
-        page_attachment.page.remove!
-        page_attachment.page.thumb.remove!
+    if current_user.role == "publisher" &&  current_user.id == comic.id
+      if comic.page_attachments != nil
+        comic.page_attachments.each do |page_attachment|
+          page_attachment.page.remove!
+          page_attachment.page.thumb.remove!
 
+        end
       end
+      comic.delete
+      render json: comic
+    else
+      flash[:error] = "You are not allowed to delete this book"
     end
-    comic.delete
-    render json: comic
   end
 
   private
