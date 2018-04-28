@@ -1,7 +1,9 @@
 <div id="menu-bar">
 <a href="#" ui-sref="home.profile({id: currentUser.id})">Profile</a>
 <a href="#" ui-sref="home.mybooks({id: currentUser.id})">My Books</a>
-<a href="#" ui-sref="home.books">Books</a>
+<span ng-if="currentUser.role ==='reader'">
+  <a href="#" ui-sref="home.books">Books</a>
+</span>
 <a href="#" ui-sref="home.publishers">Publishers</a>
 
 <span ng-if="currentUser.role =='publisher'">

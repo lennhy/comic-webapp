@@ -13,6 +13,9 @@ function UserController(Auth, UserService, FileService, $scope, user, Upload) {
   //   }
   // }
   //
+
+
+
   vm.uploadAvatar = function() {
     if (vm.user.avatar) {
       vm.updateUser(vm.user.avatar, Upload);

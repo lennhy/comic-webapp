@@ -13,16 +13,16 @@ class ComicsController < ApplicationController
   end
 
   def create
-    render json: { status: 'ok'}, notice: "This is not allowed. This site is under construction."
+    # render json: { status: 'ok'}, notice: "This is not allowed. This site is under construction."
 
-    # comic = Comic.new(comic_params)
-    # comic.users << current_user
-    # if comic.save
-    #   render json: comic
-    #   # render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!" and comic
-    # else
-    #   render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
-    # end
+    comic = Comic.new(comic_params)
+    comic.users << current_user
+    if comic.save
+      render json: comic
+      # render json: { message:'you have successfully created a new comic', status: 'ok'}, notice: "You successfully created a new Comic!" and comic
+    else
+      render json: {errors: comic.errors.full_messages}, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -52,27 +52,24 @@ class ComicsController < ApplicationController
   # end
 
   def upload
-    render json: { status: 'ok'}, notice: "This is not allowed. This site is under construction."
-
-    # if Comic.find(params[:id])
-    #   comic = Comic.find(params[:id])
-    #   if params[:cover].present? && params[:page_attachments_attributes].present?
-    #     comic.update(cover: params[:cover])
-    #     params[:page_attachments_attributes].each_with_index do |value, i|
-    #       page_attachment = PageAttachment.new
-    #       page_attachment.page = params[:page_attachments_attributes][i.to_s]
-    #       page_attachment.comic_id = comic.id
-    #       page_attachment.save
-    #     end
-    #     flash[:notice] = "You created a comic"
-    #     render json: comic
-    #   else
-    #     flash[:notice] = "There are no images"
-    #   end
-    # else
-    #   flash[:error] = "Comic book was not saved"
-    #   render json: comic
-    # end
+    if Comic.find(params[:id])
+      comic = Comic.find(params[:id])
+      if params[:cover].present? && params[:page_attachments_attributes].present?
+        comic.update(cover: params[:cover])
+        params[:page_attachments_attributes].each_with_index do |value, i|
+          page_attachment = PageAttachment.new
+          page_attachment.page = params[:page_attachments_attributes][i.to_s]
+          page_attachment.comic_id = comic.id
+          page_attachment.save
+        end
+        flash[:notice] = "You created a comic"
+      else
+        flash[:notice] = "There are no images"
+      end
+    else
+      flash[:error] = "Comic book was not saved"
+    end
+    render json: comic
   end
 
   def destroy
