@@ -1,0 +1,10 @@
+<h2>All Publishers</h2>
+
+
+  <div ng-repeat="user in vm.users | orderBy: 'name'">
+
+    <ul ng-if="user.role === 'publisher'">
+      <li><h3 ng-bind="user.name"></h3></li>
+      <li><img src="{{ user.avatar.thumb.url }}"/></li>
+    </ul>
+  </div>
