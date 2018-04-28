@@ -1,6 +1,6 @@
 function fileModel($parse) {
 	return {
-	restrict: 'A', //the directive can be used as an attribute only
+	restrict: 'EA', //the directive can be used as an attribute only
 		/*
 	 link is a function that defines functionality of directive
 	 scope: scope associated with the element
@@ -17,6 +17,7 @@ function fileModel($parse) {
 
 						//Call apply on scope, it checks for value changes and reflect them on UI
 						scope.$apply(function () {
+
 								//set the model value
 								modelSetter(scope, element[0].files[0]);
 						});

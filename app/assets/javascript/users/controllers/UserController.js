@@ -13,6 +13,10 @@ function UserController(Auth, UserService, FileService, $scope, user, Upload) {
   //   }
   // }
   //
+  vm.previewImg = function(div, displayDiv) {
+    FileService
+      .previewImg(div, displayDiv)
+}
 
 
 

@@ -60353,25 +60353,142 @@ function BooksController( $filter, BookService) {
 angular
         .module('app')
         .controller('BooksController', BooksController);
+function BookService($http){
+
+  this.httpGetAllBooks = function(){
+    return $http.get('/comics.json')
+  };
+
+
+  this.httpGetBook = function(id){
+    return $http.get('/comics/'+ id);
+  };
+
+
+  this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
+    console.log("What is happening in the BookService " + page_attachments_attributes)
+    Upload.upload({
+        method: 'PATCH',
+        url: '/pages/' + id + '/edit',
+        // transformRequest: angular.identity,
+        headers: {
+          'Content-Type': undefined
+        },
+        data: { cover, page_attachments_attributes }
+    })
+  };
+
+
+  this.httpAdd = function(id){
+    var req = {
+     method: 'PATCH',
+     url: '/comics/'+id,
+     data: id
+    }
+    return $http(req);
+  };
+
+  this.httpUpdateBook = function(id){
+    return $http.patch(`/comics/${id}`);
+  };
+
+  this.httpDeleteBook = function(id){
+    return $http.delete(`/comics/${id}`);
+  };
+
+
+}
+
+angular
+    .module('app')
+    .service('BookService', BookService);
+function GenreService($http){
+
+  this.httpGetGenres = function(){
+    return $http.get('/genres')
+  }
+}
+angular
+    .module('app')
+    .service('GenreService', GenreService);
+function RatingService($http){
+
+  this.httpGetRatings = function(id){
+    return $http.get('/ratings/'+id)
+  }
+
+  this.httpGetRating = function(id){
+    return $http.get('/ratings/'+id)
+  }
+
+  this.httpCreateRating = function(star, comic_id) {
+    data = {
+      stars: star,
+      comic_id: comic_id
+    }
+    var req = {
+     method: 'POST',
+     url: '/ratings',
+     data: data
+    }
+    return $http(req)
+    .then(successCallback)
+    .catch(errorCallback)
+  }
+  function successCallback(data){
+    return data.notice;
+  }
+  function errorCallback(error){
+    console.log(error);
+  }
+
+}
+
+angular
+    .module('app')
+    .service('RatingService', RatingService);
+function RegionService($http){
+
+  this.httpGetRegions = function(){
+    return $http.get('/regions')
+  }
+}
+angular
+    .module('app')
+    .service('RegionService', RegionService);
+function multipartForm($http){
+    this.post = function(uploadUrl, data){
+        var fd = new FormData();
+        for(var key in data){
+            console.log(key, data[key])
+
+            fd.append(key, data[key]);
+            console.log(comic)
+        }
+        $http.post(uploadUrl, fd,{
+            transformRequest: angular.identity,
+            headers: {
+                'Content-Type': undefined
+            }
+        })
+    }
+}
+
+angular
+    .module('app')
+    .service('multipartForm', multipartForm);
 // Angular Rails Template
-// source: app/assets/javascripts/books/book.html
+// source: app/assets/javascript/books/templates/book.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("books/book.html", '<div class="notification"></div>\n  <h2><span ng-bind="vm.book.title"></span></h2>\n  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>\n  <span>Pages:</span>\n\n  <div class="book_container">\n    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>\n    <button id="next" ng-click="vm.goToNextPage()">Next</button>\n\n    <div id="page" data-page-number=0>\n      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">\n    </div>\n\n  </div>\n  <div id="carousel">\n    <div class="image_container" ng-repeat="item in vm.book.page_attachments">\n      <img ng-src="{{item.page.thumb.url}}">\n    </div>\n  </div>\n  <div class="description">\n    <ul>\n    <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>\n    <li>Description: <span  ng-bind="vm.book.description"></span></li>\n    <li>Region: <span  ng-bind="vm.book.region.name"></span></li>\n\n    <li>Issue: <span ng-bind="vm.book.issue | date : \'fullDate\'"></span></li>\n    <li>Volume: <span ng-bind="vm.book.volume"></span></li>\n    <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>\n    <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>\n    <li>Posted On: <span ng-bind="vm.book.created_at | date : \'fullDate\'"></span></li>\n    </ul>\n  </div>\n\n<div>\n  <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->\n  <!-- <span ng-if="currentUser.role !==\'publisher\'"> -->\n    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->\n  <!-- </span> -->\n\n  <span ng-if="currentUser.role !== \'publisher\'">\n\n    <form name="newForm" ng-submit="vm.createRating()">\n\n      <label>Rating</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />\n      <label>1 star</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />\n      <label>2 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />\n      <label>3 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />\n      <label>4 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />\n      <label>5 stars</label>\n\n      <input type="submit" value="rate"/><br><br>\n\n      Give this a {{ vm.rating_star}} star rating.\n\n    </form>\n\n  </span>\n\n</div>\n\n</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>\n\n<!-- <div ng-repeat="page in vm.book.pages">\n  <span><img ng-src=\'{{page.image}}\'/></span>\n</div> -->\n  <form name="deleteBookForm" ng-submit="vm.deleteBook()">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form>')
+  $templateCache.put("books/templates/book.html", '<div class="notification"></div>\n  <h2><span ng-bind="vm.book.title"></span></h2>\n  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>\n  <span>Pages:</span>\n\n  <div class="book_container">\n    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>\n    <button id="next" ng-click="vm.goToNextPage()">Next</button>\n\n    <div id="page" data-page-number=0>\n      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">\n    </div>\n\n  </div>\n  <div id="carousel">\n    <div class="image_container" ng-repeat="item in vm.book.page_attachments">\n      <img ng-src="{{item.page.thumb.url}}">\n    </div>\n  </div>\n  <div class="description">\n    <ul>\n    <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>\n    <li>Description: <span  ng-bind="vm.book.description"></span></li>\n    <li>Region: <span  ng-bind="vm.book.region.name"></span></li>\n\n    <li>Issue: <span ng-bind="vm.book.issue | date : \'fullDate\'"></span></li>\n    <li>Volume: <span ng-bind="vm.book.volume"></span></li>\n    <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>\n    <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>\n    <li>Posted On: <span ng-bind="vm.book.created_at | date : \'fullDate\'"></span></li>\n    </ul>\n  </div>\n\n<div>\n  <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->\n  <!-- <span ng-if="currentUser.role !==\'publisher\'"> -->\n    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->\n  <!-- </span> -->\n\n  <span ng-if="currentUser.role !== \'publisher\'">\n\n    <form name="newForm" ng-submit="vm.createRating()">\n\n      <label>Rating</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />\n      <label>1 star</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />\n      <label>2 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />\n      <label>3 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />\n      <label>4 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />\n      <label>5 stars</label>\n\n      <input type="submit" value="rate"/><br><br>\n\n      Give this a {{ vm.rating_star}} star rating.\n\n    </form>\n\n  </span>\n\n</div>\n\n</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>\n\n<!-- <div ng-repeat="page in vm.book.pages">\n  <span><img ng-src=\'{{page.image}}\'/></span>\n</div> -->\n  <form name="deleteBookForm" ng-submit="vm.deleteBook()">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form>')
 }]);
 
 // Angular Rails Template
-// source: app/assets/javascripts/books/books.html
+// source: app/assets/javascript/books/templates/books.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("books/books.html", '<label> Search by Region:</label>\n<input ng-model="searchComics.region" ng-model-options="{updateOn: \'default blur\', debounce: {\'default\':1000, \'blur\':0}}"/>\n\n<ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: \'title\'">\n\n\n\n  <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>\n  <span><img ng-src="{{book.cover.thumb.url}}"></span>\n  <li>Publishers: <span ng-repeat="user in book.users" ng-bind="user | returnPublisher"></span></li>\n  <li>Description: <span  ng-bind="book.description"></span></li>\n  <li>Region: <span  ng-bind="book.region.name"></span></li>\n  <li>Issue: <span ng-bind="book.issue"></span></li>\n  <li>Volume: <span ng-bind="book.volume"></span></li>\n  <li>Page_count: <span ng-bind="book.page_count"></span></li>\n  <li>Issue_date: <span ng-bind="book.issue_date | date : \'fullDate\'"></span></li>\n  <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>\n  <li>Posted On: <span ng-bind="book.created_at | date : \'fullDate\'"></span></li>\n\n  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(\' \')"></span></li>\n  <button ng-click="book.upVote(book)">Upvote + </button>\n  <button ng-click="book.downVote(book)">Downvote -</button>\n  <div class ="number">{{ book.num }}</div>\n</ul>')
-}]);
-
-// Angular Rails Template
-// source: app/assets/javascripts/books/publisher_books.html
-
-angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("books/publisher_books.html", '<div class="notification"></div>\n  <h2><span ng-bind="vm.book.title"></span></h2>\n  <li><img ng-src="{{vm.book.cover.thumb.url}}"></li>\n  <span>Pages:</span>\n\n  <div class="book_container">\n    <button id="prev" ng-click="vm.goToPreviousPage()">Prev</button>\n    <button id="next" ng-click="vm.goToNextPage()">Next</button>\n\n    <div id="page" data-page-number=0>\n      <img id="image" src="{{vm.book.page_attachments[0].page.url}}">\n    </div>\n\n  </div>\n  <div id="carousel">\n    <div class="image_container" ng-repeat="item in vm.book.page_attachments">\n      <img ng-src="{{item.page.thumb.url}}">\n    </div>\n  </div>\n  <div class="description">\n    <ul>\n    <li>Publishers: <span ng-repeat="user in vm.book.users">{{ user | returnPublisher }}</span></li>\n    <li>Description: <span  ng-bind="vm.book.description"></span></li>\n    <li>Region: <span  ng-bind="vm.book.region.name"></span></li>\n\n    <li>Issue: <span ng-bind="vm.book.issue | date : \'fullDate\'"></span></li>\n    <li>Volume: <span ng-bind="vm.book.volume"></span></li>\n    <li>Page_count: <span ng-bind="vm.book.page_count"></span></li>\n    <li>Graphic Novel: <span ng-bind="vm.book.graphic_novel"></span></li>\n    <li>Posted On: <span ng-bind="vm.book.created_at | date : \'fullDate\'"></span></li>\n    </ul>\n  </div>\n\n<div>\n  <!-- <li>Genres: <span ng-repeat="genre in vm.book.genres">{{ genre.name }}</span></li> -->\n  <!-- <span ng-if="currentUser.role !==\'publisher\'"> -->\n    <!-- <button type="button" ng-click="vm.add(vm.book.id);">Get Book</button> -->\n  <!-- </span> -->\n\n  <span ng-if="currentUser.role !== \'publisher\' && book.user.name !== currentUser.name">\n\n    <form name="newForm" ng-submit="vm.createRating()">\n\n      <label>Rating</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="1" />\n      <label>1 star</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="2" />\n      <label>2 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="3" />\n      <label>3 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="4" />\n      <label>4 stars</label>\n\n      <input ng-model="vm.rating_star" type="radio" name="rating" value="5" />\n      <label>5 stars</label>\n\n      <input type="submit" value="rate"/><br><br>\n\n      Give this a {{ vm.rating_star}} star rating.\n\n    </form>\n\n  </span>\n\n</div>\n\n</span>Current Rating</span> <span ng-bind="vm.rateTotal"></span></div>\n\n<!-- <div ng-repeat="page in vm.book.pages">\n  <span><img ng-src=\'{{page.image}}\'/></span>\n</div> -->\n<!-- <div ng-if="currentUser.role === \'publisher\' && currentUser.id === user.id "> -->\n\n<form name="deleteBookForm" ng-submit="vm.deleteBook()">\n  <button type"submit" value="delete book">Delete Book</button>\n</form>\n<!-- </div> -->')
+  $templateCache.put("books/templates/books.html", '<label> Search by Region:</label>\n<input ng-model="searchComics.region" ng-model-options="{updateOn: \'default blur\', debounce: {\'default\':1000, \'blur\':0}}"/>\n\n<ul ng-repeat="book in vm.books | filter: searchComics.region | orderBy: \'title\'">\n\n\n\n  <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>\n  <span><img ng-src="{{book.cover.thumb.url}}"></span>\n  <li>Publishers: <span ng-repeat="user in book.users" ng-bind="user | returnPublisher"></span></li>\n  <li>Description: <span  ng-bind="book.description"></span></li>\n  <li>Region: <span  ng-bind="book.region.name"></span></li>\n  <li>Issue: <span ng-bind="book.issue"></span></li>\n  <li>Volume: <span ng-bind="book.volume"></span></li>\n  <li>Page_count: <span ng-bind="book.page_count"></span></li>\n  <li>Issue_date: <span ng-bind="book.issue_date | date : \'fullDate\'"></span></li>\n  <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>\n  <li>Posted On: <span ng-bind="book.created_at | date : \'fullDate\'"></span></li>\n\n  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(\' \')"></span></li>\n  <button ng-click="book.upVote(book)">Upvote + </button>\n  <button ng-click="book.downVote(book)">Downvote -</button>\n  <div class ="number">{{ book.num }}</div>\n</ul>')
 }]);
 
 (function() {
@@ -60983,86 +61100,6 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
   App.cable = ActionCable.createConsumer();
 
 }).call(this);
-// function deleteComic() {
-//     function go(scope, element, attrs, ngModel) {
-//       console.log("sdjnsdjs" + $scope)
-//       for(var i =0; i < scope.book.length; i++){
-//           if (users[i].role === "publisher" && users[i].id === currentUser.id){
-//             return deleteComic.template;
-//           }
-//        }
-//     }
-//   	return {
-//
-//   		restrict: 'EA',
-//   		require: 'ngModel',
-//       template: `<div ng-if="currentUser.role === 'publisher' && currentUser.id === user.id ">
-//
-//       <form name="deleteBookForm" ng-submit="vm.deleteBook()">
-//         <button type"submit" value="delete book">Delete Book</button>
-//       </form>
-//       </div>`,
-//   		link: go
-//     }
-//   }
-//
-// angular
-// 	.module('app')
-// 	.directive('deleteComic', deleteComic);
-function fileModel($parse) {
-	return {
-	restrict: 'A', //the directive can be used as an attribute only
-		/*
-	 link is a function that defines functionality of directive
-	 scope: scope associated with the element
-	 element: element on which this directive used
-	 attrs: key value pair of element attributes
-		*/
-		link: function (scope, element, attrs) {
-				var model = $parse(attrs.fileModel),
-				    modelSetter = model.assign; //define a setter for fileModel
-
-				//Bind change event on the element
-				element.bind('change', function () {
-					console.log(scope.vm.book.cover)
-
-						//Call apply on scope, it checks for value changes and reflect them on UI
-						scope.$apply(function () {
-								//set the model value
-								modelSetter(scope, element[0].files[0]);
-						});
-				});
-		}
-	}
-}
-angular
-	.module('app')
-	.directive('fileModel', fileModel);
-function multipleInput() {
-	return {
-		restrict: 'A',
-		require: 'ngModel',
-		link: function (scope, element, attrs, ngModel) {
-			ngModel.$validators.multipleInput = function (values) {
-        var trueVal= true
-        for(var i =0; i < values.length; i++){
-					console.log(values[i]);
-             if (values[i] === trueVal){
-               return true
-             }
-             else{
-               return false
-             }
-          }
-  			};
-
-  		}
-  	}
-  }
-
-angular
-	.module('app')
-	.directive('multipleInput', multipleInput);
 angular
   .module('app')
       .filter('returnPublisher', function () {
@@ -61092,7 +61129,7 @@ angular
         .module('app')
         .controller('HomeController', HomeController);
 // Angular Rails Template
-// source: app/assets/javascripts/home/home.html
+// source: app/assets/javascript/home/home.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
   $templateCache.put("home/home.html", '<div id="menu-bar">\n<a href="#" ui-sref="home.profile({id: currentUser.id})">Profile</a>\n<a href="#" ui-sref="home.mybooks({id: currentUser.id})">My Books</a>\n<span ng-if="currentUser.role ===\'reader\'">\n  <a href="#" ui-sref="home.books">Books</a>\n</span>\n<a href="#" ui-sref="home.publishers">Publishers</a>\n\n<span ng-if="currentUser.role ==\'publisher\'">\n  <a href="#" ui-sref="home.new">Upload</a>\n</span>\n</div>\n<h1>ComicVerge</h1>\n\n<div ui-view></div>')
@@ -61171,18 +61208,101 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
 angular
         .module('app')
         .controller('NewBookController', NewBookController);
+function fileModel($parse) {
+	return {
+	restrict: 'EA', //the directive can be used as an attribute only
+		/*
+	 link is a function that defines functionality of directive
+	 scope: scope associated with the element
+	 element: element on which this directive used
+	 attrs: key value pair of element attributes
+		*/
+		link: function (scope, element, attrs) {
+				var model = $parse(attrs.fileModel),
+				    modelSetter = model.assign; //define a setter for fileModel
+
+				//Bind change event on the element
+				element.bind('change', function () {
+					console.log(scope.vm.book.cover)
+
+						//Call apply on scope, it checks for value changes and reflect them on UI
+						scope.$apply(function () {
+
+								//set the model value
+								modelSetter(scope, element[0].files[0]);
+						});
+				});
+		}
+	}
+}
+angular
+	.module('app')
+	.directive('fileModel', fileModel);
+function multipleInput() {
+	return {
+		restrict: 'A',
+		require: 'ngModel',
+		link: function (scope, element, attrs, ngModel) {
+			ngModel.$validators.multipleInput = function (values) {
+        var trueVal= true
+        for(var i =0; i < values.length; i++){
+					console.log(values[i]);
+             if (values[i] === trueVal){
+               return true
+             }
+             else{
+               return false
+             }
+          }
+  			};
+
+  		}
+  	}
+  }
+
+angular
+	.module('app')
+	.directive('multipleInput', multipleInput);
+function NewBookService($http){
+
+      this.httpCreateBook = function(data) {
+        var req = {
+         method: 'POST',
+         url: '/comics',
+         data: {comic:data},
+         headers: {
+           'Content-Type': 'application/json'
+         }
+        }
+        return $http(req)
+        .then(successCallback)
+        .catch(errorCallback)
+
+        function successCallback(data){
+          return data;
+        }
+
+        function errorCallback(error){
+          console.log(error)
+        }
+      }
+}
+
+angular
+    .module('app')
+    .service('BookService', BookService);
 // Angular Rails Template
-// source: app/assets/javascripts/new/new_book.html
+// source: app/assets/javascript/new_book/templates/new_book.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("new/new_book.html", '<br>\n<h3>Upload a Book</h3>\n\n<div id="message">\n</div>\n<form name="newForm" ng-submit="vm.createBook()">\n\n  <!--  TITLE  -->\n  <label for="title"> Title: </label><br>\n  <input ng-model="vm.book.title" type="text" name="title" required="required"/><br></br>\n\n  <div ng-messages="newForm.title.$error" ng-if="newForm.title.$touched">\n    <div ng-message="required">A region is required!</div>\n  </div>\n\n  <!--  DESCRIPTION  -->\n  <label for="description"> Description: </label><br>\n  <input ng-model="vm.book.description" type="text" minlength="10" name="description" required="required" /><br></br>\n\n  <div ng-messages="newForm.description.$error" ng-if="newForm.description.$touched">\n    <div ng-message="required">A Desciption is required!</div>\n    <div ng-message="minlength">Must be more than 10 characters!</div>\n  </div>\n\n  <!--  ISSUE  -->\n  <label for="issue"> Issue number: </label><br>\n  <input  ng-model="vm.book.issue" name="issue" type="number" required="required" /><br></br>\n\n  <div ng-messages="newForm.issue.$error" ng-if="newForm.issue.$touched">\n      <div ng-message="required">An issue number is required!</div>\n  </div>\n\n\n  <!-- VOLUME  -->\n  <label for="volume"> volume: </label><br>\n  <input  ng-model="vm.book.volume" name="volume" type="number" required="required" /><br></br>\n\n  <div ng-messages="newForm.volume.$error" ng-if="newForm.volume.$touched">\n      <div ng-message="required">A volume number is required!</div>\n  </div>\n\n  <!--  PAGE COUNT  -->\n  <label for="Page Count"> Page Count: </label><br>\n  <input  ng-model="vm.book.page_count" type="number" name="pageCount"required="required" /><br></br>\n\n  <div ng-messages="newForm.pageCount.$error" ng-if="newForm.pageCount.$touched">\n      <div ng-message="required">An page count is required!</div>\n  </div>\n\n  <!--  ISSUE DATE  -->\n  <label for="Issue Date"> Issue Date: </label><br>\n  <input ng-model="vm.book.issue_date" type="date" name="issueDate" required="required" /><br></br>\n\n  <div ng-messages="newForm.issueDate.$error" ng-if="newForm.issueDate.$touched">\n      <div ng-message="required">An issue date is required!</div>\n  </div>\n\n\n  <!-- OPTIONS DROPDOWN FOR REGIONS -->\n  <label for="region"> Region: </label><br>\n\n  <select ng-model="vm.book.region_id" >\n\n    <option ng-repeat="region in vm.regions" required="required" value="{{region.id}}">{{region.name}}</option>\n\n  </select><br></br>\n\n\n  <!-- OPTIONS DROPDOWN FOR GENRES -->\n  <label ng-repeat="genre in vm.genres">\n    <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">\n      {{genre.name}}\n </label>\n\n <h1>You selected: {{vm.book.genre_ids}}</h1>\n\n\n <!-- RADIO BUTTON FIELDS FOR GRAPHIC NOVEL -->\n  <label for="Graphic Novel"> Graphic Novel: </label>\n\n  <label for="Graphic Novel"> Yes: </label>\n\n  <input  ng-model="vm.book.graphic_novel" type="radio" name="graphic_novel" value="true"/>\n\n\n  <label for="Graphic Novel"> No: </label>\n\n  <input  ng-model="vm.book.graphic_novel" type="radio" name = "graphic_novel" value="false"/>\n\n  <div ng-messages="newForm.graphic_novel.$errors">\n      <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>\n  </div><br>\n\n  <input type="submit" id="create-book" value="create"/>\n\n</form>\n\n<form name="form" ng-submit="vm.uploadPages()">\n\n\n  <!-- SINGLE UPLOAD COVER -->\n  <div id="preview"></div>\n  <label for="myFileField">Select a file: </label>\n  <input type="file" file-model="vm.book.cover"  id ="cover" disabled=true>\n  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->\n\n\n  <!-- MULTIPLE UPLOAD PAGES-->\n  <label>Upload Pages all pages must be numbered in chronological order</label>\n  <ul ng-repeat="image in vm.upload">\n    <div id="preview_pages"></div>\n    <img ng-src="{{image.url}}">\n  </ul>\n  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple disabled=true>\n  <input type="submit" id="upload-images" disabled=true value="Upload images"/>\n\n</form>')
+  $templateCache.put("new_book/templates/new_book.html", '<br>\n<h3>Upload a Book</h3>\n\n<div id="message">\n</div>\n<form name="newForm" ng-submit="vm.createBook()">\n\n  <!--  TITLE  -->\n  <label for="title"> Title: </label><br>\n  <input ng-model="vm.book.title" type="text" name="title" required="required"/><br></br>\n\n  <div ng-messages="newForm.title.$error" ng-if="newForm.title.$touched">\n    <div ng-message="required">A region is required!</div>\n  </div>\n\n  <!--  DESCRIPTION  -->\n  <label for="description"> Description: </label><br>\n  <input ng-model="vm.book.description" type="text" minlength="10" name="description" required="required" /><br></br>\n\n  <div ng-messages="newForm.description.$error" ng-if="newForm.description.$touched">\n    <div ng-message="required">A Desciption is required!</div>\n    <div ng-message="minlength">Must be more than 10 characters!</div>\n  </div>\n\n  <!--  ISSUE  -->\n  <label for="issue"> Issue number: </label><br>\n  <input  ng-model="vm.book.issue" name="issue" type="number" required="required" /><br></br>\n\n  <div ng-messages="newForm.issue.$error" ng-if="newForm.issue.$touched">\n      <div ng-message="required">An issue number is required!</div>\n  </div>\n\n\n  <!-- VOLUME  -->\n  <label for="volume"> volume: </label><br>\n  <input  ng-model="vm.book.volume" name="volume" type="number" required="required" /><br></br>\n\n  <div ng-messages="newForm.volume.$error" ng-if="newForm.volume.$touched">\n      <div ng-message="required">A volume number is required!</div>\n  </div>\n\n  <!--  PAGE COUNT  -->\n  <label for="Page Count"> Page Count: </label><br>\n  <input  ng-model="vm.book.page_count" type="number" name="pageCount"required="required" /><br></br>\n\n  <div ng-messages="newForm.pageCount.$error" ng-if="newForm.pageCount.$touched">\n      <div ng-message="required">An page count is required!</div>\n  </div>\n\n  <!--  ISSUE DATE  -->\n  <label for="Issue Date"> Issue Date: </label><br>\n  <input ng-model="vm.book.issue_date" type="date" name="issueDate" required="required" /><br></br>\n\n  <div ng-messages="newForm.issueDate.$error" ng-if="newForm.issueDate.$touched">\n      <div ng-message="required">An issue date is required!</div>\n  </div>\n\n\n  <!-- OPTIONS DROPDOWN FOR REGIONS -->\n  <label for="region"> Region: </label><br>\n\n  <select ng-model="vm.book.region_id" >\n\n    <option ng-repeat="region in vm.regions" required="required" value="{{region.id}}">{{region.name}}</option>\n\n  </select><br></br>\n\n\n  <!-- OPTIONS DROPDOWN FOR GENRES -->\n  <label ng-repeat="genre in vm.genres">\n    <input type= "checkbox" ng-model="vm.book.genre_ids[$index]"  name= "genre.name" ng-true-value="{{genre.id}}" ng-false-value="">\n      {{genre.name}}\n </label>\n\n <h1>You selected: {{vm.book.genre_ids}}</h1>\n\n\n <!-- RADIO BUTTON FIELDS FOR GRAPHIC NOVEL -->\n  <label for="Graphic Novel"> Graphic Novel: </label>\n\n  <label for="Graphic Novel"> Yes: </label>\n\n  <input  ng-model="vm.book.graphic_novel" type="radio" name="graphic_novel" value="true"/>\n\n\n  <label for="Graphic Novel"> No: </label>\n\n  <input  ng-model="vm.book.graphic_novel" type="radio" name = "graphic_novel" value="false"/>\n\n  <div ng-messages="newForm.graphic_novel.$errors">\n      <div ng-message="multipleInput">You need to state if the book is a graphic novel or not</div>\n  </div><br>\n\n  <input type="submit" id="create-book" value="create"/>\n\n</form>\n\n<form name="form" ng-submit="vm.uploadPages()">\n\n\n  <!-- SINGLE UPLOAD COVER -->\n  <div id="preview"></div>\n  <label for="myFileField">Select a file: </label>\n  <input type="file" file-model="vm.book.cover"  id ="cover" disabled=true>\n  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->\n\n\n  <!-- MULTIPLE UPLOAD PAGES-->\n  <label>Upload Pages all pages must be numbered in chronological order</label>\n  <ul ng-repeat="image in vm.upload">\n    <div id="preview_pages"></div>\n    <img ng-src="{{image.url}}">\n  </ul>\n  <input type="file" file-model="vm.book.page_attachments_attributes"  id ="page_attachments_attributes" multiple disabled=true>\n  <input type="submit" id="upload-images" disabled=true value="Upload images"/>\n\n</form>')
 }]);
 
 // Angular Rails Template
-// source: app/assets/javascripts/new/page_upload.html
+// source: app/assets/javascript/new_book/templates/page_upload.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("new/page_upload.html", '<form name="form" ng-submit="vm.uploadPages()">\n\n  <!-- SINGLE UPLOAD COVER -->\n  <!-- <label>Upload Cover Page </label> -->\n    <div id="preview"></div>\n    <div class="form-group">\n       <label for="myFileField">Select a file: </label>\n\n       <div class="button" ngf-select ng-model="vm.book.cover" name="cover"\n       ngf-pattern="\'image/*\'" ngf-accept="\'image/*\'">Upload Cover here</div>\n\n       <!-- <input type="file" file-model="vm.book.cover"  id ="exampleInputFile"> -->\n    </div>\n  <!-- <input type= "file" ngf-select="vm.book.cover" name="cover" id="cover" ng-click="vm.previewCover(\'#cover\', \'#preview\')"  accept="image/*" /> -->\n  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->\n\n  <!-- MULTIPLE UPLOAD PAGES-->\n  <label>Upload Pages all pages must be numbered in chronological order</label>\n  <ul ng-repeat="image in vm.upload">\n    <div id="preview_pages"></div>\n    <img ng-src="{{image.url}}">\n  </ul>\n  <input type="file" ng-model="vm.book.pages"  id="pages"  accept="image/*" multiple>\n\n  <!-- <%= form.file_field :avatars, multiple: true %> -->\n  <!-- <div class="button" ngf-select ng-model="vm.book.pages[]"  id="pages"  accept="image/*" multiple>Upload Pages here</div> -->\n\n\n  <input type="submit" value="Upload images"/>\n\n</form>')
+  $templateCache.put("new_book/templates/page_upload.html", '<form name="form" ng-submit="vm.uploadPages()">\n\n  <!-- SINGLE UPLOAD COVER -->\n  <!-- <label>Upload Cover Page </label> -->\n    <div id="preview"></div>\n    <div class="form-group">\n       <label for="myFileField">Select a file: </label>\n\n       <div class="button" ngf-select ng-model="vm.book.cover" name="cover"\n       ngf-pattern="\'image/*\'" ngf-accept="\'image/*\'">Upload Cover here</div>\n\n       <!-- <input type="file" file-model="vm.book.cover"  id ="exampleInputFile"> -->\n    </div>\n  <!-- <input type= "file" ngf-select="vm.book.cover" name="cover" id="cover" ng-click="vm.previewCover(\'#cover\', \'#preview\')"  accept="image/*" /> -->\n  <!-- <uploader ng-model="vm.book.cover"><uploader/> -->\n\n  <!-- MULTIPLE UPLOAD PAGES-->\n  <label>Upload Pages all pages must be numbered in chronological order</label>\n  <ul ng-repeat="image in vm.upload">\n    <div id="preview_pages"></div>\n    <img ng-src="{{image.url}}">\n  </ul>\n  <input type="file" ng-model="vm.book.pages"  id="pages"  accept="image/*" multiple>\n\n  <!-- <%= form.file_field :avatars, multiple: true %> -->\n  <!-- <div class="button" ngf-select ng-model="vm.book.pages[]"  id="pages"  accept="image/*" multiple>Upload Pages here</div> -->\n\n\n  <input type="submit" value="Upload images"/>\n\n</form>')
 }]);
 
 angular
@@ -61197,7 +61317,7 @@ angular
 
           .state('home.new', {
               url: 'new',
-              templateUrl: 'new/new_book.html',
+              templateUrl: 'new_book/templates/new_book.html',
               controller: 'NewBookController as vm',
               resolve: {
                   regions: function (RegionService) {
@@ -61220,7 +61340,7 @@ angular
           // Show page for a selected book
           .state('home.book', {
               url: 'books/:id',
-              templateUrl: 'books/book.html',
+              templateUrl: 'books/templates/book.html',
               controller: 'BookController as vm',
               resolve: {
                   book: function (BookService, $stateParams) {
@@ -61228,19 +61348,16 @@ angular
                   }
               }
           })
-          // book: function (BookService, $stateParams) {
-          //   return BookService.httpGetBook($stateParams.id);
-          // }
-          // Current User books
+  
           .state('home.mybooks', {
               url: 'mybooks/:id',
-              templateUrl: 'users/user_books.html'
+              templateUrl: 'users/templates/user_books.html'
           })
 
           // Current User profile
           .state('home.profile', {
               url: 'users/:id',
-              templateUrl: 'users/user_profile.html',
+              templateUrl: 'users/templates/user_profile.html',
               controller: 'UserController as vm',
               resolve: {
                   user: function (UserService, $stateParams) {
@@ -61252,7 +61369,7 @@ angular
           // Publishers index page
           .state('home.publishers', {
               url: 'publishers',
-              templateUrl: 'users/publishers.html',
+              templateUrl: 'users/templates/publishers.html',
               controller: 'UsersController as vm',
               resolve: {
                 allUsers: function (UserService) {
@@ -61264,153 +61381,64 @@ angular
      $urlRouterProvider.otherwise('/');
 
   });
-function BookService($http){
+function UserController(Auth, UserService, FileService, $scope, user, Upload) {
+  var vm = this;
+  vm.user = user.data;
 
-  this.httpGetAllBooks = function(){
-    return $http.get('/comics.json')
-  };
+  currentUser = Auth.currentUser();
+
+  // vm.bookPublisher = function(curUser){
+  //   console.log(curUser)
+  //   for(let i=0; vm.book.users.length; i++){
+  //     if(vm.book.users[i].id === curUser.id && vm.book.users[i].role === "publisher"){
+  //       return true;
+  //     }
+  //   }
+  // }
+  //
+  vm.previewImg = function(div, displayDiv) {
+    FileService
+      .previewImg(div, displayDiv)
+}
 
 
-  this.httpGetBook = function(id){
-    return $http.get('/comics/'+ id);
-  };
 
-
-  this.httpCreateBook = function(data) {
-    var req = {
-     method: 'POST',
-     url: '/comics',
-     data: {comic:data},
-     headers: {
-       'Content-Type': 'application/json'
-     }
-    }
-    return $http(req)
-    .then(successCallback)
-    .catch(errorCallback)
-
-    function successCallback(data){
-      return data;
-    }
-
-    function errorCallback(error){
-      console.log(error)
+  vm.uploadAvatar = function() {
+    if (vm.user.avatar) {
+      vm.updateUser(vm.user.avatar, Upload);
     }
   }
 
-
-  this.updateBook = function(cover, page_attachments_attributes, id, Upload) {
-    console.log("What is happening in the BookService " + page_attachments_attributes)
+  vm.updateUser = function(avatar, Upload) {
     Upload.upload({
         method: 'PATCH',
-        url: '/pages/' + id + '/edit',
-        // transformRequest: angular.identity,
-        headers: {
-          'Content-Type': undefined
-        },
-        data: { cover, page_attachments_attributes }
+        url: '/avatar/' + vm.user.id + '/edit',
+        data: { avatar }
     })
   };
-
-
-  this.httpAdd = function(id){
-    var req = {
-     method: 'PATCH',
-     url: '/comics/'+id,
-     data: id
-    }
-    return $http(req);
-  };
-
-  this.httpUpdateBook = function(id){
-    return $http.patch(`/comics/${id}`);
-  };
-
-  this.httpDeleteBook = function(id){
-    return $http.delete(`/comics/${id}`);
-  };
-
-
-  // function Node(data){
-  //   this.data = data;
-  //   this.previous = previous;
-  //   this.next = next;
-  // }
-  //
-  // // this.PageContainer = function(book, number){
-  //   var node = new Node(book.page_attachments[0]);
-  //
-  //   this.doublyLinkedPages(node) {
-  //     this._length = 0;
-  //     this.head = null;
-  //     this.tail = null;
-  //
-  //     function nextPage(node){
-  //       node.data+=1
-  //       return node.data;
-  //     }
-  //
-  //     function prevPage(node){
-  //       node.data-=1
-  //       return node.data;
-  //     }
-  //
-  //   }
-
-    // const pages_carousel = new DoublyLinkedPages();
-
-    // function getFirstPage(){
-    //   return this.head;
-    // }
-
-    // function getLastPage(){
-    //   if (!this.head){
-    //     return "There are no pages";
-    //   }
-    //
-    //   let node = this.head;
-    //   while(node){
-    //     if(!node.next){
-    //       return node;
-    //     }
-    //     node = node.next; // update the node to the next one in our chain
-    //   }
-    // }
-    // function getPageAt(){
-    //
-    // }
-
-
-    // }
-
-  // }
 
 }
 
 angular
-    .module('app')
-    .service('BookService', BookService);
-// function DomService($http){
-//    this.hideWhenSubmitBook("menu-bar"){
-//     document.getElementById("menu-bar").style.display = "none";
-//
-//
-//     when click first submit button
-//     hide other buttons
-//
-//     when click 2nd submit button
-//     reveal buttons
-//   }
-// }
-//
-// angular
-//     .module('app')
-//     .service('FileService', FileService);
+      .module('app')
+      .controller('UserController', UserController);
+function UsersController(allUsers) {
+  console.log(allUsers);
+  var vm = this;
+  vm.users = allUsers.data;
+
+}
+
+angular
+        .module('app')
+        .controller('UsersController', UsersController);
 function FileService($http){
 
   // preview image before upload
   this.previewImg = function(div,  displayDiv){
+
   $(div).on('change', function(event) {
+     console.log(event)
      var files = event.target.files;
      var image = files[0]
      var reader = new FileReader();
@@ -61430,60 +61458,6 @@ function FileService($http){
 angular
     .module('app')
     .service('FileService', FileService);
-function GenreService($http){
-
-  this.httpGetGenres = function(){
-    return $http.get('/genres')
-  }
-}
-angular
-    .module('app')
-    .service('GenreService', GenreService);
-function RatingService($http){
-
-  this.httpGetRatings = function(id){
-    return $http.get('/ratings/'+id)
-  }
-
-  this.httpGetRating = function(id){
-    return $http.get('/ratings/'+id)
-  }
-
-  this.httpCreateRating = function(star, comic_id) {
-    data = {
-      stars: star,
-      comic_id: comic_id
-    }
-    var req = {
-     method: 'POST',
-     url: '/ratings',
-     data: data
-    }
-    return $http(req)
-    .then(successCallback)
-    .catch(errorCallback)
-  }
-  function successCallback(data){
-    return data.notice;
-  }
-  function errorCallback(error){
-    console.log(error);
-  }
-
-}
-
-angular
-    .module('app')
-    .service('RatingService', RatingService);
-function RegionService($http){
-
-  this.httpGetRegions = function(){
-    return $http.get('/regions')
-  }
-}
-angular
-    .module('app')
-    .service('RegionService', RegionService);
 function UserService($http){
 
   this.httpGetUser = function(id){
@@ -61525,93 +61499,25 @@ function UserService($http){
 angular
     .module('app')
     .service('UserService', UserService);
-function multipartForm($http){
-    this.post = function(uploadUrl, data){
-        var fd = new FormData();
-        for(var key in data){
-            console.log(key, data[key])
-
-            fd.append(key, data[key]);
-            console.log(comic)
-        }
-        $http.post(uploadUrl, fd,{
-            transformRequest: angular.identity,
-            headers: {
-                'Content-Type': undefined
-            }
-        })
-    }
-}
-
-angular
-    .module('app')
-    .service('multipartForm', multipartForm);
-function UserController(Auth, UserService, FileService, $scope, user, Upload) {
-  var vm = this;
-  vm.user = user.data;
-
-  currentUser = Auth.currentUser();
-
-  // vm.bookPublisher = function(curUser){
-  //   console.log(curUser)
-  //   for(let i=0; vm.book.users.length; i++){
-  //     if(vm.book.users[i].id === curUser.id && vm.book.users[i].role === "publisher"){
-  //       return true;
-  //     }
-  //   }
-  // }
-  //
-
-
-
-  vm.uploadAvatar = function() {
-    if (vm.user.avatar) {
-      vm.updateUser(vm.user.avatar, Upload);
-    }
-  }
-
-  vm.updateUser = function(avatar, Upload) {
-    Upload.upload({
-        method: 'PATCH',
-        url: '/avatar/' + vm.user.id + '/edit',
-        data: { avatar }
-    })
-  };
-
-}
-
-angular
-      .module('app')
-      .controller('UserController', UserController);
-function UsersController(allUsers) {
-  console.log(allUsers);
-  var vm = this;
-  vm.users = allUsers.data;
-
-}
-
-angular
-        .module('app')
-        .controller('UsersController', UsersController);
 // Angular Rails Template
-// source: app/assets/javascripts/users/publishers.html
+// source: app/assets/javascript/users/templates/publishers.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("users/publishers.html", '<h2>All Publishers</h2>\n\n\n  <div ng-repeat="user in vm.users | orderBy: \'name\'">\n\n    <ul ng-if="user.role === \'publisher\'">\n      <li><h3 ng-bind="user.name"></h3></li>\n      <li><img src="{{ user.avatar.thumb.url }}"/></li>\n    </ul>\n  </div>')
+  $templateCache.put("users/templates/publishers.html", '<h2>All Publishers</h2>\n\n\n  <div ng-repeat="user in vm.users | orderBy: \'name\'">\n\n    <ul ng-if="user.role === \'publisher\'">\n      <li><h3 ng-bind="user.name"></h3></li>\n      <li><img src="{{ user.avatar.thumb.url }}"/></li>\n    </ul>\n  </div>')
 }]);
 
 // Angular Rails Template
-// source: app/assets/javascripts/users/user_books.html
+// source: app/assets/javascript/users/templates/user_books.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("users/user_books.html", '<h2>My books</h2>\n\n<ul ng-repeat="book in currentUser.comics  | orderBy: \'title\'">\n  <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>\n  <span><img ng-src="{{book.cover.thumb.url}}"></span>\n\n  <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>\n  <li>Description: <span  ng-bind="book.description"></span></li>\n  <li>Region: <span  ng-bind="book.region.name"></span></li>\n\n  <li>Issue: <span ng-bind="book.issue"></span></li>\n  <li>Volume: <span ng-bind="book.volume"></span></li>\n  <li>Page_count: <span ng-bind="book.page_count"></span></li>\n  <li>Issue_date: <span ng-bind="book.issue_date | date : \'fullDate\'"></span></li>\n  <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>\n  <li>Posted On: <span ng-bind="book.created_at | date : \'fullDate\'"></span></li>\n  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(\' \')"></span></li>\n  <div ng-if="currentUser.role === \'publisher\'">\n\n  <!-- <form name="deleteBookForm" ng-submit="UserController.deleteBook(book.id)">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form> -->\n  </div>\n</ul>')
+  $templateCache.put("users/templates/user_books.html", '<h2>My books</h2>\n\n<ul ng-repeat="book in currentUser.comics  | orderBy: \'title\'">\n  <h2><a href="#" ui-sref="home.book({id: book.id})" span ng-bind="book.title"></span></h2></a>\n  <span><img ng-src="{{book.cover.thumb.url}}"></span>\n\n  <li>Publishers: <span ng-repeat="user in book.users">{{ user | returnPublisher }}</span></li>\n  <li>Description: <span  ng-bind="book.description"></span></li>\n  <li>Region: <span  ng-bind="book.region.name"></span></li>\n\n  <li>Issue: <span ng-bind="book.issue"></span></li>\n  <li>Volume: <span ng-bind="book.volume"></span></li>\n  <li>Page_count: <span ng-bind="book.page_count"></span></li>\n  <li>Issue_date: <span ng-bind="book.issue_date | date : \'fullDate\'"></span></li>\n  <li>Graphic Novel: <span ng-bind="book.graphic_novel"></span></li>\n  <li>Posted On: <span ng-bind="book.created_at | date : \'fullDate\'"></span></li>\n  <li>Genres: <span ng-repeat="genre in book.genres" ng-bind= "genre.name+(\' \')"></span></li>\n  <div ng-if="currentUser.role === \'publisher\'">\n\n  <!-- <form name="deleteBookForm" ng-submit="UserController.deleteBook(book.id)">\n    <button type"submit" value="delete book">Delete Book</button>\n  </form> -->\n  </div>\n</ul>')
 }]);
 
 // Angular Rails Template
-// source: app/assets/javascripts/users/user_profile.html
+// source: app/assets/javascript/users/templates/user_profile.html
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("users/user_profile.html", '<h2>My Profile</h2>\n\n<form name="form" ng-submit="vm.uploadAvatar()">\n\n  <!-- single upload -->\n  <label>Upload Avatar Page </label>\n\n  <!-- <input type="file" ng-model="vm.user.avatar" id="avatar" accept="image/*" /> -->\n\n  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar"\n  ngf-pattern="\'image/*\'" ngf-accept="\'image/*\'">Select</div>\n\n  <input type="submit" value="Submit"/>\n\n</form>\n\n<div id="preview_avatar"></div>\n<img src="{{vm.user.avatar.thumb.url}}"/>\n<ul>\n  <li>Name: <span ng-bind="currentUser.name"></li>\n  <li>Email: <span ng-bind="currentUser.email"></li>\n  <li>User Type: <span ng-bind="currentUser.role"></li>\n</ul>')
+  $templateCache.put("users/templates/user_profile.html", '<h2>My Profile</h2>\n<div id="preview_avatar"></div>\n\n<form name="form" ng-submit="vm.uploadAvatar()">\n\n  <!-- single upload -->\n  <label>Upload Avatar Page </label>\n\n  <!-- <input type="file" ng-model="vm.user.avatar" id="avatar" accept="image/*" /> -->\n\n  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar"  id="avatar" ng-click="vm.previewImg(\'#avatar\', \'#preview_avatar\')" \n  ngf-pattern="\'image/*\'" ngf-accept="\'image/*\'">Select</div>\n\n  <input type="submit" value="Submit"/>\n\n</form>\n\n<div id="preview_avatar"></div>\n<img src="{{vm.user.avatar.thumb.url}}"/>\n<ul>\n  <li>Name: <span ng-bind="currentUser.name"></li>\n  <li>Email: <span ng-bind="currentUser.email"></li>\n  <li>User Type: <span ng-bind="currentUser.role"></li>\n</ul>')
 }]);
 
 

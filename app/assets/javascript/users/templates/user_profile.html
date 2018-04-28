@@ -1,4 +1,5 @@
 <h2>My Profile</h2>
+<div id="preview_avatar"></div>
 
 <form name="form" ng-submit="vm.uploadAvatar()">
 
@@ -7,7 +8,7 @@
 
   <!-- <input type="file" ng-model="vm.user.avatar" id="avatar" accept="image/*" /> -->
 
-  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar"
+  <div class="button" ngf-select ng-model="vm.user.avatar" name="avatar"  id="avatar" ng-click="vm.previewImg('#avatar', '#preview_avatar')" 
   ngf-pattern="'image/*'" ngf-accept="'image/*'">Select</div>
 
   <input type="submit" value="Submit"/>

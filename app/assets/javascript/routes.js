@@ -10,7 +10,7 @@ angular
 
           .state('home.new', {
               url: 'new',
-              templateUrl: 'new/new_book.html',
+              templateUrl: 'new_book/templates/new_book.html',
               controller: 'NewBookController as vm',
               resolve: {
                   regions: function (RegionService) {
@@ -33,7 +33,7 @@ angular
           // Show page for a selected book
           .state('home.book', {
               url: 'books/:id',
-              templateUrl: 'books/book.html',
+              templateUrl: 'books/templates/book.html',
               controller: 'BookController as vm',
               resolve: {
                   book: function (BookService, $stateParams) {
@@ -41,19 +41,16 @@ angular
                   }
               }
           })
-          // book: function (BookService, $stateParams) {
-          //   return BookService.httpGetBook($stateParams.id);
-          // }
-          // Current User books
+  
           .state('home.mybooks', {
               url: 'mybooks/:id',
-              templateUrl: 'users/user_books.html'
+              templateUrl: 'users/templates/user_books.html'
           })
 
           // Current User profile
           .state('home.profile', {
               url: 'users/:id',
-              templateUrl: 'users/user_profile.html',
+              templateUrl: 'users/templates/user_profile.html',
               controller: 'UserController as vm',
               resolve: {
                   user: function (UserService, $stateParams) {
@@ -65,7 +62,7 @@ angular
           // Publishers index page
           .state('home.publishers', {
               url: 'publishers',
-              templateUrl: 'users/publishers.html',
+              templateUrl: 'users/templates/publishers.html',
               controller: 'UsersController as vm',
               resolve: {
                 allUsers: function (UserService) {

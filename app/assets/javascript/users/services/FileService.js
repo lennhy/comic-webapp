@@ -2,7 +2,9 @@ function FileService($http){
 
   // preview image before upload
   this.previewImg = function(div,  displayDiv){
+
   $(div).on('change', function(event) {
+     console.log(event)
      var files = event.target.files;
      var image = files[0]
      var reader = new FileReader();
