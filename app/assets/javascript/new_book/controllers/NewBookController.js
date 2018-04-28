@@ -21,8 +21,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
   // SAVE MULTIPLE AND SINGLE FILE INPUTS TO VARIABLES
   $("#page_attachments_attributes").change(function(event){
     vm.page_attachments_attribute = event.target.files
-    console.log("page attachments " + vm.page_attachments_attribute)
-    console.log("page cover " + vm.book.cover)
   });
 
   vm.previewCover = function(div, displayDiv) {
@@ -44,7 +42,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
      //  before submit form
      .httpCreateBook(vm.book)
        .then(function (res) {
-         // console.log(res.data.id)
          id = res.data.id;
          var arr=[];
             for(let i=0; i < res.data.comic.pages.length; i++){
@@ -52,7 +49,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
             };
         document.getElementById('#message').prepend("<li>You have successfully created a new comic!</li>");
        },function(error){
-            console.log(error + "lats")
             document.getElementById('#message').append("<li>Looks like You are are missing something!</li>");
        })
    }
@@ -61,8 +57,6 @@ function NewBookController(BookService, FileService, regions, genres, $scope, $h
    vm.uploadPages = function() {
      document.getElementById("menu-bar").style.display = "block";
     if (vm.book.cover && vm.page_attachments_attribute) {
-      console.log(vm.page_attachments_attribute);
-      console.log("This is the id "+id)
       BookService.updateBook(vm.book.cover, vm.page_attachments_attribute, id, Upload);
     }
   }

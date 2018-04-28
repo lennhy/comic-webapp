@@ -10,7 +10,6 @@ function BooksController( $filter, BookService) {
                getBooks[i].num = 0;
            }
            vm.books = getBooks;
-           // console.log(vm.books);
 
         },function(error){
             console.log(error)

@@ -36,11 +36,9 @@ function BookController( book, RatingService, BookService, $scope, $route) {
 
 
   vm.add = function(id){
-    console.log(id)
     BookService
       .httpAdd(bookId)
         .then(function (data) {
-          console.log(status)
           if(data.status === 'ok') {
             $('ul').prepend("<li>You have successfully added a new comic to your account!</li>");
           }else{

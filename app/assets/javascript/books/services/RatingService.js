@@ -26,7 +26,7 @@ function RatingService($http){
     return data.notice;
   }
   function errorCallback(error){
-    console.log(error);
+    // console.log(error);
   }
 
 }
